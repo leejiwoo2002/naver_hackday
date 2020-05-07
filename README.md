@@ -26,7 +26,7 @@
 
 - 일주일 기준으로 작업 일정 작성 (러프하게)
 - ERD 필수
-- project  초기 셋팅 (팀별 branch 생성)
+- project  초기 셋팅 (master branch 에서 팀별 branch 생성)
 - 코드 컨벤션 맞추기 
 	- 저장소 : https://github.com/naver/hackday-conventions-java
 	- 가이드 : https://naver.github.io/hackday-conventions-java/
