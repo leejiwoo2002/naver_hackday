@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: build
+---
+
+spring:
+  profiles: build
+---
+
+spring:
+  profiles: yunsang
+
+
+---
+
+spring:
+  profiles: jiwoo
