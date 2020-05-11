@@ -22,8 +22,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: kim111
+    username: naver
+    password: hackday
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
