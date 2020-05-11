@@ -1,14 +1,40 @@
 spring:
   profiles:
-    active: build
----
+    active: yunsang
 
+  mvc:
+    static-path-pattern: /resources/**
+---
 spring:
   profiles: build
 ---
 
 spring:
   profiles: yunsang
+  datasource:
+    url: jdbc:mysql://localhost:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: kim111
+    jpa:
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+      showSql: true
+      database: mysql
+      generate-ddl: true
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate.format_sql: true
+        use_sql_comments: true
+
+    thymeleaf:
+      prefix: classpath:templates/
+      check-template-location: true
+      suffix: .html
+      mode: HTML5
+      cache: false
+    jwt:
+      secret: govlepe@$&
 
 
 ---
