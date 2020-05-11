@@ -2,8 +2,16 @@ spring:
   profiles:
     active: yunsang
 
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
   mvc:
     static-path-pattern: /resources/**
+
+
 ---
 spring:
   profiles: build
@@ -16,25 +24,17 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: kim111
-    jpa:
-      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-      showSql: true
-      database: mysql
-      generate-ddl: true
-      hibernate:
-        ddl-auto: update
-      properties:
-        hibernate.format_sql: true
-        use_sql_comments: true
 
-    thymeleaf:
-      prefix: classpath:templates/
-      check-template-location: true
-      suffix: .html
-      mode: HTML5
-      cache: false
-    jwt:
-      secret: govlepe@$&
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    showSql: true
+    database: mysql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+      use_sql_comments: true
 
 
 ---
