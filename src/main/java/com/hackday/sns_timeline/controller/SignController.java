@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.domain.dto.MemberDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -15,9 +17,9 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/sign")
 public class SignController {
 
-	// @RequestMapping(value = "/up", method = RequestMethod.GET)
-	// public ModelAndView signUp(@ModelAttribute MemberDto memberDto) {
-	// 	return new ModelAndView("signUp").addObject(CommonConst.MEMBER_DTO, memberDto);
-	// }
+	@RequestMapping(value = "/up", method = RequestMethod.GET)
+	public ModelAndView signUp(@ModelAttribute MemberDto memberDto) {
+		return new ModelAndView("signUp").addObject(CommonConst.MEMBER_DTO, memberDto);
+	}
 
 }
