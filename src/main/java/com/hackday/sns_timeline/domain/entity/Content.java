@@ -21,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.repository.Temporal;
 
@@ -41,7 +42,6 @@ public class Content {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@NotBlank
 	private long content_id;
 
 	@ManyToOne
@@ -53,10 +53,10 @@ public class Content {
 	@NotBlank
 	private String body;
 
-	@NotBlank
+	@NotNull
 	private Date posting_time;
 
-	@NotBlank
+	@NotNull
 	private boolean is_delete;
 
 
