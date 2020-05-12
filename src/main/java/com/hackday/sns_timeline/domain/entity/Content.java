@@ -1,6 +1,10 @@
+
 package com.hackday.sns_timeline.domain.entity;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -13,8 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+
+import org.springframework.data.jpa.repository.Temporal;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -28,32 +35,29 @@ import lombok.NonNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(indexes = {@Index(columnList="email")})
-public class Member {
+@Table
+public class Content {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-
-	@Email
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@NotBlank
-	@Column(nullable = false, unique = true, length = 100)
-	private String email;
+	private long content_id;
 
 	@NotBlank
-	@Column(nullable = false, length = 30)
-	private String name;
+	private long member_id;
 
-	@NonNull
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@Column(nullable = false, length = 100)
-	private String password;
+	@NotBlank
+	private String title;
 
-	@ManyToMany
-	List<Member> subscribe = new ArrayList<>();
+	@NotBlank
+	private String body;
 
-	@OneToMany
-	@JoinColumn(name="member_id")
-	private List<Content> contents = new ArrayList<>();
+	@NotBlank
+	private Date posting_time;
+
+	@NotBlank
+	private boolean is_delete;
+
 
 }
+
