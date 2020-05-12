@@ -39,6 +39,8 @@
   - https://www.ncloud.com/nsa/snstimeline2
   - 계정 : hack_sns
   - 패스워드 : 별도 공유
+  - 윤상님 지우님 : 3번4번
+  - 혜린님 대환님 : 1번2
   
 ## 오프라인 랩업 미팅
 
