@@ -31,11 +31,17 @@ import lombok.extern.log4j.Log4j2;
 public class ContentService {
 
 	final private ContentRepository contentRepository;
+	final private MemberRepository memberRepository;
 
 
-	public Content contentCreate(ContentDto contentDto) throws Exception {
+	public Content contentCreate(ContentDto contentDto, User user) throws Exception {
 
 		LocalDateTime currentDateTime = LocalDateTime.now();
+
+		String userName = user.getUsername();
+
+		Member member = memberRepository.findByEmail(userName)
+			.orElseThrow(() -> new UsernameNotFoundException(userName));
 
 
 		Content content = Content.builder()
@@ -43,6 +49,7 @@ public class ContentService {
 			.body(contentDto.getBody())
 			.is_delete(false)
 			.posting_time(java.sql.Timestamp.valueOf(currentDateTime.plusHours(9)))
+			.member(member)
 			.build();
 
 		return contentRepository.save(content);

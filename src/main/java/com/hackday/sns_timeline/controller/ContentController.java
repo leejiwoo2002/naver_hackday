@@ -2,6 +2,8 @@ package com.hackday.sns_timeline.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +32,10 @@ public class ContentController {
 	}
 
 	@RequestMapping(value = "/create/do", method = RequestMethod.POST)
-	public ModelAndView contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto) throws Exception {
+	public ModelAndView contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto, @AuthenticationPrincipal User user) throws Exception {
 		log.info(contentDto.getTitle() + " tries to create content");
 
-		contentService.contentCreate(contentDto);
+		contentService.contentCreate(contentDto,user);
 
 		return new ModelAndView("index");
 	}
