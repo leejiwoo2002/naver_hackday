@@ -52,8 +52,6 @@ public class Member {
 	@ManyToMany
 	List<Member> subscribe = new ArrayList<>();
 
-	@OneToMany
-	@JoinColumn(name="member_id")
-	private List<Content> contents = new ArrayList<>();
+
 
 }

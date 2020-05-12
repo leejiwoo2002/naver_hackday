@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TemporalType;
@@ -43,8 +44,8 @@ public class Content {
 	@NotBlank
 	private long content_id;
 
-	@NotBlank
-	private long member_id;
+	@ManyToOne
+	private Member member;
 
 	@NotBlank
 	private String title;
