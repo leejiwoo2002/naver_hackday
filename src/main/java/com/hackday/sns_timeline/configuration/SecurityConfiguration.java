@@ -39,14 +39,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.httpBasic().disable() // 기본설정 사용안함. 기본설정은 비인증시 로그인폼 화면으로 리다이렉트 된다.
 			.authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
 			.antMatchers("/timeLine/**", "/contents/**").hasRole("MEMBER")
-			.antMatchers("/", "/sign/**").anonymous() // 가입 및 인증 주소는 누구나 접근가능
+			.antMatchers("/", "/sign/**").anonymous() // 가입 및 인증 주소는 누구나 접근 가능
 			.antMatchers("/resources/**").permitAll()
 			.anyRequest().hasRole("MEMBER") // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
 
 			.and()
 			.formLogin() // 로그인 폼 설정
-			.loginPage("/") // 로그인 URL
-			.defaultSuccessUrl("/timeLine", true) // 로그인 성공 시 URL
+			.loginPage("/sign/in") // 로그인 URL
+			.defaultSuccessUrl("/sign/in", true) // 로그인 성공 시 URL
 			.usernameParameter("email") // 로그인 폼에서 username 의 파라미터 커스텀
 			.permitAll() // 권한 설정
 
