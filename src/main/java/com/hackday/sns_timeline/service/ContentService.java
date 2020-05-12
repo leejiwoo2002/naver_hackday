@@ -34,7 +34,7 @@ public class ContentService {
 	final private MemberRepository memberRepository;
 
 
-	public Content contentCreate(ContentDto contentDto, User user) throws Exception {
+	public Content contentCreate(ContentDto contentDto, User user,String saveName) throws Exception {
 
 		LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -50,6 +50,7 @@ public class ContentService {
 			.is_delete(false)
 			.posting_time(java.sql.Timestamp.valueOf(currentDateTime.plusHours(9)))
 			.member(member)
+			.file_name(saveName)
 			.build();
 
 		return contentRepository.save(content);

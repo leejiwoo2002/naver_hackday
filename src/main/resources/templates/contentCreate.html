@@ -10,8 +10,9 @@
 <section class="hero-section"
          th:style="'background: url(/resources/img/hero-slider/1.jpg) no-repeat center center fixed;'">
     <div class="col-lg-6">
-        <form class="hero-form" th:action="@{/content/create/do}" th:object="${contentDto}" action="#" th:method="post">
+        <form class="hero-form" th:action="@{/content/create/do}" th:object="${contentDto}" action="#" th:method="post" enctype="multipart/form-data" >
             <input type="text" placeholder="Content Title" th:field="*{title}" required="required">
+            <input type="file" placeholder="file" name="file" >
             <textarea name="body" placeholder="Content Body" th:field="*{body}" required="required" wrap="hard" >
             </textarea>
             <button class="site-btn" th:type="submit">create content!</button>

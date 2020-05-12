@@ -1,5 +1,7 @@
 package com.hackday.sns_timeline.domain.dto;
 
+import java.sql.Blob;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

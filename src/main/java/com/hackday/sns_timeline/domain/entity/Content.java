@@ -1,6 +1,7 @@
 
 package com.hackday.sns_timeline.domain.entity;
 
+import java.sql.Blob;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -49,6 +51,8 @@ public class Content {
 
 	@NotBlank
 	private String title;
+
+	private String file_name;
 
 	@NotBlank
 	private String body;
