@@ -10,8 +10,6 @@ spring:
     cache: false
   mvc:
     static-path-pattern: /resources/**
-
-
 ---
 spring:
   profiles: build
@@ -35,8 +33,6 @@ spring:
     properties:
       hibernate.format_sql: true
       use_sql_comments: true
-
-
 ---
 
 spring:

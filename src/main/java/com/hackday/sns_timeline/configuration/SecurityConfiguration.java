@@ -45,8 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 			.and()
 			.formLogin() // 로그인 폼 설정
-			.loginPage("/") // 로그인 URL
-			.defaultSuccessUrl("/timeLine", true) // 로그인 성공 시 URL
+			.loginPage("/sign/in") // 로그인 URL
+			.defaultSuccessUrl("/sign/in", true) // 로그인 성공 시 URL
 			.usernameParameter("email") // 로그인 폼에서 username 의 파라미터 커스텀
 			.permitAll() // 권한 설정
 

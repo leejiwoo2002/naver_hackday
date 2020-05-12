@@ -1,4 +1,13 @@
 package com.hackday.sns_timeline.domain;
 
-public class Role {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public enum Role {
+
+	MEMBER("ROLE_MEMBER");
+
+	private String value;
 }
