@@ -57,7 +57,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.invalidateHttpSession(true); // 세션 초기화
 	}
 
-
 	@Override
 	public void configure(WebSecurity web) {
 		// 시큐리티 적용 무시 URL

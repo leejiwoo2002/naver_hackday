@@ -51,7 +51,5 @@ public class Member {
 
 	@ManyToMany
 	List<Member> subscribe = new ArrayList<>();
-
-
-
+	private List<Content> contents = new ArrayList<>();
 }

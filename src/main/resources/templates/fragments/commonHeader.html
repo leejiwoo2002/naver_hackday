@@ -9,10 +9,17 @@
     </a>
     <nav class="header-nav">
         <ul class="main-menu">
-            <li><a th:href="@{/}">Home</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{/}">Home</a></li>
+            <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/timeLine}">Time Line</a></li>
+            <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/search}">Search member</a></li>
+            <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/contents/create}">Posting</a></li>
         </ul>
-        <div class="header-right">
-            <a class="hr-btn hr-btn-2" th:href="@{/sign/up}">Sign Up</a>
+        <div class="header-right" sec:authorize="isAuthenticated()">
+            <a sec:authorize="isAuthenticated()" th:href="@{/sign/out}" class="hr-btn hr-btn-2">Sign Out</a>
+        </div>
+
+        <div class="header-right" sec:authorize="isAnonymous()">
+            <a sec:authorize="isAnonymous()" th:href="@{/sign/up}" class="hr-btn hr-btn-2">Sign Up</a>
         </div>
     </nav>
 </header>
@@ -20,4 +27,3 @@
 
 
 </html>
-
