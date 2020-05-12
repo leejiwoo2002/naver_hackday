@@ -55,5 +55,4 @@ public class Member {
 	@OneToMany
 	@JoinColumn(name="member_id")
 	private List<Content> contents = new ArrayList<>();
-
 }
