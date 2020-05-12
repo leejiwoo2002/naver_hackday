@@ -4,5 +4,6 @@ public final class CommonConst{
 
 	public final static String MEMBER_DTO = "memberDto";
 	public final static String CONTENT_DTO = "contentDto";
+	public final static String MEMBERS = "members";
 
 }
