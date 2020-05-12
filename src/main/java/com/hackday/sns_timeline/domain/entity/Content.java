@@ -1,6 +1,7 @@
 
 package com.hackday.sns_timeline.domain.entity;
 
+import java.sql.Blob;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -14,12 +15,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.jpa.repository.Temporal;
 
@@ -40,22 +44,23 @@ public class Content {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@NotBlank
 	private long content_id;
 
-	@NotBlank
-	private long member_id;
+	@ManyToOne
+	private Member member;
 
 	@NotBlank
 	private String title;
 
+	private String file_name;
+
 	@NotBlank
 	private String body;
 
-	@NotBlank
+	@NotNull
 	private Date posting_time;
 
-	@NotBlank
+	@NotNull
 	private boolean is_delete;
 
 
