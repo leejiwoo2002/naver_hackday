@@ -11,18 +11,18 @@
 <!-- Header Section -->
 <header th:replace="fragments/commonHeader :: header"></header>
 
-<section class="elements-section spad" th:with="search = ${''}">
+<section class="elements-section spad">
     <div class="element">
         <div class="col-lg-4 col-md-6 sidebar">
             <div class="sb-widget">
                 <form class="search-form" th:action="@{/member/search/do}" th:method="GET">
-                    <input type="text" placeholder="검색어를 입력해 주세요." th:name="search" th:value="${search}">
+                    <input th:id="search" type="text" placeholder="검색어를 입력해 주세요." th:name="search">
                     <button th:type="submit"><img src="img/search-icon.png" alt=""></button>
                 </form>
             </div>
         </div>
 
-        <div class="element" th:if="${members} != null">
+        <div id="result" class="element" th:if="${members} != null">
             <div class="row" th:each="member : ${members}">
                 <div class="col-md-4">
                     <div class="icon-box-item ">
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <nav class="site-pagination" th:if="${members.getTotalPages() > 1}">
+            <nav class="site-pagination" th:if="${members.getTotalPages() > 1}" th:with="search = ${''}">
                 <ul class="pagination"
                     th:with="start = (${T(Math).floor(members.getPageable().getPageNumber() / 10) * 10 + 1}),
                         last = (${(T(Math).floor(members.getPageable().getPageNumber() / 10) * 10 + 1) + 9 < members.getTotalPages() ? (T(Math).floor(members.getPageable().getPageNumber() / 10) * 10 + 1) + 9 : members.getTotalPages()})">
@@ -84,6 +84,23 @@
 <script src="/resources/js/main.js"></script>
 
 <script type="text/javascript" th:inline="javascript">
+    /* <![CDATA[ */
+    function getMemberList(search, page) {
+        console.log(search + '  ' + page);
+        const url = "/member/search?search=" + search + "&page=" + page;
+
+        $.ajax({
+            type: "get",
+            url: url,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                $('#result').setAttribute(th:)
+                alert(data);
+            }
+        });
+    }
+
     function addSubscribe(id) {
         const url = "/subscribe/do";
 
@@ -104,7 +121,7 @@
             }
         });
     }
-
+    /* ]]> */
 </script>
 </body>
 </html>
