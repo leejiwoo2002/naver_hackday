@@ -6,7 +6,9 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -19,9 +21,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.domain.dto.ContentDto;
-import com.hackday.sns_timeline.domain.dto.MemberDto;
+import com.hackday.sns_timeline.domain.entity.Content;
+import com.hackday.sns_timeline.domain.entity.Member;
 import com.hackday.sns_timeline.service.ContentService;
-import com.hackday.sns_timeline.service.SignService;
+import com.hackday.sns_timeline.service.MemberSearchService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -32,6 +35,8 @@ import lombok.extern.log4j.Log4j2;
 public class ContentController {
 
 	final private ContentService contentService;
+	final private MemberSearchService memberSearchService;
+
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView getCreatePage(@ModelAttribute ContentDto contentDto) {
@@ -39,7 +44,7 @@ public class ContentController {
 	}
 
 	@RequestMapping(value = "/create/do", method = RequestMethod.POST)
-	public ModelAndView contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO)
+	public String contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
 		@RequestParam("file") MultipartFile file) throws Exception {
 		log.info(contentDto.getTitle() + " tries to create content");
@@ -57,6 +62,17 @@ public class ContentController {
 		}
 		contentService.contentCreate(contentDto,user,saveName);
 
-		return new ModelAndView("index");
+		return "redirect:/timeLine";
+	}
+
+	@RequestMapping(value = "/readMyContent", method = RequestMethod.GET)
+	public ModelAndView readContent(@AuthenticationPrincipal User user,
+		@PageableDefault Pageable pageable) {
+		log.info("my Content = " + user.getUsername());
+
+		Page<ContentDto> contentDtoList = contentService.findMyContent(user.getUsername(), pageable);
+
+		log.info("contents : " + contentDtoList);
+		return new ModelAndView("contentReadMy").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
 	}
 }
