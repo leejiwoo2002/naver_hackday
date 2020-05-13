@@ -41,8 +41,8 @@ public class MemberSearchController {
 	public ModelAndView searchMember(@RequestParam(name = "search") String search,
 		@PageableDefault Pageable pageable) {
 		log.info("search = " + search);
-		Page<Member> members = memberSearchService.findMembers(search, pageable);
-		return new ModelAndView("searchMember").addObject(CommonConst.MEMBERS, members);
+		Page<MemberDto> memberDtoList = memberSearchService.findMembers(search, pageable);
+		return new ModelAndView("searchMember").addObject(CommonConst.MEMBER_DTO_LIST, memberDtoList);
 	}
 
 	@GetMapping("/test")

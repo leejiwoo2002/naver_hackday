@@ -22,19 +22,19 @@
             </div>
         </div>
 
-        <div id="result" class="element" th:if="${members} != null">
-            <div class="row" th:each="member : ${members}">
+        <div id="result" class="element" th:if="${memberDtoList} != null">
+            <div class="row" th:each="memberDto : ${memberDtoList}">
                 <div class="col-md-4">
                     <div class="icon-box-item ">
                         <form th:action="@{/subscribe/do}" th:object=${subscribeDto} method="post">
-                            <input type="hidden" name="id" th:value="${member.getId()}"/>
+                            <input type="hidden" name="id" th:value="${memberDto.getId()}"/>
                             <button class="ib-icon btn" th:type="submit">
                                 <i class="flaticon-036-customer-service"></i>
                             </button>
                         </form>
 
                         <div class="ib-text">
-                            <h5 th:text="*{member.getEmail()}"></h5>
+                            <h5 th:text="*{memberDto.getEmail()}"></h5>
                             <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per incep-tos
                                 himenaeos. Suspendisse potenti. Ut gravida mattis.</p>
                         </div>
@@ -42,30 +42,30 @@
                 </div>
             </div>
 
-            <nav class="site-pagination" th:if="${members.getTotalPages() > 1}" th:with="search = ${''}">
+            <nav class="site-pagination" th:if="${memberDtoList.getTotalPages() > 1}" th:with="search = ${''}">
                 <ul class="pagination"
-                    th:with="start=${T(Math).floor(boardList.number/10)*10 + 1},
-                            last=(${start + 9 < boardList.totalPages ? start + 9 : boardList.totalPages})">
+                    th:with="start=${T(Math).floor(memberDtoList.number/10)*10 + 1},
+                            last=(${start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages())})">
                     <li>
                         <a th:href="@{/member/search/do(search = ${search},page=1)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
-                    <li th:class="${members.first} ? 'disabled'">
-                        <a th:href="@{/member/search/do(search = ${search}, page=${members.getPageable().getPageNumber()})}"
+                    <li th:class="${memberDtoList.first} ? 'disabled'">
+                        <a th:href="@{/member/search/do(search = ${search}, page=${memberDtoList.getPageable().getPageNumber()})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
                     </li>
 
                     <li th:each="page: ${#numbers.sequence(start, last)}"
-                        th:class="${page == members.getPageable().getPageNumber() + 1} ? 'active'">
+                        th:class="${page == memberDtoList.getPageable().getPageNumber() + 1} ? 'active'">
                         <a th:text="${page}" th:href="@{/member/search/do(search = ${search}, page=${page})}"></a>
                     </li>
 
-                    <li th:class="${members.last} ? 'disabled'">
-                        <a th:href="@{/member/search/do(search = ${search}, page=${members.getPageable().getPageNumber()+2})}"
+                    <li th:class="${memberDtoList.last} ? 'disabled'">
+                        <a th:href="@{/member/search/do(search = ${search}, page=${memberDtoList.getPageable().getPageNumber()+2})}"
                            aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
