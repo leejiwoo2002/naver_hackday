@@ -35,6 +35,7 @@ public class SignController {
 
 		signService.signUp(memberDto);
 
+
 		log.info(memberDto.getEmail() + " succeeds to log up");
 		return new ModelAndView("index").addObject(CommonConst.MEMBER_DTO, new MemberDto());
 	}
