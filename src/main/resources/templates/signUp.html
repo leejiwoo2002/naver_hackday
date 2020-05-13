@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <th:block th:replace="fragments/commonHead"></th:block>
 </head>
@@ -11,9 +11,9 @@
          th:style="'background: url(/resources/img/hero-slider/1.jpg) no-repeat center center fixed;'">
     <div class="col-lg-6">
         <form class="hero-form" th:action="@{/sign/up/do}" th:object="${memberDto}" action="#" th:method="post">
-            <input type="text" placeholder="Your Name" th:field="*{name}" required="required">
-            <input type="email" placeholder="Your E-mail" th:field="*{email}" required="required">
-            <input type="password" placeholder="Your Password" th:field="*{password}" required="required">
+            <input type="text" id="name" name="name" placeholder="Your Name" th:value= "*{name}" required="required">
+            <input type="email" id="email" name="email" placeholder="Your E-mail" th:value="*{email}" required="required">
+            <input type="password" id="password" name="password" placeholder="Your Password" th:value="*{password}" required="required">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
                 lacus vel facilisis. </p>

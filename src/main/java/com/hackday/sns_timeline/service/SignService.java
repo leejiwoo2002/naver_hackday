@@ -1,6 +1,8 @@
 package com.hackday.sns_timeline.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -11,8 +13,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hackday.sns_timeline.domain.Role;
+import com.hackday.sns_timeline.domain.dto.CustomUser;
 import com.hackday.sns_timeline.domain.dto.MemberDto;
 import com.hackday.sns_timeline.domain.entity.Member;
 import com.hackday.sns_timeline.repository.MemberRepository;
@@ -25,6 +29,7 @@ import lombok.extern.log4j.Log4j2;
 public class SignService implements UserDetailsService {
 
 	final private MemberRepository memberRepository;
+	final private SubscribeService subscribeService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -37,25 +42,30 @@ public class SignService implements UserDetailsService {
 
 		authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
 
-		return new User(member.getEmail(), member.getPassword(), authorities);
+		return new CustomUser(member.getEmail(), member.getPassword(), authorities, member.getId());
 	}
 
-
-	public Member signUp(MemberDto memberDto) throws Exception {
+	@Transactional
+	public void signUp(MemberDto memberDto) throws Exception {
 		// email duplicated
 		if (checkEmail(memberDto.getEmail())) {
 			throw new Exception("Email is duplicated.");
 		}
 
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		Date date = java.sql.Timestamp.valueOf(currentDateTime.plusHours(9));
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		Member member = Member.builder()
 			.email(memberDto.getEmail())
 			.name(memberDto.getName())
 			.password(passwordEncoder.encode(memberDto.getPassword()))
+			.regDate(date)
 			.build();
 
-		return memberRepository.save(member);
+		member = memberRepository.save(member);
+
+		subscribeService.saveSubscribe(member, member);
 	}
 
 	private boolean checkEmail(String email) {
@@ -63,11 +73,5 @@ public class SignService implements UserDetailsService {
 			return true;
 		else
 			return false;
-	}
-
-	private Member checkPassword(String email, String password) throws Exception {
-		Member member = memberRepository.findByEmailAndPassword(email, password)
-			.orElseThrow(() -> new Exception("Check your password"));
-		return member;
 	}
 }

@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.domain.dto.MemberDto;
+import com.hackday.sns_timeline.domain.dto.SubscribeDto;
 import com.hackday.sns_timeline.domain.entity.Member;
 import com.hackday.sns_timeline.service.MemberSearchService;
 import com.hackday.sns_timeline.service.SignService;
@@ -28,21 +31,21 @@ public class MemberSearchController {
 	final private MemberSearchService memberSearchService;
 	final private SignService signService;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ModelAndView searchMemberPage() {
+	@GetMapping
+	public ModelAndView searchMemberPage(@ModelAttribute SubscribeDto subscribeDto) {
 		log.info("call search member");
 		return new ModelAndView("searchMember");
 	}
 
-	@RequestMapping(value = "/do", method = RequestMethod.GET)
+	@GetMapping("/do")
 	public ModelAndView searchMember(@RequestParam(name = "search") String search,
 		@PageableDefault Pageable pageable) {
 		log.info("search = " + search);
-		Page<Member> members = memberSearchService.findMembers(search, pageable);
-		return new ModelAndView("searchMember").addObject(CommonConst.MEMBERS, members);
+		Page<MemberDto> memberDtoList = memberSearchService.findMembers(search, pageable);
+		return new ModelAndView("searchMember").addObject(CommonConst.MEMBER_DTO_LIST, memberDtoList);
 	}
 
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
+	@GetMapping("/test")
 	public @ResponseBody String createTestData(@RequestParam(name = "name") String name,
 												@RequestParam(name = "count") int count) throws Exception{
 
