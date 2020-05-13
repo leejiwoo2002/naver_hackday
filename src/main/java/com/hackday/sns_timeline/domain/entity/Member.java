@@ -55,7 +55,4 @@ public class Member {
 
 	@NonNull
 	private Date regDate;
-
-	@OneToMany
-	private List<Content> contents = new ArrayList<>();
 }

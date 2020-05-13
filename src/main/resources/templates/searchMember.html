@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
+      xmlns:th="http://thymeleaf.org"
 >
 
 <head>
@@ -26,10 +26,12 @@
             <div class="row" th:each="member : ${members}">
                 <div class="col-md-4">
                     <div class="icon-box-item ">
-                        <button class="ib-icon btn" th:type="button"
-                                th:onclick="'javascript:addSubscribe(\''+*{member.getId()}+'\')'" action="#">
-                            <i class="flaticon-036-customer-service"></i>
-                        </button>
+                        <form th:action="@{/subscribe/do}" th:object=${subscribeDto} method="post">
+                            <input type="hidden" name="id" th:value="${member.getId()}"/>
+                            <button class="ib-icon btn" th:type="submit">
+                                <i class="flaticon-036-customer-service"></i>
+                            </button>
+                        </form>
 
                         <div class="ib-text">
                             <h5 th:text="*{member.getEmail()}"></h5>
@@ -42,8 +44,8 @@
 
             <nav class="site-pagination" th:if="${members.getTotalPages() > 1}" th:with="search = ${''}">
                 <ul class="pagination"
-                    th:with="start = (${T(Math).floor(members.getPageable().getPageNumber() / 10) * 10 + 1}),
-                        last = (${(T(Math).floor(members.getPageable().getPageNumber() / 10) * 10 + 1) + 9 < members.getTotalPages() ? (T(Math).floor(members.getPageable().getPageNumber() / 10) * 10 + 1) + 9 : members.getTotalPages()})">
+                    th:with="start=${T(Math).floor(boardList.number/10)*10 + 1},
+                            last=(${start + 9 < boardList.totalPages ? start + 9 : boardList.totalPages})">
                     <li>
                         <a th:href="@{/member/search/do(search = ${search},page=1)}" aria-label="First">
                             <span aria-hidden="true">First</span>
@@ -95,19 +97,19 @@
             async: false,
             dataType: "json",
             success: function (data) {
-                $('#result').setAttribute(th:)
+                // $('#result').setAttribute(th:)
                 alert(data);
             }
         });
     }
 
-    function addSubscribe(id) {
+    function addSubscribe(member) {
         const url = "/subscribe/do";
 
-        console.log(id);
+        console.log(member.id);
 
         const request = {
-            id: id
+            id : member.id
         }
 
         $.ajax({

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hackday.sns_timeline.domain.Role;
+import com.hackday.sns_timeline.domain.dto.CustomUser;
 import com.hackday.sns_timeline.domain.dto.MemberDto;
 import com.hackday.sns_timeline.domain.entity.Member;
 import com.hackday.sns_timeline.repository.MemberRepository;
@@ -41,7 +42,7 @@ public class SignService implements UserDetailsService {
 
 		authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
 
-		return new User(member.getEmail(), member.getPassword(), authorities);
+		return new CustomUser(member.getEmail(), member.getPassword(), authorities, member.getId());
 	}
 
 	@Transactional

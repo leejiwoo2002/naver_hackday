@@ -21,9 +21,9 @@ public class SubscribeService {
 	final private MemberRepository memberRepository;
 	final private SubscribeRepository subscribeRepository;
 
-	public void addSubscribe(String subscribeEmail, String subscribedEmail) throws Exception{
-		Member subscribeMember = memberRepository.findByEmail(subscribeEmail).orElseThrow(() -> new Exception());
-		Member subscribedMember = memberRepository.findByEmail(subscribedEmail).orElseThrow(() -> new Exception());
+	public void addSubscribe(long subscribeId, long subscribedId) throws Exception{
+		Member subscribeMember = memberRepository.findById(subscribeId).orElseThrow(() -> new Exception());
+		Member subscribedMember = memberRepository.findById(subscribedId).orElseThrow(() -> new Exception());
 
 		saveSubscribe(subscribeMember, subscribedMember);
 	}
@@ -39,5 +39,4 @@ public class SubscribeService {
 
 		subscribeRepository.save(subscribe);
 	}
-
 }
