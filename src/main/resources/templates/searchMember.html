@@ -43,9 +43,7 @@
             </div>
 
             <nav class="site-pagination" th:if="${memberDtoList.getTotalPages() > 1}">
-                <ul class="pagination"
-                    th:with="start=${T(Math).floor(memberDtoList.number/10)*10 + 1},
-                            last=(${start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages())})">
+                <ul class="pagination" th:with="start=${start}, last=${last}">
                     <li>
                         <a th:href="@{/member/search/do(search = ${search},page=1)}" aria-label="First">
                             <span aria-hidden="true">First</span>
@@ -67,7 +65,13 @@
                     <li th:class="${memberDtoList.last} ? 'disabled'">
                         <a th:href="@{/member/search/do(search = ${search}, page=${memberDtoList.getPageable().getPageNumber()+2})}"
                            aria-label="Next">
-                            <span aria-hidden="true">&gt;</span>
+                            <span aria-hidden="true">></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/member/search/do(search = ${search},page = ${memberDtoList.getTotalPages()})}" aria-label="Last">
+                            <span aria-hidden="true">Last</span>
                         </a>
                     </li>
                 </ul>

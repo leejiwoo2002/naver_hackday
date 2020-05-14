@@ -45,6 +45,10 @@ public class MemberSearchController {
 		if(memberDtoList.getContent().size() == 0){
 			rttr.addFlashAttribute("isNull", true);
 		} else {
+			int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
+			int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
+			rttr.addFlashAttribute("start", start);
+			rttr.addFlashAttribute("last", last);
 			rttr.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
 		}
 
