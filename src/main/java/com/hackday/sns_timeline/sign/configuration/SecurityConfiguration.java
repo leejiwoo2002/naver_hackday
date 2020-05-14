@@ -43,8 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
 			.antMatchers("/timeLine/**","/content/**", "/subscribe/**").hasRole("MEMBER")
 			.antMatchers("/", "/sign/**").anonymous() // 가입 및 인증 주소는 누구나 접근가능
-			.antMatchers("/resources/**").permitAll()
-			.anyRequest().hasRole("MEMBER") // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
+			.anyRequest().permitAll() // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
 
 			.and()
 			.formLogin() // 로그인 폼 설정
@@ -66,7 +65,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) {
 		// 시큐리티 적용 무시 URL
-		web.ignoring().antMatchers("/resources/**");
+		web.ignoring().antMatchers("/resources/**",
+			"/v2/api-docs",
+			"/configuration/ui",
+			"/swagger-resources/**",
+			"/configuration/security",
+			"/swagger-ui.html",
+			"/webjars/**");
 	}
 
 	// 로그인 설정
