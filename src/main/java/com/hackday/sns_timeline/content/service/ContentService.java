@@ -35,12 +35,11 @@ public class ContentService {
 		Member member = memberRepository.findByEmail(userName)
 			.orElseThrow(() -> new UsernameNotFoundException(userName));
 
-
 		Content content = Content.builder()
 			.title(contentDto.getTitle())
 			.body(contentDto.getBody())
 			.is_delete(false)
-			.posting_time(java.sql.Timestamp.valueOf(currentDateTime.plusHours(9)))
+			.posting_time(java.sql.Timestamp.valueOf(currentDateTime))
 			.member(member)
 			.file_name(saveName)
 			.build();
