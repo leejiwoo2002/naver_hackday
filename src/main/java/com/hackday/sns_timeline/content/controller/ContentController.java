@@ -9,6 +9,7 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -38,6 +39,10 @@ public class ContentController {
 	final private ContentService contentService;
 	final private MemberSearchService memberSearchService;
 
+	@Value("${imagePath.name}")
+	private	String filePath;
+
+
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView getCreatePage(@ModelAttribute ContentDto contentDto) {
@@ -49,6 +54,8 @@ public class ContentController {
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
 		@RequestParam("file") MultipartFile file) throws Exception {
 		log.info(contentDto.getTitle() + " tries to create content");
+
+		log.info("filePath : " + filePath);
 
 		String saveName="";
 		if(!file.isEmpty()) {
@@ -63,7 +70,7 @@ public class ContentController {
 
 			saveName+=extension; // 확장자 추가
 
-			File directory = new File(CommonConst.IMAGE_PATH+"/"+folderName);
+			File directory = new File(filePath+"/"+folderName);
 
 			if (!directory.exists()) {
 				try{
@@ -74,7 +81,7 @@ public class ContentController {
 				}
 			}
 
-			File saveFile = new File(CommonConst.IMAGE_PATH+"/"+folderName, saveName); // 저장할 폴더 이름, 저장할 파일 이름
+			File saveFile = new File(filePath+"/"+folderName, saveName); // 저장할 폴더 이름, 저장할 파일 이름
 			try {
 				file.transferTo(saveFile); // 업로드 파일에 saveFile이라는 껍데기 입힘
 			} catch (IOException e) {

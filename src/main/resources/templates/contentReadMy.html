@@ -35,7 +35,8 @@
                         <div class="ib-text">
                             <h5 th:text="*{content.getTitle()}"></h5>
                             <p th:if="${content.getFile_name().length()} > 0 ">
-                                <img th:src="'/resources/img/user-images/' + ${#strings.substring(content.getPosting_time(),0,10)} +'/'+ ${content.getFile_name()}"/>
+                                <label th:text="'/user-images/' + ${#strings.substring(content.getPosting_time(),0,10)} +'/'+ ${content.getFile_name()}"/>
+                                <img th:src="'/user-images/' + ${#strings.substring(content.getPosting_time(),0,10)} +'/'+ ${content.getFile_name()}"/>
                             </p>
                             <p th:text="*{content.getBody()}">  </p>
                         </div>
