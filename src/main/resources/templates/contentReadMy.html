@@ -34,6 +34,10 @@
 
                         <div class="ib-text">
                             <h5 th:text="*{content.getTitle()}"></h5>
+                            <p th:if="${content.getFile_name().length()} > 0 ">
+                                <label th:text="'/user-images/' + ${#strings.substring(content.getPosting_time(),0,10)} +'/'+ ${content.getFile_name()}"/>
+                                <img th:src="'/user-images/' + ${#strings.substring(content.getPosting_time(),0,10)} +'/'+ ${content.getFile_name()}"/>
+                            </p>
                             <p th:text="*{content.getBody()}">  </p>
                         </div>
                     </div>
@@ -45,13 +49,13 @@
                     th:with="start = (${T(Math).floor(contentDtoList.getPageable().getPageNumber() / 10) * 10 + 1}),
                         last = (${(T(Math).floor(contentDtoList.getPageable().getPageNumber() / 10) * 10 + 1) + 9 < members.getTotalPages() ? (T(Math).floor(members.getPageable().getPageNumber() / 10) * 10 + 1) + 9 : members.getTotalPages()})">
                     <li>
-                        <a th:href="@{/content/readMyContent(page=1)}" aria-label="First">
+                        <a th:href="@{/content/my(page=1)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <li th:class="${contentDtoList.first} ? 'disabled'">
-                        <a th:href="@{/content/readMyContent(page=${contentDtoList.getPageable().getPageNumber()})}"
+                        <a th:href="@{/content/my(page=${contentDtoList.getPageable().getPageNumber()})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
@@ -59,17 +63,18 @@
 
                     <li th:each="page: ${#numbers.sequence(start, last)}"
                         th:class="${page == contentDtoList.getPageable().getPageNumber() + 1} ? 'active'">
-                        <a th:text="${page}" th:href="@{/content/readMyContent(page=${page})}"></a>
+                        <a th:text="${page}" th:href="@{/content/my(page=${page})}"></a>
                     </li>
 
                     <li th:class="${contentDtoList.last} ? 'disabled'">
-                        <a th:href="@{/content/readMyContent(page=${contentDtoList.getPageable().getPageNumber()+2})}"
+                        <a th:href="@{/content/my(page=${contentDtoList.getPageable().getPageNumber()+2})}"
                            aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
                     </li>
                 </ul>
             </nav>
+
         </div>
     </div>
     </div>

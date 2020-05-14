@@ -1,6 +1,8 @@
 package com.hackday.sns_timeline.content.domain.dto;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.hackday.sns_timeline.content.domain.entity.Content;
 import lombok.AllArgsConstructor;
@@ -20,7 +22,7 @@ public class ContentDto {
 	private String body;
 	private String title;
 	private String file_name;
-	private Timestamp posting_time;
+	private Date posting_time;
 	private Long member_id;
 
 	static public ContentDto customConverter(Content content){
@@ -29,6 +31,8 @@ public class ContentDto {
 			.content_id(content.getContent_id())
 			.body(content.getBody())
 			.title(content.getTitle())
+			.file_name(content.getFile_name())
+			.posting_time(content.getPosting_time())
 			.build();
 	}
 
