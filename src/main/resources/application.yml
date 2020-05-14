@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: yunsang
+    active: jiwoo
 
   thymeleaf:
     prefix: classpath:templates/

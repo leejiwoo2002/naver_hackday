@@ -29,6 +29,7 @@ public class ContentDto {
 			.content_id(content.getContent_id())
 			.body(content.getBody())
 			.title(content.getTitle())
+			.file_name(content.getFile_name())
 			.build();
 	}
 

@@ -2,10 +2,13 @@ package com.hackday.sns_timeline.content.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -36,12 +39,12 @@ public class ContentController {
 	final private MemberSearchService memberSearchService;
 
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView getCreatePage(@ModelAttribute ContentDto contentDto) {
 		return new ModelAndView("contentCreate").addObject(CommonConst.CONTENT_DTO, contentDto);
 	}
 
-	@RequestMapping(value = "/create/do", method = RequestMethod.POST)
+	@RequestMapping(value = "/new/do", method = RequestMethod.POST)
 	public String contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
 		@RequestParam("file") MultipartFile file) throws Exception {
@@ -50,8 +53,28 @@ public class ContentController {
 		String saveName="";
 		if(!file.isEmpty()) {
 			UUID uuid = UUID.randomUUID();
-			saveName = uuid + "_" + file.getOriginalFilename();
-			File saveFile = new File(CommonConst.IMAGE_PATH, saveName); // 저장할 폴더 이름, 저장할 파일 이름
+			saveName = uuid.toString();
+
+			SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
+			Date today = new Date();
+			String folderName = dateFormat.format(today);
+
+			String extension = "."+FilenameUtils.getExtension(file.getOriginalFilename());
+
+			saveName+=extension; // 확장자 추가
+
+			File directory = new File(CommonConst.IMAGE_PATH+"/"+folderName);
+
+			if (!directory.exists()) {
+				try{
+					directory.mkdir(); //폴더 생성합니다.
+				}
+				catch(Exception e){
+					e.getStackTrace();
+				}
+			}
+
+			File saveFile = new File(CommonConst.IMAGE_PATH+"/"+folderName, saveName); // 저장할 폴더 이름, 저장할 파일 이름
 			try {
 				file.transferTo(saveFile); // 업로드 파일에 saveFile이라는 껍데기 입힘
 			} catch (IOException e) {
@@ -63,7 +86,7 @@ public class ContentController {
 		return "redirect:/timeLine";
 	}
 
-	@RequestMapping(value = "/readMyContent", method = RequestMethod.GET)
+	@RequestMapping(value = "/my", method = RequestMethod.GET)
 	public ModelAndView readContent(@AuthenticationPrincipal User user,
 		@PageableDefault Pageable pageable) {
 		log.info("my Content = " + user.getUsername());
