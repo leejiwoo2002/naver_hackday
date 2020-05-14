@@ -26,7 +26,7 @@
             <div class="row" th:each="memberDto : ${memberDtoList}">
                 <div class="col-md-4">
                     <div class="icon-box-item ">
-                        <form th:action="@{/subscribe/do}" th:object=${subscribeDto} method="post">
+                        <form th:action="@{/subscribe}" th:object=${subscribeDto} method="post">
                             <input type="hidden" name="id" th:value="${memberDto.getId()}"/>
                             <button class="ib-icon btn" th:type="submit">
                                 <i class="flaticon-036-customer-service"></i>

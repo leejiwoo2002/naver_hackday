@@ -22,7 +22,7 @@ public class SubscribeController {
 
 	final private SubscribeService subscribeService;
 
-	@PostMapping("/do")
+	@PostMapping()
 	public String addSubscribe(@ModelAttribute("subscribeDto") @Valid SubscribeDto subscribeDto, @AuthenticationPrincipal CustomUser user) throws Exception {
 
 		log.info(subscribeDto.getId());

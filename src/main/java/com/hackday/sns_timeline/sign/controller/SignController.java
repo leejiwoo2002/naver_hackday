@@ -3,6 +3,7 @@ package com.hackday.sns_timeline.sign.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +33,7 @@ public class SignController {
 		return new ModelAndView("signUp");
 	}
 
-	@PostMapping("/up/do")
+	@PostMapping("/up")
 	public String signUp(@Valid MemberDto memberDto) throws Exception {
 		signService.signUp(memberDto);
 		return "redirect:/";
@@ -46,7 +47,6 @@ public class SignController {
 
 	@GetMapping("/fail")
 	public String signInFail(RedirectAttributes rttr){
-		log.error("sign error");
 		rttr.addFlashAttribute("error", "The ID or password are not correct. Please check again.");
 		return "redirect:/";
 	}

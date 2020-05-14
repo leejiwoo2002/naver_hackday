@@ -19,8 +19,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
 	Optional<Member> findByEmail(String email);
 
-	Optional<Member> findByEmailAndPassword(String email, String password);
-
 	@Query(value = "select * from Member member where member.email like %:search% or member.name like %:search%", nativeQuery = true)
 	Page<Member> searchMember(@Param("search") String search, Pageable pageable);
 }

@@ -2,6 +2,7 @@ package com.hackday.sns_timeline.sign.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -33,45 +34,36 @@ public class SignService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		log.info("try sign in : " + username);
-
 		Member member = memberRepository.findByEmail(username)
 			.orElseThrow(() -> new UsernameNotFoundException(username));
 
 		List<GrantedAuthority> authorities = new ArrayList<>();
 
-		authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
+		for (String role : member.getRoles()) {
+			authorities.add(new SimpleGrantedAuthority(role));
+		}
 
 		return new CustomUser(member.getEmail(), member.getPassword(), authorities, member.getId());
 	}
 
 	@Transactional
 	public void signUp(MemberDto memberDto) throws Exception {
-		// email duplicated
-		if (checkEmail(memberDto.getEmail())) {
-			throw new Exception("Email is duplicated.");
+		if(memberRepository.findByEmail(memberDto.getEmail()).isPresent()){
+			throw new Exception("email already exist");
 		}
 
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		Date date = java.sql.Timestamp.valueOf(currentDateTime.plusHours(9));
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-		Member member = Member.builder()
+		Member member = memberRepository.save(Member.builder()
 			.email(memberDto.getEmail())
 			.name(memberDto.getName())
 			.password(passwordEncoder.encode(memberDto.getPassword()))
+			.roles(new ArrayList<>(Arrays.asList(Role.MEMBER.getValue())))
 			.regDate(date)
-			.build();
-
-		member = memberRepository.save(member);
+			.build());
 
 		subscribeService.saveSubscribe(member, member);
-	}
-
-	private boolean checkEmail(String email) {
-		if (memberRepository.findByEmail(email).isPresent())
-			return true;
-		else
-			return false;
 	}
 }

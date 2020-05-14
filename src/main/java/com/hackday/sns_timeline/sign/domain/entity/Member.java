@@ -1,11 +1,14 @@
 package com.hackday.sns_timeline.sign.domain.entity;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,8 +22,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.jpa.repository.Temporal;
+import org.springframework.security.core.GrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.hackday.sns_timeline.sign.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -52,6 +57,10 @@ public class Member {
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@Column(nullable = false, length = 100)
 	private String password;
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	@Builder.Default
+	private List<String> roles = new ArrayList<>();
 
 	@NonNull
 	private Date regDate;
