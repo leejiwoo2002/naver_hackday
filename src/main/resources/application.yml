@@ -1,6 +1,7 @@
+
 spring:
   profiles:
-    active: yunsang
+    active: jiwoo
 
   thymeleaf:
     prefix: classpath:templates/
@@ -10,11 +11,12 @@ spring:
     cache: false
   mvc:
     static-path-pattern: /resources/**
-
 sever:
   error:
     include-exception: true
     include-stacktrace: always
+    
+imagePath.name: /Users/jiwoo/OneDrive - kyonggi.ac.kr/IdeaProjects/user-images
 
 ---
 spring:
@@ -44,7 +46,7 @@ spring:
 spring:
   profiles: jiwoo
   datasource:
-    url: jdbc:mysql://localhost:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: naver
     password: hackday
@@ -59,3 +61,6 @@ spring:
     properties:
       hibernate.format_sql: true
       use_sql_comments: true
+
+
+

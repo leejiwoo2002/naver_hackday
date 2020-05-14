@@ -10,10 +10,10 @@
     <nav class="header-nav">
         <ul class="main-menu">
             <li><a sec:authorize="isAnonymous()" th:href="@{/}">Home</a></li>
-            <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/content/readMyContent}">My Content</a></li>
+            <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/content/my}">My Content</a></li>
             <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/timeLine}">Time Line</a></li>
             <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/member/search}">Search member</a></li>
-            <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/content/create}">Posting</a></li>
+            <li><a sec:authorize="hasRole('ROLE_MEMBER')" th:href="@{/content/new}">Posting</a></li>
         </ul>
         <div class="header-right" sec:authorize="isAuthenticated()">
             <a sec:authorize="isAuthenticated()" th:href="@{/sign/out}" class="hr-btn hr-btn-2">Sign Out</a>
