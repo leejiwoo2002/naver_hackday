@@ -11,15 +11,12 @@ import org.springframework.stereotype.Repository;
 
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 
-@Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
 	@Override
 	Optional<Member> findById(Long aLong);
 
 	Optional<Member> findByEmail(String email);
-
-	Optional<Member> findByEmailAndPassword(String email, String password);
 
 	@Query(value = "select * from Member member where member.email like %:search% or member.name like %:search%", nativeQuery = true)
 	Page<Member> searchMember(@Param("search") String search, Pageable pageable);

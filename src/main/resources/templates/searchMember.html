@@ -4,6 +4,8 @@
 >
 
 <head>
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <th:block th:replace="fragments/commonHead"></th:block>
 </head>
 
@@ -17,35 +19,39 @@
             <div class="sb-widget">
                 <form class="search-form" th:action="@{/member/search/do}" th:method="GET">
                     <input th:id="search" type="text" placeholder="검색어를 입력해 주세요." th:name="search">
-                    <button th:type="submit"><img src="img/search-icon.png" alt=""></button>
+                    <button th:type="submit">
+                        <img src="img/search-icon.png" alt="">
+                    </button>
                 </form>
             </div>
         </div>
 
         <div id="result" class="element" th:if="${memberDtoList} != null">
-            <div class="row" th:each="memberDto : ${memberDtoList}">
+            <div class="row" th:each="memberDto, i : ${memberDtoList}">
                 <div class="col-md-4">
-                    <div class="icon-box-item ">
-                        <form th:action="@{/subscribe/do}" th:object=${subscribeDto} method="post">
+                    <div class="icon-box-item">
+                        <form th:action="@{/subscribe}" th:object=${subscribeDto} method="post">
                             <input type="hidden" name="id" th:value="${memberDto.getId()}"/>
-                            <button class="ib-icon btn" th:type="submit">
+                            <input type="hidden" name="search" th:value="${search}"/>
+                            <input type="hidden" name="page" th:value="${memberDtoList.getPageable().getPageNumber()}"/>
+                            <button class="ib-icon btn" type="submit">
                                 <i class="flaticon-036-customer-service"></i>
                             </button>
                         </form>
 
                         <div class="ib-text">
-                            <h5 th:text="*{memberDto.getEmail()}"></h5>
-                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per incep-tos
-                                himenaeos. Suspendisse potenti. Ut gravida mattis.</p>
+                            <h4>
+                                <span th:text="${memberDto.getEmail()}" th:remove="tag">Email</span>
+                                <br/>
+                                <small th:text="${memberDto.getName()}" >Name</small>
+                            </h4>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <nav class="site-pagination" th:if="${memberDtoList.getTotalPages() > 1}" th:with="search = ${''}">
-                <ul class="pagination"
-                    th:with="start=${T(Math).floor(memberDtoList.number/10)*10 + 1},
-                            last=(${start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages())})">
+            <nav class="site-pagination" th:if="${memberDtoList.getTotalPages() > 1}">
+                <ul class="pagination" th:with="start=${start}, last=${last}">
                     <li>
                         <a th:href="@{/member/search/do(search = ${search},page=1)}" aria-label="First">
                             <span aria-hidden="true">First</span>
@@ -67,7 +73,13 @@
                     <li th:class="${memberDtoList.last} ? 'disabled'">
                         <a th:href="@{/member/search/do(search = ${search}, page=${memberDtoList.getPageable().getPageNumber()+2})}"
                            aria-label="Next">
-                            <span aria-hidden="true">&gt;</span>
+                            <span aria-hidden="true">></span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/member/search/do(search = ${search},page = ${memberDtoList.getTotalPages()})}" aria-label="Last">
+                            <span aria-hidden="true">Last</span>
                         </a>
                     </li>
                 </ul>
@@ -87,29 +99,46 @@
 
 <script type="text/javascript" th:inline="javascript">
     /* <![CDATA[ */
-    function getMemberList(search, page) {
-        console.log(search + '  ' + page);
-        const url = "/member/search?search=" + search + "&page=" + page;
+    const isNull = /*[[${isNull}]]*/ false;
+    const memberDto = /*[[${memberDtoList.getContent()}]]*/ null;
 
-        $.ajax({
-            type: "get",
-            url: url,
-            async: false,
-            dataType: "json",
-            success: function (data) {
-                // $('#result').setAttribute(th:)
-                alert(data);
-            }
-        });
-    }
+    $(document).ready(function () {
+        if(isNull) {
+            alert("검색 결과가 없습니다.");
+        }
 
-    function addSubscribe(member) {
-        const url = "/subscribe/do";
+    //     const token = $('#_csrf').attr('content');
+    //     const header = $('#_csrf_header').attr('content');
+    //
+    //     $('#subscribeBtn').click(function(e) {
+    //         e.preventDefault();
+    //         const memberDtoId = $('#subscribeBtn').val();
+    //         console.log(memberDto[0].getKey('id'));
+    //         $.ajax({
+    //             url: '/subscribe',
+    //             type: 'post',
+    //             dataType: 'JSON',
+    //             data : {
+    //               id : memberDtoId
+    //             },
+    //             timeout: 10000,
+    //             beforeSend: function(xhr) {
+    //                 xhr.setRequestHeader(header, token);
+    //             },
+    //             success: function(data) {
+    //                 console.log("success")
+    //             }
+    //         });
+    //     });
+    });
 
-        console.log(member.id);
+    function addSubscribe(e, id) {
+        const url = "/subscribe";
+        e.preventDefault();
+        console.log(id);
 
         const request = {
-            id : member.id
+            id: id
         }
 
         $.ajax({

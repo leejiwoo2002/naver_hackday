@@ -3,6 +3,7 @@ package com.hackday.sns_timeline.memberSearch.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
 import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
@@ -30,20 +33,37 @@ public class MemberSearchController {
 
 	@GetMapping
 	public ModelAndView searchMemberPage(@ModelAttribute SubscribeDto subscribeDto) {
-		log.info("call search member");
 		return new ModelAndView("searchMember");
 	}
 
 	@GetMapping("/do")
-	public ModelAndView searchMember(@RequestParam(name = "search") String search, @PageableDefault Pageable pageable) {
-		log.info("search = " + search);
+	public String searchMember(@RequestParam(name = "search") String search, @PageableDefault Pageable pageable,
+		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) {
+		if(user == null) {
+			return "redirect:/";
+		}
+
+		redirectAttributes.addFlashAttribute("search", search);
+
 		Page<MemberDto> memberDtoList = memberSearchService.findMembers(search, pageable);
-		return new ModelAndView("searchMember").addObject(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+
+		if(memberDtoList.getContent().size() == 0){
+			redirectAttributes.addFlashAttribute("isNull", true);
+		} else {
+			memberSearchService.checkSubscribed(memberDtoList, user.getId());
+			int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
+			int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
+			redirectAttributes.addFlashAttribute("start", start);
+			redirectAttributes.addFlashAttribute("last", last);
+			redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+		}
+
+		return "redirect:/member/search";
 	}
 
 	@GetMapping("/test")
-	public @ResponseBody String createTestData(@RequestParam(name = "name") String name,
-												@RequestParam(name = "count") int count) throws Exception{
+	public String createTestData(@RequestParam(name = "name") String name,
+		@RequestParam(name = "count") int count) throws Exception {
 
 		for (int i = 1; i <= count; i++) {
 			signService.signUp(MemberDto.builder()
@@ -53,6 +73,6 @@ public class MemberSearchController {
 				.build());
 		}
 
-		return "OK";
+		return "redirect:/member/search";
 	}
 }
