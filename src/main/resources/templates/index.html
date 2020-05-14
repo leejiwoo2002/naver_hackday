@@ -25,6 +25,7 @@
                     <a href="#" class="site-btn sb-dark">Find out more</a>
                 </div>
             </div>
+
             <div class="col-lg-6">
                 <form class="hero-form" th:action="@{/sign/in}" th:method="post" action="#">
                     <input type="email" placeholder="Your E-mail" th:name="email" required="required">
@@ -50,5 +51,17 @@
 <script src="/resources/js/owl.carousel.min.js"></script>
 <script src="/resources/js/jquery-ui.min.js"></script>
 <script src="/resources/js/main.js"></script>
+
+<script type="text/javascript" th:inline="javascript">
+    /* <![CDATA[ */
+    const error = /*[[${error}]]*/ "default";
+
+    $(document).ready(function () {
+        if(error != null) {
+            alert(error);
+        }
+    });
+    /* ]]> */
+</script>
 </body>
 </html>
