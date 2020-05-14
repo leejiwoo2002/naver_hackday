@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
@@ -30,20 +31,29 @@ public class MemberSearchController {
 
 	@GetMapping
 	public ModelAndView searchMemberPage(@ModelAttribute SubscribeDto subscribeDto) {
-		log.info("call search member");
 		return new ModelAndView("searchMember");
 	}
 
 	@GetMapping("/do")
-	public ModelAndView searchMember(@RequestParam(name = "search") String search, @PageableDefault Pageable pageable) {
-		log.info("search = " + search);
+	public String searchMember(@RequestParam(name = "search") String search, @PageableDefault Pageable pageable,
+		RedirectAttributes rttr) {
+
+		rttr.addFlashAttribute("search", search);
+
 		Page<MemberDto> memberDtoList = memberSearchService.findMembers(search, pageable);
-		return new ModelAndView("searchMember").addObject(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+
+		if(memberDtoList.getContent().size() == 0){
+			rttr.addFlashAttribute("isNull", true);
+		} else {
+			rttr.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+		}
+
+		return "redirect:/member/search";
 	}
 
 	@GetMapping("/test")
-	public @ResponseBody String createTestData(@RequestParam(name = "name") String name,
-												@RequestParam(name = "count") int count) throws Exception{
+	public String createTestData(@RequestParam(name = "name") String name,
+		@RequestParam(name = "count") int count) throws Exception {
 
 		for (int i = 1; i <= count; i++) {
 			signService.signUp(MemberDto.builder()
@@ -53,6 +63,6 @@ public class MemberSearchController {
 				.build());
 		}
 
-		return "OK";
+		return "redirect:/member/search";
 	}
 }

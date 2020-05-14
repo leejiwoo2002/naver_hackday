@@ -54,11 +54,11 @@
 
 <script type="text/javascript" th:inline="javascript">
     /* <![CDATA[ */
-    const error = /*[[${error}]]*/ "default";
+    const error = /*[[${error}]]*/ false;
 
     $(document).ready(function () {
-        if(error != null) {
-            alert(error);
+        if(error) {
+            alert("로그인 정보를 확인해 주세요.");
         }
     });
     /* ]]> */

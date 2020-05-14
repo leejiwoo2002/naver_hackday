@@ -47,7 +47,7 @@ public class SignController {
 
 	@GetMapping("/fail")
 	public String signInFail(RedirectAttributes rttr){
-		rttr.addFlashAttribute("error", "The ID or password are not correct. Please check again.");
+		rttr.addFlashAttribute("error", true);
 		return "redirect:/";
 	}
 }

@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-            <nav class="site-pagination" th:if="${memberDtoList.getTotalPages() > 1}" th:with="search = ${''}">
+            <nav class="site-pagination" th:if="${memberDtoList.getTotalPages() > 1}">
                 <ul class="pagination"
                     th:with="start=${T(Math).floor(memberDtoList.number/10)*10 + 1},
                             last=(${start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages())})">
@@ -87,42 +87,13 @@
 
 <script type="text/javascript" th:inline="javascript">
     /* <![CDATA[ */
-    function getMemberList(search, page) {
-        console.log(search + '  ' + page);
-        const url = "/member/search?search=" + search + "&page=" + page;
+    const isNull = /*[[${isNull}]]*/ false;
 
-        $.ajax({
-            type: "get",
-            url: url,
-            async: false,
-            dataType: "json",
-            success: function (data) {
-                // $('#result').setAttribute(th:)
-                alert(data);
-            }
-        });
-    }
-
-    function addSubscribe(member) {
-        const url = "/subscribe/do";
-
-        console.log(member.id);
-
-        const request = {
-            id : member.id
+    $(document).ready(function () {
+        if(isNull) {
+            alert("검색 결과가 없습니다.");
         }
-
-        $.ajax({
-            type: "post",
-            data: request,
-            url: url,
-            async: false,
-            dataType: "json",
-            success: function () {
-                alert("success");
-            }
-        });
-    }
+    });
     /* ]]> */
 </script>
 </body>
