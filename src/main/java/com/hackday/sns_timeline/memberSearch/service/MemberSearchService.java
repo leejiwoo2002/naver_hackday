@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
+import com.hackday.sns_timeline.subscribe.domain.entity.SubscribePK;
+import com.hackday.sns_timeline.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -16,6 +18,7 @@ import lombok.extern.log4j.Log4j2;
 public class MemberSearchService {
 
 	final private MemberRepository memberRepository;
+	final private SubscribeRepository subscribeRepository;
 
 	public Page<MemberDto> findMembers(String search, Pageable pageable) {
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
@@ -23,5 +26,14 @@ public class MemberSearchService {
 		Page<MemberDto> searchMembers = memberRepository.searchMember(search, pageable).map(MemberDto::customConverter);
 
 		return searchMembers;
+	}
+
+	public void checkSubscribed(Page<MemberDto> searchMembers, long id){
+		for (MemberDto searchMember : searchMembers) {
+			if(subscribeRepository.findById(SubscribePK.builder().subscriberId(id)
+				.subscribedMemberId(searchMember.getId()).build()).isPresent()){
+				searchMember.setSubscribed(true);
+			}
+		}
 	}
 }

@@ -4,6 +4,8 @@
 >
 
 <head>
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
     <th:block th:replace="fragments/commonHead"></th:block>
 </head>
 
@@ -17,26 +19,32 @@
             <div class="sb-widget">
                 <form class="search-form" th:action="@{/member/search/do}" th:method="GET">
                     <input th:id="search" type="text" placeholder="검색어를 입력해 주세요." th:name="search">
-                    <button th:type="submit"><img src="img/search-icon.png" alt=""></button>
+                    <button th:type="submit">
+                        <img src="img/search-icon.png" alt="">
+                    </button>
                 </form>
             </div>
         </div>
 
         <div id="result" class="element" th:if="${memberDtoList} != null">
-            <div class="row" th:each="memberDto : ${memberDtoList}">
+            <div class="row" th:each="memberDto, i : ${memberDtoList}">
                 <div class="col-md-4">
-                    <div class="icon-box-item ">
+                    <div class="icon-box-item">
                         <form th:action="@{/subscribe}" th:object=${subscribeDto} method="post">
                             <input type="hidden" name="id" th:value="${memberDto.getId()}"/>
-                            <button class="ib-icon btn" th:type="submit">
+                            <input type="hidden" name="search" th:value="${search}"/>
+                            <input type="hidden" name="page" th:value="${memberDtoList.getPageable().getPageNumber()}"/>
+                            <button class="ib-icon btn" type="submit">
                                 <i class="flaticon-036-customer-service"></i>
                             </button>
                         </form>
 
                         <div class="ib-text">
-                            <h5 th:text="*{memberDto.getEmail()}"></h5>
-                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per incep-tos
-                                himenaeos. Suspendisse potenti. Ut gravida mattis.</p>
+                            <h4>
+                                <span th:text="${memberDto.getEmail()}" th:remove="tag">Email</span>
+                                <br/>
+                                <small th:text="${memberDto.getName()}" >Name</small>
+                            </h4>
                         </div>
                     </div>
                 </div>
@@ -92,12 +100,58 @@
 <script type="text/javascript" th:inline="javascript">
     /* <![CDATA[ */
     const isNull = /*[[${isNull}]]*/ false;
+    const memberDto = /*[[${memberDtoList.getContent()}]]*/ null;
 
     $(document).ready(function () {
         if(isNull) {
             alert("검색 결과가 없습니다.");
         }
+
+    //     const token = $('#_csrf').attr('content');
+    //     const header = $('#_csrf_header').attr('content');
+    //
+    //     $('#subscribeBtn').click(function(e) {
+    //         e.preventDefault();
+    //         const memberDtoId = $('#subscribeBtn').val();
+    //         console.log(memberDto[0].getKey('id'));
+    //         $.ajax({
+    //             url: '/subscribe',
+    //             type: 'post',
+    //             dataType: 'JSON',
+    //             data : {
+    //               id : memberDtoId
+    //             },
+    //             timeout: 10000,
+    //             beforeSend: function(xhr) {
+    //                 xhr.setRequestHeader(header, token);
+    //             },
+    //             success: function(data) {
+    //                 console.log("success")
+    //             }
+    //         });
+    //     });
     });
+
+    function addSubscribe(e, id) {
+        const url = "/subscribe";
+        e.preventDefault();
+        console.log(id);
+
+        const request = {
+            id: id
+        }
+
+        $.ajax({
+            type: "post",
+            data: request,
+            url: url,
+            async: false,
+            dataType: "json",
+            success: function () {
+                alert("success");
+            }
+        });
+    }
     /* ]]> */
 </script>
 </body>

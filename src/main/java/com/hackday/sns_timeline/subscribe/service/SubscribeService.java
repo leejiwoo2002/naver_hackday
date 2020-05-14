@@ -21,22 +21,28 @@ public class SubscribeService {
 	final private MemberRepository memberRepository;
 	final private SubscribeRepository subscribeRepository;
 
-	public void addSubscribe(long subscribeId, long subscribedId) throws Exception{
+	public Subscribe addSubscribe(long subscribeId, long subscribedId) throws Exception{
 		Member subscribeMember = memberRepository.findById(subscribeId).orElseThrow(() -> new Exception());
 		Member subscribedMember = memberRepository.findById(subscribedId).orElseThrow(() -> new Exception());
 
-		saveSubscribe(subscribeMember, subscribedMember);
+		return saveSubscribe(subscribeMember, subscribedMember);
 	}
 
-	public void saveSubscribe(Member subscribeMember, Member subscribedMember){
+	public Subscribe saveSubscribe(Member subscribeMember, Member subscribedMember){
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		Date date = java.sql.Timestamp.valueOf(currentDateTime.plusHours(9));
 
 		SubscribePK subscribePK = SubscribePK.builder().subscriberId(subscribeMember.getId())
 			.subscribedMemberId(subscribedMember.getId()).build();
 
-		Subscribe subscribe = Subscribe.builder().subscribePK(subscribePK).regDate(date).build();
+		Subscribe subscribe = subscribeRepository.findById(subscribePK).orElseGet(() -> new Subscribe());
 
-		subscribeRepository.save(subscribe);
+		if(subscribe.getSubscribePK() != null) {
+			return subscribe;
+		}
+
+		subscribe = Subscribe.builder().subscribePK(subscribePK).regDate(date).build();
+
+		return subscribeRepository.save(subscribe);
 	}
 }

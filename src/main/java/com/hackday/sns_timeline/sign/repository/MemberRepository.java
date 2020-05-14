@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 
-@Repository
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
 	@Override

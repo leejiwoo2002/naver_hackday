@@ -3,6 +3,7 @@ package com.hackday.sns_timeline.memberSearch.controller;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
 import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
@@ -36,20 +38,24 @@ public class MemberSearchController {
 
 	@GetMapping("/do")
 	public String searchMember(@RequestParam(name = "search") String search, @PageableDefault Pageable pageable,
-		RedirectAttributes rttr) {
+		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) {
+		if(user == null) {
+			return "redirect:/";
+		}
 
-		rttr.addFlashAttribute("search", search);
+		redirectAttributes.addFlashAttribute("search", search);
 
 		Page<MemberDto> memberDtoList = memberSearchService.findMembers(search, pageable);
 
 		if(memberDtoList.getContent().size() == 0){
-			rttr.addFlashAttribute("isNull", true);
+			redirectAttributes.addFlashAttribute("isNull", true);
 		} else {
+			memberSearchService.checkSubscribed(memberDtoList, user.getId());
 			int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
 			int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
-			rttr.addFlashAttribute("start", start);
-			rttr.addFlashAttribute("last", last);
-			rttr.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+			redirectAttributes.addFlashAttribute("start", start);
+			redirectAttributes.addFlashAttribute("last", last);
+			redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
 		}
 
 		return "redirect:/member/search";

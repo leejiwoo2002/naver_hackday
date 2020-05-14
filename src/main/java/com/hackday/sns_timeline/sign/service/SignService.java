@@ -53,7 +53,7 @@ public class SignService implements UserDetailsService {
 		}
 
 		LocalDateTime currentDateTime = LocalDateTime.now();
-		Date date = java.sql.Timestamp.valueOf(currentDateTime.plusHours(9));
+		Date date = java.sql.Timestamp.valueOf(currentDateTime);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 		Member member = memberRepository.save(Member.builder()

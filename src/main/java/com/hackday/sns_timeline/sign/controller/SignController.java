@@ -40,14 +40,16 @@ public class SignController {
 	}
 
 	@GetMapping("/in")
-	public String signInSuccess(@AuthenticationPrincipal CustomUser user) throws Exception {
-		if(user==null) throw new Exception();
+	public String signInSuccess(@AuthenticationPrincipal CustomUser user) {
+		if(user==null) {
+			return "redirect:/";
+		}
 		return "redirect:/timeLine";
 	}
 
 	@GetMapping("/fail")
-	public String signInFail(RedirectAttributes rttr){
-		rttr.addFlashAttribute("error", true);
+	public String signInFail(RedirectAttributes redirectAttributes){
+		redirectAttributes.addFlashAttribute("error", true);
 		return "redirect:/";
 	}
 }
