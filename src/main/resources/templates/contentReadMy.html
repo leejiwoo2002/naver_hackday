@@ -25,8 +25,10 @@
             <div class="row" th:each="content : ${contentDtoList}">
                 <div class="col-md-4">
                     <div class="icon-box-item ">
-                        <form>
-                            <input type="hidden" name="id" >
+                        <form th:action="@{/}" th:object=${} method="post">
+                        <input type="hidden" name="id" th:value="${content.getId()}"/>
+                            <input type="hidden" name="search" th:value="${search}"/>
+                            <input type="hidden" name="page" th:value="${contentDtoList.getPageable().getPageNumber()}"/>
                             <button class="ib-icon btn" th:type="submit">
                                 <i class="flaticon-036-customer-service"></i>
                             </button>

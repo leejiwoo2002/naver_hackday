@@ -27,6 +27,8 @@ import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.service.ContentService;
 import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -34,6 +36,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/content")
+@Api(value = "/content", description = "컨텐츠 CRUD 기능 담")
 public class ContentController {
 
 	final private ContentService contentService;
@@ -43,12 +46,19 @@ public class ContentController {
 	private	String filePath;
 
 
-
+	@ApiOperation(httpMethod = "GET",
+		value = "글 작성 페이지",
+		response = ModelAndView.class,
+		nickname = "getCreatePage")
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView getCreatePage(@ModelAttribute ContentDto contentDto) {
 		return new ModelAndView("contentCreate").addObject(CommonConst.CONTENT_DTO, contentDto);
 	}
 
+	@ApiOperation(httpMethod = "POST",
+		value = "글 작성 후 메인화면(Timeline) 반환",
+		response = String.class,
+		nickname = "contentCreate")
 	@RequestMapping(value = "/new/do", method = RequestMethod.POST)
 	public String contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
@@ -93,6 +103,10 @@ public class ContentController {
 		return "redirect:/timeLine";
 	}
 
+	@ApiOperation(httpMethod = "GET",
+		value = "자신의 글 목록 조회 페이",
+		response = ModelAndView.class,
+		nickname = "readContent")
 	@RequestMapping(value = "/my", method = RequestMethod.GET)
 	public ModelAndView readContent(@AuthenticationPrincipal User user,
 		@PageableDefault Pageable pageable) {
