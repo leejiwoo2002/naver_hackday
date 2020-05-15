@@ -21,4 +21,13 @@ public class SubscribeDto {
 	private long id;
 	private String search;
 	private int page;
+	private boolean subscribed;
+
+	public boolean getSubscribed() {
+		return subscribed;
+	}
+
+	public void setSubscribed(boolean subscribed) {
+		this.subscribed = subscribed;
+	}
 }

@@ -47,7 +47,7 @@ public class SignService implements UserDetailsService {
 	}
 
 	@Transactional
-	public void signUp(MemberDto memberDto) throws Exception {
+	public Member signUp(MemberDto memberDto) throws Exception {
 		if(memberRepository.findByEmail(memberDto.getEmail()).isPresent()){
 			throw new Exception("email already exist");
 		}
@@ -64,6 +64,8 @@ public class SignService implements UserDetailsService {
 			.regDate(date)
 			.build());
 
-		subscribeService.saveSubscribe(member, member);
+		subscribeService.addSubscribe(member.getId(), member.getId());
+
+		return member;
 	}
 }

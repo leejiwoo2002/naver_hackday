@@ -4,7 +4,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.subscribe.domain.entity.SubscribePK;
@@ -30,10 +32,21 @@ public class MemberSearchService {
 
 	public void checkSubscribed(Page<MemberDto> searchMembers, long id){
 		for (MemberDto searchMember : searchMembers) {
-			if(subscribeRepository.findById(SubscribePK.builder().subscriberId(id)
-				.subscribedMemberId(searchMember.getId()).build()).isPresent()){
+			if(subscribeRepository.findById(SubscribePK.builder().userId(id)
+				.subscribeTargetId(searchMember.getId()).build()).isPresent()){
 				searchMember.setSubscribed(true);
 			}
 		}
+	}
+
+	public RedirectAttributes setMemberSearchAttributes(RedirectAttributes redirectAttributes, Page<MemberDto> memberDtoList){
+
+		int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
+		int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
+		redirectAttributes.addFlashAttribute(CommonConst.START, start);
+		redirectAttributes.addFlashAttribute(CommonConst.LAST, last);
+		redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+
+		return redirectAttributes;
 	}
 }
