@@ -28,7 +28,7 @@ public class Content {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long content_id;
+	private long contentId;
 
 	@ManyToOne
 	private Member member;
@@ -36,14 +36,14 @@ public class Content {
 	@NotBlank
 	private String title;
 
-	private String file_name;
+	private String fileName;
 
 	@NotBlank
 	private String body;
 
 	@NotNull
-	private Date posting_time;
+	private Date postingTime;
 
 	@NotNull
-	private boolean check_delete;
+	private boolean checkDelete;
 }

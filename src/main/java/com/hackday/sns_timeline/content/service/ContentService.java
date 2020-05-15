@@ -38,10 +38,10 @@ public class ContentService {
 		Content content = Content.builder()
 			.title(contentDto.getTitle())
 			.body(contentDto.getBody())
-			.check_delete(false)
-			.posting_time(java.sql.Timestamp.valueOf(currentDateTime))
+			.checkDelete(false)
+			.postingTime(java.sql.Timestamp.valueOf(currentDateTime))
 			.member(member)
-			.file_name(saveName)
+			.fileName(saveName)
 			.build();
 
 		return contentRepository.save(content);

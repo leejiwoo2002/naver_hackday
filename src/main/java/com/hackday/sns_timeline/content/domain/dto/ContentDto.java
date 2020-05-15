@@ -19,23 +19,23 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ContentDto {
 
-	private Long content_id;
+	private Long contentId;
 	private String body;
 	private String title;
-	private String file_name;
-	private Date posting_time;
+	private String fileName;
+	private Date postingTime;
 	private Member member;
-	private boolean check_delete;
+	private boolean checkDelete;
 
 	static public ContentDto customConverter(Content content){
 
 		return new ContentDto().builder()
-			.content_id(content.getContent_id())
-			.check_delete(content.isCheck_delete())
+			.contentId(content.getContentId())
+			.checkDelete(content.isCheckDelete())
 			.body(content.getBody())
 			.title(content.getTitle())
-			.file_name(content.getFile_name())
-			.posting_time(content.getPosting_time())
+			.fileName(content.getFileName())
+			.postingTime(content.getPostingTime())
 			.member(content.getMember())
 			.build();
 	}

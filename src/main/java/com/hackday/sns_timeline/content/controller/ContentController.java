@@ -128,12 +128,12 @@ public class ContentController {
 	public String deleteContent(@AuthenticationPrincipal User user, @ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
 		Date today = new Date();
-		contentDto.setPosting_time(today); // date가 string 으로 넘어와서 자동매핑 실패
+		contentDto.setPostingTime(today); // date가 string 으로 넘어와서 자동매핑 실패
 
 		log.info("here1");
 		log.info("user-name : "+user.getUsername());
-		log.info("content id : "+contentDto.getContent_id());
-		contentService.contentRemove(contentDto.getContent_id(),user);
+		log.info("content id : "+contentDto.getContentId());
+		contentService.contentRemove(contentDto.getContentId(),user);
 
 		return "redirect:/timeLine";
 	}

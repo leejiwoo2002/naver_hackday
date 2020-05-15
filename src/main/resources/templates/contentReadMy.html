@@ -26,7 +26,7 @@
                 <div class="col-md-4">
                     <div class="icon-box-item ">
                         <form th:action="@{/content/status}" th:object="${contentDto}" th:method="post">
-                            <input type="hidden" name="content_id" th:value="${content.getContent_id()}"/>
+                            <input type="hidden" name="contentId" th:value="${content.getContentId()}"/>
                             <input type="hidden" name="body" th:value="${content.getBody()}"/>
                             <input type="hidden" name="title" th:value="${content.getTitle()}"/>
 
