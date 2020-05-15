@@ -39,46 +39,37 @@ public class SubscribeController {
 	final private SubscribeService subscribeService;
 	final private MemberSearchService memberSearchService;
 
-	@ApiOperation(httpMethod = "POST",
+	@ApiOperation(
+		httpMethod = "POST",
 		value = "구독 추가 / 삭제 기능, param 으로 오는 Boolean 값으로 추가, 삭제 결정",
 		response = String.class,
-		nickname="addSubscribe")
+		nickname="manageSubscribe"
+	)
 	@PostMapping()
-	public String addSubscribe(@ModelAttribute("subscribeDto") @Valid SubscribeDto subscribeDto,
+	public String manageSubscribe(@ModelAttribute(CommonConst.SUBSCRIBE_DTO) @Valid SubscribeDto subscribeDto,
 		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) throws Exception {
 
 		if(user == null){
-			return "redirect:/";
+			return CommonConst.REDIRECT_INDEX;
 		}
 
 		if(subscribeDto.getSubscribed()){
-			log.info("delete   " + user.getId() + "  " + subscribeDto.getId());
 			subscribeService.deleteSubscribe(user.getId(), subscribeDto.getId());
 		} else {
-			Subscribe subscribe = subscribeService.addSubscribe(user.getId(), subscribeDto.getId());
-			if(subscribe.getSubscribePK().getUserId() != user.getId() ||
-				subscribe.getSubscribePK().getSubscribeTargetId() != subscribeDto.getId()){
-				log.error(subscribe.getSubscribePK().getUserId()  + "   " + user.getId());
-				log.error(subscribe.getSubscribePK().getSubscribeTargetId()  + "   " + subscribeDto.getId());
-				throw new Exception("subscribe fail");
-			}
+			subscribeService.addSubscribe(user.getId(), subscribeDto.getId());
 		}
 
 		Page<MemberDto> memberDtoList = memberSearchService.findMembers(subscribeDto.getSearch(),
 			PageRequest.of(subscribeDto.getPage(), 10));
 
-		redirectAttributes.addFlashAttribute("search", subscribeDto.getSearch());
+		redirectAttributes.addFlashAttribute(CommonConst.SEARCH, subscribeDto.getSearch());
 		if(memberDtoList.getContent().size() > 0) {
 			memberSearchService.checkSubscribed(memberDtoList, user.getId());
-			int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
-			int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
-			redirectAttributes.addFlashAttribute("start", start);
-			redirectAttributes.addFlashAttribute("last", last);
-			redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+			memberSearchService.setMemberSearchAttributes(redirectAttributes, memberDtoList);
 		}else {
-			redirectAttributes.addFlashAttribute("isNull", true);
+			redirectAttributes.addFlashAttribute(CommonConst.IS_NULL, true);
 		}
 
-		return "redirect:/member/search";
+		return CommonConst.REDIRECT_MEMBER_SEARCH;
 	}
 }

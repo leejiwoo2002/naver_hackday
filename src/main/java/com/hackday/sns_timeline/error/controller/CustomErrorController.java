@@ -25,10 +25,12 @@ import lombok.extern.log4j.Log4j2;
 @Api(value = "/error", description = "에러 관리")
 public class CustomErrorController implements ErrorController {
 
-	@ApiOperation(httpMethod = "GET",
+	@ApiOperation(
+		httpMethod = "GET",
 		value = "Custom Error 페이지 반환",
 		response = String.class,
-		nickname="handleError")
+		nickname="handleError"
+	)
 	@GetMapping
 	public String handleError(HttpServletRequest request, Model model) {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

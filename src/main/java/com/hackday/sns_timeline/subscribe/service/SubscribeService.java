@@ -50,9 +50,9 @@ public class SubscribeService {
 	}
 
 	private Optional<Subscribe> getSubscribe(long userId, long subscribeTargetId) throws Exception {
-		Member userMember = memberRepository.findById(userId).orElseThrow(() -> new Exception("member not present"));
+		Member userMember = memberRepository.findById(userId).orElseThrow(() -> new Exception("member not exist"));
 		Member subscribeTargetMember = memberRepository.findById(subscribeTargetId).orElseThrow(()
-			-> new Exception("member not present"));
+			-> new Exception("member not exist"));
 
 		SubscribePK subscribePK = SubscribePK.builder().userId(userMember.getId())
 			.subscribeTargetId(subscribeTargetMember.getId()).build();

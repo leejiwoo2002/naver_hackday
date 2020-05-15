@@ -28,7 +28,4 @@ public class SwaggerConfiguration {
 		return new ApiInfoBuilder().title("Spring API Documentation")
 			.description("타임라인 웹 어플리케이션 연동 문서입니다").build();
 	}
-
-
-
 }

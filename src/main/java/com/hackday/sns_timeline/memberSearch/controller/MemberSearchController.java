@@ -34,42 +34,42 @@ public class MemberSearchController {
 	final private MemberSearchService memberSearchService;
 	final private SignService signService;
 
-	@ApiOperation(httpMethod = "GET",
+	@ApiOperation(
+		httpMethod = "GET",
 		value = "친구 찾기 페이지",
 		response = ModelAndView.class,
-		nickname="searchMemberPage")
+		nickname="searchMemberPage"
+	)
 	@GetMapping
 	public ModelAndView searchMemberPage(@ModelAttribute SubscribeDto subscribeDto) {
-		return new ModelAndView("searchMember");
+		return new ModelAndView(CommonConst.SEARCH_MEMBER);
 	}
 
-	@ApiOperation(httpMethod = "GET",
+	@ApiOperation(
+		httpMethod = "GET",
 		value = "친구 찾기 Page<MemberDto>(요청 된 페이지) 반환",
 		response = String.class,
-		nickname="searchMember")
+		nickname="searchMember"
+	)
 	@GetMapping("/do")
-	public String searchMember(@RequestParam(name = "search") String search, @PageableDefault Pageable pageable,
+	public String searchMember(@RequestParam(name = CommonConst.SEARCH) String search, @PageableDefault Pageable pageable,
 		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) {
 		if(user == null) {
-			return "redirect:/";
+			return CommonConst.REDIRECT_INDEX;
 		}
 
-		redirectAttributes.addFlashAttribute("search", search);
+		redirectAttributes.addFlashAttribute(CommonConst.SEARCH, search);
 
 		Page<MemberDto> memberDtoList = memberSearchService.findMembers(search, pageable);
 
 		if(memberDtoList.getContent().size() == 0){
-			redirectAttributes.addFlashAttribute("isNull", true);
+			redirectAttributes.addFlashAttribute(CommonConst.IS_NULL, true);
 		} else {
 			memberSearchService.checkSubscribed(memberDtoList, user.getId());
-			int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
-			int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
-			redirectAttributes.addFlashAttribute("start", start);
-			redirectAttributes.addFlashAttribute("last", last);
-			redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+			memberSearchService.setMemberSearchAttributes(redirectAttributes, memberDtoList);
 		}
 
-		return "redirect:/member/search";
+		return CommonConst.REDIRECT_MEMBER_SEARCH;
 	}
 
 
