@@ -31,6 +31,5 @@ public class SignTest {
 			MemberDto.builder().email("test" + maxId + 1 + "@test").name("test").password("test").build());
 
 		assertThat(memberRepository.findByEmail(newMember.getEmail()).isPresent()).isTrue();
-
 	}
 }

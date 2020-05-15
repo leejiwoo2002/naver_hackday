@@ -1,14 +1,8 @@
 
 spring:
   profiles:
-    active: yunsang
+    active: build
 
-  thymeleaf:
-    prefix: classpath:templates/
-    check-template-location: true
-    suffix: .html
-    mode: HTML5
-    cache: false
   mvc:
     static-path-pattern: /resources/**
 sever:
@@ -21,6 +15,30 @@ imagePath.name: /Users/jiwoo/OneDrive - kyonggi.ac.kr/IdeaProjects/user-images
 ---
 spring:
   profiles: build
+
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: true
+
+  datasource:
+    url: jdbc:mysql://49.50.172.59:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: hackday
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    showSql: true
+    database: mysql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+      use_sql_comments: true
 ---
 
 spring:
@@ -30,6 +48,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: kim111
+
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -50,6 +75,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: naver
     password: hackday
+
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+    cache: false
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

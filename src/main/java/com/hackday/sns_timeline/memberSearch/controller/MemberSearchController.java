@@ -19,6 +19,8 @@ import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
 import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
 import com.hackday.sns_timeline.sign.service.SignService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -26,16 +28,25 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @RequiredArgsConstructor
 @RequestMapping("/member/search")
+@Api(value = "/member/search", description = "친구찾기 기능 담당")
 public class MemberSearchController {
 
 	final private MemberSearchService memberSearchService;
 	final private SignService signService;
 
+	@ApiOperation(httpMethod = "GET",
+		value = "친구 찾기 페이지",
+		response = ModelAndView.class,
+		nickname="searchMemberPage")
 	@GetMapping
 	public ModelAndView searchMemberPage(@ModelAttribute SubscribeDto subscribeDto) {
 		return new ModelAndView("searchMember");
 	}
 
+	@ApiOperation(httpMethod = "GET",
+		value = "친구 찾기 Page<MemberDto>(요청 된 페이지) 반환",
+		response = String.class,
+		nickname="searchMember")
 	@GetMapping("/do")
 	public String searchMember(@RequestParam(name = "search") String search, @PageableDefault Pageable pageable,
 		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) {
@@ -61,18 +72,23 @@ public class MemberSearchController {
 		return "redirect:/member/search";
 	}
 
-	@GetMapping("/test")
-	public String createTestData(@RequestParam(name = "name") String name,
-		@RequestParam(name = "count") int count) throws Exception {
 
-		for (int i = 1; i <= count; i++) {
-			signService.signUp(MemberDto.builder()
-				.email(name+i + "@"+name)
-				.name(name+i)
-				.password("test")
-				.build());
-		}
-
-		return "redirect:/member/search";
-	}
+	// @ApiOperation(httpMethod = "GET",
+	// 	value = "Mock 데이터를 넣기 위한 end point",
+	// 	response = String.class,
+	// 	nickname="createTestData")
+	// @GetMapping("/test")
+	// public String createTestData(@RequestParam(name = "name") String name,
+	// 	@RequestParam(name = "count") int count) throws Exception {
+	//
+	// 	for (int i = 1; i <= count; i++) {
+	// 		signService.signUp(MemberDto.builder()
+	// 			.email(name+i + "@"+name)
+	// 			.name(name+i)
+	// 			.password("test")
+	// 			.build());
+	// 	}
+	//
+	// 	return "redirect:/member/search";
+	// }
 }
