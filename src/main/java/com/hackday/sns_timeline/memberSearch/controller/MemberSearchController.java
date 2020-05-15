@@ -9,16 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
-import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
-import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
 import com.hackday.sns_timeline.sign.service.SignService;
+import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +52,7 @@ public class MemberSearchController {
 	)
 	@GetMapping("/do")
 	public String searchMember(@RequestParam(name = CommonConst.SEARCH) String search, @PageableDefault Pageable pageable,
-		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) {
+		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) throws Exception {
 		if(user == null) {
 			return CommonConst.REDIRECT_INDEX;
 		}

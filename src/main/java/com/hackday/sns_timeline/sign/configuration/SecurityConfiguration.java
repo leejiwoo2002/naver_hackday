@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.hackday.sns_timeline.sign.service.SignService;
@@ -41,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http
 			.httpBasic().disable() // 기본설정 사용안함. 기본설정은 비인증시 로그인폼 화면으로 리다이렉트 된다.
 			.authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
-			.antMatchers("/timeLine/**","/content/**", "/subscribe/**","/member/search/**").hasRole("MEMBER")
+			.antMatchers("/timeLine/**","/content/**", "/subscribe/**","/member/search/**", "/profile/**").hasRole("MEMBER")
 			.antMatchers("/", "/sign/**").anonymous() // 가입 및 인증 주소는 누구나 접근가능
 			.anyRequest().permitAll() // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
 
