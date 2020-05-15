@@ -24,11 +24,13 @@ public class ContentDto {
 	private String file_name;
 	private Date posting_time;
 	private Long member_id;
+	private boolean check_delete;
 
 	static public ContentDto customConverter(Content content){
 
 		return new ContentDto().builder()
 			.content_id(content.getContent_id())
+			.check_delete(content.isCheck_delete())
 			.body(content.getBody())
 			.title(content.getTitle())
 			.file_name(content.getFile_name())

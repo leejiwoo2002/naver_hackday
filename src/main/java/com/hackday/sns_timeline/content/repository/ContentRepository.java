@@ -16,6 +16,6 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 	@Override
 	Optional<Content> findById(Long aLong);
 
-	@Query(value = "select * from Content content where content.member_id=:id", nativeQuery = true)
+	@Query(value = "select * from Content content where content.member_id=:id and content.check_delete=false order by posting_time DESC", nativeQuery = true)
 	Page<Content> searchMyContent(Long id, Pageable pageable);
 }
