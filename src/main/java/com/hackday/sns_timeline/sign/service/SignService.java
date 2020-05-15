@@ -64,6 +64,6 @@ public class SignService implements UserDetailsService {
 			.regDate(date)
 			.build());
 
-		subscribeService.saveSubscribe(member, member);
+		subscribeService.addSubscribe(member.getId(), member.getId());
 	}
 }

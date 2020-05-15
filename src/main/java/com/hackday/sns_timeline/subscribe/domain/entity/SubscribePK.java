@@ -20,6 +20,6 @@ public class SubscribePK implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Long subscriberId;
-	private Long subscribedMemberId;
+	private Long userId;
+	private Long subscribeTargetId;
 }

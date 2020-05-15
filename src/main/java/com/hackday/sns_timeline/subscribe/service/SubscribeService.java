@@ -2,8 +2,10 @@ package com.hackday.sns_timeline.subscribe.service;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.subscribe.domain.entity.Subscribe;
@@ -21,28 +23,40 @@ public class SubscribeService {
 	final private MemberRepository memberRepository;
 	final private SubscribeRepository subscribeRepository;
 
-	public Subscribe addSubscribe(long subscribeId, long subscribedId) throws Exception{
-		Member subscribeMember = memberRepository.findById(subscribeId).orElseThrow(() -> new Exception());
-		Member subscribedMember = memberRepository.findById(subscribedId).orElseThrow(() -> new Exception());
-
-		return saveSubscribe(subscribeMember, subscribedMember);
-	}
-
-	public Subscribe saveSubscribe(Member subscribeMember, Member subscribedMember){
+	public Subscribe addSubscribe(long userId, long subscribeTargetId) throws Exception{
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		Date date = java.sql.Timestamp.valueOf(currentDateTime.plusHours(9));
 
-		SubscribePK subscribePK = SubscribePK.builder().subscriberId(subscribeMember.getId())
-			.subscribedMemberId(subscribedMember.getId()).build();
-
-		Subscribe subscribe = subscribeRepository.findById(subscribePK).orElseGet(() -> new Subscribe());
+		Subscribe subscribe = getSubscribe(userId, subscribeTargetId).orElseGet(() -> new Subscribe());
 
 		if(subscribe.getSubscribePK() != null) {
+			log.info("already subscribe");
+			log.info(subscribe.getSubscribePK().getUserId());
+			log.info(subscribe.getSubscribePK().getSubscribeTargetId());
 			return subscribe;
 		}
 
-		subscribe = Subscribe.builder().subscribePK(subscribePK).regDate(date).build();
+		subscribe = Subscribe.builder().subscribePK(SubscribePK.builder().userId(userId)
+			.subscribeTargetId(subscribeTargetId).build()).regDate(date).build();
 
 		return subscribeRepository.save(subscribe);
+	}
+
+	@Transactional
+	public void deleteSubscribe(long userId, long subscribeTargetId) throws Exception {
+		Subscribe subscribe = getSubscribe(userId, subscribeTargetId).orElseThrow(() -> new Exception("subscribe not exist"));
+
+		subscribeRepository.delete(subscribe);
+	}
+
+	private Optional<Subscribe> getSubscribe(long userId, long subscribeTargetId) throws Exception {
+		Member userMember = memberRepository.findById(userId).orElseThrow(() -> new Exception("member not present"));
+		Member subscribeTargetMember = memberRepository.findById(subscribeTargetId).orElseThrow(()
+			-> new Exception("member not present"));
+
+		SubscribePK subscribePK = SubscribePK.builder().userId(userMember.getId())
+			.subscribeTargetId(subscribeTargetMember.getId()).build();
+
+		return subscribeRepository.findById(subscribePK);
 	}
 }

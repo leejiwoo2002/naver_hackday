@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.service.SignService;
+import io.swagger.annotations.ApiModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 

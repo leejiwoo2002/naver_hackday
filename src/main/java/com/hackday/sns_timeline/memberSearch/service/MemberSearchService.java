@@ -30,8 +30,8 @@ public class MemberSearchService {
 
 	public void checkSubscribed(Page<MemberDto> searchMembers, long id){
 		for (MemberDto searchMember : searchMembers) {
-			if(subscribeRepository.findById(SubscribePK.builder().subscriberId(id)
-				.subscribedMemberId(searchMember.getId()).build()).isPresent()){
+			if(subscribeRepository.findById(SubscribePK.builder().userId(id)
+				.subscribeTargetId(searchMember.getId()).build()).isPresent()){
 				searchMember.setSubscribed(true);
 			}
 		}

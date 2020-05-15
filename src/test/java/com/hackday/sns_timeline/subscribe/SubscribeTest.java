@@ -24,10 +24,12 @@ public class SubscribeTest {
 	SubscribeRepository subscribeRepository;
 
 	@Test
-	public void addSubscribe() throws Exception{
-		subscribeService.addSubscribe(7,8);
+	public void addSubscribe() throws Exception {
+		subscribeService.addSubscribe(7, 8);
 
-		assertThat(subscribeRepository.findById(SubscribePK.builder().subscriberId((long)1).subscribedMemberId((long)2).build()).isPresent())
+		assertThat(
+			subscribeRepository.findById(SubscribePK.builder().userId((long)1).subscribeTargetId((long)2).build())
+				.isPresent())
 			.isTrue();
 	}
 }

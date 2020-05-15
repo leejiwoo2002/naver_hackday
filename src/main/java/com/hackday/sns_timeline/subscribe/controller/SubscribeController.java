@@ -36,31 +36,40 @@ public class SubscribeController {
 	final private MemberSearchService memberSearchService;
 
 	@PostMapping()
-	public @ResponseBody  String addSubscribe(@ModelAttribute("subscribeDto") @Valid SubscribeDto subscribeDto,
+	public String addSubscribe(@ModelAttribute("subscribeDto") @Valid SubscribeDto subscribeDto,
 		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) throws Exception {
 
 		if(user == null){
 			return "redirect:/";
 		}
 
-		log.info(subscribeDto.getId());
-		log.info(subscribeDto.getPage());
-		log.info(subscribeDto.getSearch());
+		if(subscribeDto.getSubscribed()){
+			log.info("delete   " + user.getId() + "  " + subscribeDto.getId());
+			subscribeService.deleteSubscribe(user.getId(), subscribeDto.getId());
+		} else {
+			Subscribe subscribe = subscribeService.addSubscribe(user.getId(), subscribeDto.getId());
+			if(subscribe.getSubscribePK().getUserId() != user.getId() ||
+				subscribe.getSubscribePK().getSubscribeTargetId() != subscribeDto.getId()){
+				log.error(subscribe.getSubscribePK().getUserId()  + "   " + user.getId());
+				log.error(subscribe.getSubscribePK().getSubscribeTargetId()  + "   " + subscribeDto.getId());
+				throw new Exception("subscribe fail");
+			}
+		}
 
 		Page<MemberDto> memberDtoList = memberSearchService.findMembers(subscribeDto.getSearch(),
 			PageRequest.of(subscribeDto.getPage(), 10));
 
+		redirectAttributes.addFlashAttribute("search", subscribeDto.getSearch());
 		if(memberDtoList.getContent().size() > 0) {
 			memberSearchService.checkSubscribed(memberDtoList, user.getId());
-			redirectAttributes.addFlashAttribute(CommonConst.CONTENT_DTO_LIST, memberDtoList);
+			int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
+			int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
+			redirectAttributes.addFlashAttribute("start", start);
+			redirectAttributes.addFlashAttribute("last", last);
+			redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+		}else {
+			redirectAttributes.addFlashAttribute("isNull", true);
 		}
-
-		Subscribe subscribe = subscribeService.addSubscribe(subscribeDto.getId(), user.getId());
-
-		// if(subscribe.getSubscribePK().getSubscriberId() != user.getId() ||
-		// 	subscribe.getSubscribePK().getSubscribedMemberId() != subscribeDto.getId()){
-		// 	throw new Exception();
-		// }
 
 		return "redirect:/member/search";
 	}
