@@ -323,7 +323,8 @@ Commom elements
 /* Icon Box */
 
 .icon-box-item {
-	margin-bottom: 30px;
+	/*margin-bottom: 30px;*/
+	width: 500px;
 }
 
 .icon-box-item .ib-icon {
