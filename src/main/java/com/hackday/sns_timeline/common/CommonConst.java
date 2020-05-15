@@ -25,7 +25,4 @@ public final class CommonConst{
 	public final static String REDIRECT_INDEX = "redirect:/";
 	public final static String REDIRECT_MEMBER_SEARCH = "redirect:/member/search";
 	public final static String REDIRECT_TIME_LINE = "redirect:/timeLine";
-	// public final static String REDIRECT_INDEX = "redirect:/";
-	// public final static String REDIRECT_INDEX = "redirect:/";
-
 }
