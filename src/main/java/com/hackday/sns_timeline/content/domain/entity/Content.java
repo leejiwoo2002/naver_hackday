@@ -45,5 +45,5 @@ public class Content {
 	private Date posting_time;
 
 	@NotNull
-	private boolean is_delete;
+	private boolean check_delete;
 }

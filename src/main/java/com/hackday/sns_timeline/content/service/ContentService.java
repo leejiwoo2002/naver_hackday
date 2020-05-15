@@ -38,7 +38,7 @@ public class ContentService {
 		Content content = Content.builder()
 			.title(contentDto.getTitle())
 			.body(contentDto.getBody())
-			.is_delete(false)
+			.check_delete(false)
 			.posting_time(java.sql.Timestamp.valueOf(currentDateTime))
 			.member(member)
 			.file_name(saveName)
@@ -64,5 +64,13 @@ public class ContentService {
 		return searchMyContent;
 	}
 
+	public void contentRemove(Long id, User user) {
+		String userName = user.getUsername();
 
+		Member member = memberRepository.findByEmail(userName)
+			.orElseThrow(() -> new UsernameNotFoundException(userName));
+
+		contentRepository.removeMyContent(id);
+
+	}
 }
