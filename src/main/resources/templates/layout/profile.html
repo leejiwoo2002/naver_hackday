@@ -11,12 +11,12 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="contact-text">
-                        <h2>Get in touch</h2>
+                        <h2 th:text="${memberDto.getName()}"/>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tem por incididunt ut labore et dolore mag na aliqua.  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hime-naeos. Suspendisse potenti. </p>
                         <ul>
+                            <li ><i class="flaticon-025-arroba"></i><span th:text="${memberDto.getEmail()}"/></li>
                             <li><i class="flaticon-032-placeholder"></i>1525  Loans Lane, Los Angeles, CA</li>
                             <li><i class="flaticon-029-telephone-1"></i>+1 (603)535-4592</li>
-                            <li><i class="flaticon-025-arroba"></i>hello@youremail.com</li>
                             <li><i class="flaticon-038-wall-clock"></i>Everyday: 06:00 -22:00</li>
                         </ul>
                         <div class="social-links">
@@ -32,13 +32,19 @@
 
                 <div class="col-lg-4">
                     <h3>구독 리스트</h3>
-                    <div class="social-links">
-                        <div class="row"><a href="#"><i class="fa fa-facebook"></i></a></div>
-                        <div class="row"><a href="#"><i class="fa fa-instagram"></i></a></div>
-                        <div class="row"><a href="#"><i class="fa fa-linkedin"></i></a></div>
-                        <div class="row"><a href="#"><i class="fa fa-pinterest"></i></a></div>
-                        <div class="row"><a href="#"><i class="fa fa-twitter"></i></a></div>
-                        <div class="row"><a href="#"><i class="fa fa-youtube-play"></i></a></div>
+                    <div class="row" th:each="subscribe : ${subscribeList}">
+                        <div class="icon-box-item">
+                            <form method="post">
+                                <button class="ib-icon btn" type="submit">
+                                    <i class="flaticon-004-assistance"></i>
+                                </button>
+                            </form>
+
+                            <div class="col">
+                                <div class="row ib-text" th:text="${subscribe.getEmail()}"></div>
+                                <div class="row ib-text" th:text="${subscribe.getName()}"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

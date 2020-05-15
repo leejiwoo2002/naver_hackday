@@ -1,14 +1,19 @@
 package com.hackday.sns_timeline.memberSearch.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
+import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
+import com.hackday.sns_timeline.subscribe.domain.entity.Subscribe;
 import com.hackday.sns_timeline.subscribe.domain.entity.SubscribePK;
 import com.hackday.sns_timeline.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +27,7 @@ public class MemberSearchService {
 	final private MemberRepository memberRepository;
 	final private SubscribeRepository subscribeRepository;
 
+	@Transactional
 	public Page<MemberDto> findMembers(String search, Pageable pageable) {
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 		pageable = PageRequest.of(page, 10);
@@ -30,10 +36,13 @@ public class MemberSearchService {
 		return searchMembers;
 	}
 
-	public void checkSubscribed(Page<MemberDto> searchMembers, long id){
+	@Transactional
+	public void checkSubscribed(Page<MemberDto> searchMembers, long id) throws Exception {
+		Member member = memberRepository.findById(id).orElseThrow(() -> new Exception());
+		List<Long> subscribeList = subscribeRepository.findSubscribeIdByMember(member);
+
 		for (MemberDto searchMember : searchMembers) {
-			if(subscribeRepository.findById(SubscribePK.builder().userId(id)
-				.subscribeTargetId(searchMember.getId()).build()).isPresent()){
+			if(subscribeList.contains(searchMember.getId())){
 				searchMember.setSubscribed(true);
 			}
 		}

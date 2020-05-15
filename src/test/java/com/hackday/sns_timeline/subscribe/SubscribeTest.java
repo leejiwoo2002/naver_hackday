@@ -69,7 +69,7 @@ public class SubscribeTest {
 		subscribeService.addSubscribe(member.getId(), newMember.getId());
 
 		assertThat(
-			subscribeRepository.findById(SubscribePK.builder().userId(member.getId()).subscribeTargetId(newMember.getId()).build())
+			subscribeRepository.findByMemberAndSubscribeMember(member, newMember)
 				.isPresent())
 			.isTrue();
 	}
@@ -80,12 +80,14 @@ public class SubscribeTest {
 		List<Subscribe> all = subscribeRepository.findAll();
 		Subscribe subscribe = all.get(0);
 
-		subscribeService.deleteSubscribe(subscribe.getSubscribePK().getUserId()
-			, subscribe.getSubscribePK().getSubscribeTargetId());
+		subscribeService.deleteSubscribe(subscribe.getMember().getId()
+			, subscribe.getSubscribeMember().getId());
 
 		assertThat(
-			subscribeRepository.findById(subscribe.getSubscribePK())
+			subscribeRepository.findById(subscribe.getId())
 				.isPresent())
 			.isFalse();
 	}
+
+
 }

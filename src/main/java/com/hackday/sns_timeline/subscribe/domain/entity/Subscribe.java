@@ -3,9 +3,16 @@ package com.hackday.sns_timeline.subscribe.domain.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
+import com.hackday.sns_timeline.sign.domain.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,8 +25,15 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Subscribe implements Serializable {
 
-	@EmbeddedId
-	private SubscribePK subscribePK;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+
+	@ManyToOne
+	private Member member;
+
+	@ManyToOne
+	private Member subscribeMember;
 
 	private Date regDate;
 }

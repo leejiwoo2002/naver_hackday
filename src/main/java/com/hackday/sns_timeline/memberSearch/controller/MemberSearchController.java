@@ -53,7 +53,7 @@ public class MemberSearchController {
 	)
 	@GetMapping("/do")
 	public String searchMember(@RequestParam(name = CommonConst.SEARCH) String search, @PageableDefault Pageable pageable,
-		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) {
+		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) throws Exception {
 		if(user == null) {
 			return CommonConst.REDIRECT_INDEX;
 		}

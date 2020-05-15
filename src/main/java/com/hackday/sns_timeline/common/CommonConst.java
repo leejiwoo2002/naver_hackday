@@ -8,6 +8,7 @@ public final class CommonConst{
 	public final static String CONTENT_DTO_LIST = "contentDtoList";
 	public final static String MEMBERS = "members";
 	public final static String SUBSCRIBE_DTO = "subscribeDto";
+	public final static String SUBSCRIBE_LIST = "subscribeList";
 
 	public final static String INDEX = "/layout/index";
 	public final static String SIGN_UP = "/layout/signUp";
