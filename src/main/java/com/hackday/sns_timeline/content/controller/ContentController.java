@@ -25,8 +25,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
+import com.hackday.sns_timeline.content.domain.entity.Content;
 import com.hackday.sns_timeline.content.service.ContentService;
 import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
+import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -104,12 +106,12 @@ public class ContentController {
 	}
 
 	@ApiOperation(httpMethod = "GET",
-		value = "자신의 글 목록 조회 페이",
+		value = "자신의 글 목록 조회 페이지",
 		response = ModelAndView.class,
 		nickname = "readContent")
 	@RequestMapping(value = "/my", method = RequestMethod.GET)
-	public ModelAndView readContent(@AuthenticationPrincipal User user,
-		@PageableDefault Pageable pageable) {
+	public ModelAndView readContent(@ModelAttribute(CommonConst.CONTENT_DTO)
+	@Valid ContentDto contentDto, @AuthenticationPrincipal User user, @PageableDefault Pageable pageable) {
 		log.info("my Content = " + user.getUsername());
 
 		Page<ContentDto> contentDtoList = contentService.findMyContent(user.getUsername(), pageable);
@@ -117,4 +119,23 @@ public class ContentController {
 		log.info("contents : " + contentDtoList);
 		return new ModelAndView("contentReadMy").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
 	}
+
+	@ApiOperation(httpMethod = "POST",
+		value = "자신의 글 삭제 함수",
+		response = String.class,
+		nickname = "deleteContent")
+	@RequestMapping(value = "/status", method = RequestMethod.POST)
+	public String deleteContent(@AuthenticationPrincipal User user, @ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
+		Date today = new Date();
+		contentDto.setPosting_time(today); // date가 string 으로 넘어와서 자동매핑 실패
+
+		log.info("here1");
+		log.info("user-name : "+user.getUsername());
+		log.info("content id : "+contentDto.getContent_id());
+		contentService.contentRemove(contentDto.getContent_id(),user);
+
+		return "redirect:/timeLine";
+	}
+
 }

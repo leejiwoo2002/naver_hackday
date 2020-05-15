@@ -25,9 +25,12 @@
             <div class="row" th:each="content : ${contentDtoList}">
                 <div class="col-md-4">
                     <div class="icon-box-item ">
-                        <form>
-                        <input type="hidden" name="id"/>
-                            <button class="ib-icon btn" th:type="submit">
+                        <form th:action="@{/content/status}" th:object="${contentDto}" th:method="post">
+                            <input type="hidden" name="content_id" th:value="${content.getContent_id()}"/>
+                            <input type="hidden" name="body" th:value="${content.getBody()}"/>
+                            <input type="hidden" name="title" th:value="${content.getTitle()}"/>
+
+                            <button class="ib-icon btn" th:type="submit" onclick="click_delete();" />
                                 <i class="flaticon-036-customer-service"></i>
                             </button>
                         </form>
@@ -87,6 +90,11 @@
 <script src="/resources/js/owl.carousel.min.js"></script>
 <script src="/resources/js/jquery-ui.min.js"></script>
 <script src="/resources/js/main.js"></script>
+<script>
+    function click_delete(){
+        alert("삭제되었습니다");
+    }
+</script>
 
 </body>
 </html>

@@ -64,5 +64,13 @@ public class ContentService {
 		return searchMyContent;
 	}
 
+	public void contentRemove(Long id, User user) {
+		String userName = user.getUsername();
 
+		Member member = memberRepository.findByEmail(userName)
+			.orElseThrow(() -> new UsernameNotFoundException(userName));
+
+		contentRepository.removeMyContent(id);
+
+	}
 }

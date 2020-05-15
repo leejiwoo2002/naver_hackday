@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.hackday.sns_timeline.content.domain.entity.Content;
+import com.hackday.sns_timeline.sign.domain.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +24,7 @@ public class ContentDto {
 	private String title;
 	private String file_name;
 	private Date posting_time;
-	private Long member_id;
+	private Member member;
 	private boolean check_delete;
 
 	static public ContentDto customConverter(Content content){
@@ -35,6 +36,7 @@ public class ContentDto {
 			.title(content.getTitle())
 			.file_name(content.getFile_name())
 			.posting_time(content.getPosting_time())
+			.member(content.getMember())
 			.build();
 	}
 
