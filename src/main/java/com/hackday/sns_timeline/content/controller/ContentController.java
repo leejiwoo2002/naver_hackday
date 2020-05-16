@@ -25,10 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
-import com.hackday.sns_timeline.content.domain.entity.Content;
 import com.hackday.sns_timeline.content.service.ContentService;
 import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
-import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +52,7 @@ public class ContentController {
 		nickname = "getCreatePage")
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView getCreatePage(@ModelAttribute ContentDto contentDto) {
-		return new ModelAndView("contentCreate").addObject(CommonConst.CONTENT_DTO, contentDto);
+		return new ModelAndView("layout/contentCreate").addObject(CommonConst.CONTENT_DTO, contentDto);
 	}
 
 	@ApiOperation(httpMethod = "POST",
@@ -117,7 +115,7 @@ public class ContentController {
 		Page<ContentDto> contentDtoList = contentService.findMyContent(user.getUsername(), pageable);
 
 		log.info("contents : " + contentDtoList);
-		return new ModelAndView("contentReadMy").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
+		return new ModelAndView("layout/contentReadMy").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
 	}
 
 	@ApiOperation(httpMethod = "POST",

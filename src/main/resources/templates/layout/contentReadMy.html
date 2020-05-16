@@ -30,16 +30,15 @@
                             <input type="hidden" name="body" th:value="${content.getBody()}"/>
                             <input type="hidden" name="title" th:value="${content.getTitle()}"/>
 
-                            <button class="ib-icon btn" th:type="submit" onclick="click_delete();" />
-                                <i class="flaticon-036-customer-service"></i>
+                            <button class="" th:type="submit" onclick="click_delete();" />
+                            삭제하기
                             </button>
                         </form>
 
                         <div class="ib-text">
                             <h5 th:text="*{content.getTitle()}"></h5>
-                            <p th:if="${content.getFile_name().length()} > 0 ">
-                                <label th:text="'/user-images/' + ${#strings.substring(content.getPosting_time(),0,10)} +'/'+ ${content.getFile_name()}"/>
-                                <img th:src="'/user-images/' + ${#strings.substring(content.getPosting_time(),0,10)} +'/'+ ${content.getFile_name()}"/>
+                            <p th:if="${content.getFileName().length()} > 0 ">
+                                <img th:src="'/user-images/' + ${#strings.substring(content.getPostingTime(),0,10)} +'/'+ ${content.getFileName()}"/>
                             </p>
                             <p th:text="*{content.getBody()}">  </p>
                         </div>
