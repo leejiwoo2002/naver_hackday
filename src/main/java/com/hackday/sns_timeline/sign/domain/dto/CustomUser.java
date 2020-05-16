@@ -13,6 +13,7 @@ import lombok.Setter;
 public class CustomUser extends User {
 
 	private long id;
+	private String name;
 
 	public CustomUser(String username, String password,
 		Collection<? extends GrantedAuthority> authorities) {
@@ -20,8 +21,9 @@ public class CustomUser extends User {
 	}
 
 	public CustomUser(String username, String password,
-		Collection<? extends GrantedAuthority> authorities, long id) {
+		Collection<? extends GrantedAuthority> authorities, long id, String name) {
 		super(username, password, authorities);
 		this.id = id;
+		this.name = name;
 	}
 }

@@ -40,7 +40,8 @@ public class SignController {
 		return new ModelAndView(CommonConst.SIGN_UP);
 	}
 
-	@ApiOperation(httpMethod = "POST",
+	@ApiOperation(
+		httpMethod = "POST",
 		value = "회원가입 처리 후 홈 리다이렉트",
 		response = String.class,
 		nickname="signUp")
@@ -64,10 +65,12 @@ public class SignController {
 		return CommonConst.REDIRECT_TIME_LINE;
 	}
 
-	@ApiOperation(httpMethod = "GET",
+	@ApiOperation(
+		httpMethod = "GET",
 		value = "Spring security 로그인 실패 시 요청 end point, 인덱스 페이지 반환",
 		response = String.class,
-		nickname="signInFail")
+		nickname="signInFail"
+	)
 	@GetMapping("/fail")
 	public String signInFail(RedirectAttributes redirectAttributes){
 		redirectAttributes.addFlashAttribute(CommonConst.ERROR, true);

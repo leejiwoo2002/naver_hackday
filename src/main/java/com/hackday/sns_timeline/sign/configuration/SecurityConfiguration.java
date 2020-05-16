@@ -19,16 +19,12 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private final SignService signService;
-	// private final AccessDeniedHandler accessDeniedHandler;
-	// private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
-	// 패스워드 인코더 빈 등록
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	// 권한 매니저 빈 등록
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -38,33 +34,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-			.httpBasic().disable() // 기본설정 사용안함. 기본설정은 비인증시 로그인폼 화면으로 리다이렉트 된다.
-			.authorizeRequests() // 다음 리퀘스트에 대한 사용권한 체크
+			.httpBasic().disable()
+			.authorizeRequests()
 			.antMatchers("/timeLine/**","/content/**", "/subscribe/**","/member/search/**", "/profile/**").hasRole("MEMBER")
-			.antMatchers("/", "/sign/**").anonymous() // 가입 및 인증 주소는 누구나 접근가능
-			.anyRequest().permitAll() // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
+			.antMatchers("/", "/sign/**").anonymous()
+			.anyRequest().permitAll()
 
 			.and()
-			.formLogin() // 로그인 폼 설정
-			.loginPage("/") // 로그인 URL
+			.formLogin()
+			.loginPage("/")
 			.loginProcessingUrl("/sign/in")
-			.defaultSuccessUrl("/sign/in", true) // 로그인 성공 시 URL
-			.usernameParameter("email") // 로그인 폼에서 username 의 파라미터 커스텀
+			.defaultSuccessUrl("/sign/in", true)
+			.usernameParameter("email")
 			.failureUrl("/sign/fail")
-			// .failureHandler(customAuthenticationFailureHandler)
-			.permitAll() // 권한 설정
+			.permitAll()
 
 			.and()
-			.logout() // 로그아웃 설정
-			.logoutRequestMatcher(new AntPathRequestMatcher("/sign/out")) // 로그아웃 URL
-			.logoutSuccessUrl("/") // 로그아웃 성공 시 URL
-			.invalidateHttpSession(true); // 세션 초기화
+			.logout()
+			.logoutRequestMatcher(new AntPathRequestMatcher("/sign/out"))
+			.logoutSuccessUrl("/")
+			.invalidateHttpSession(true);
 	}
 
 	@Override
 	public void configure(WebSecurity web) {
-		// 시큐리티 적용 무시 URL
-		web.ignoring().antMatchers("/resources/**",
+		web.ignoring().antMatchers(
+			"/resources/**",
 			"/v2/api-docs",
 			"/configuration/ui",
 			"/swagger-resources/**",
@@ -73,11 +68,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			"/webjars/**");
 	}
 
-	// 로그인 설정
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		// userDetailService 인터페이스를 상속받은 signService 의 loadUserByUsername 로직 사용
-		// 패스워드 인코더 설정
 		auth.userDetailsService(signService).passwordEncoder(passwordEncoder());
 	}
 }
