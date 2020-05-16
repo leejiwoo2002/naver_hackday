@@ -72,22 +72,24 @@ public class MemberSearchController {
 	}
 
 
-	// @ApiOperation(httpMethod = "GET",
-	// 	value = "Mock 데이터를 넣기 위한 end point",
-	// 	response = String.class,
-	// 	nickname="createTestData")
-	// @GetMapping("/test")
-	// public String createTestData(@RequestParam(name = "name") String name,
-	// 	@RequestParam(name = "count") int count) throws Exception {
-	//
-	// 	for (int i = 1; i <= count; i++) {
-	// 		signService.signUp(MemberDto.builder()
-	// 			.email(name+i + "@"+name)
-	// 			.name(name+i)
-	// 			.password("test")
-	// 			.build());
-	// 	}
-	//
-	// 	return "redirect:/member/search";
-	// }
+	@ApiOperation(
+		httpMethod = "GET",
+		value = "Mock 데이터를 넣기 위한 end point",
+		response = String.class,
+		nickname="createTestData"
+	)
+	@GetMapping("/test")
+	public String createTestData(@RequestParam(name = "name") String name,
+		@RequestParam(name = "count") int count) throws Exception {
+
+		for (int i = 1; i <= count; i++) {
+			signService.signUp(MemberDto.builder()
+				.email(name+i + "@"+name)
+				.name(name+i)
+				.password("test")
+				.build());
+		}
+
+		return "redirect:/member/search";
+	}
 }

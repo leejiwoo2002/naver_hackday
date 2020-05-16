@@ -25,7 +25,7 @@ public class ProfileService {
 
 	@Transactional
 	public Member getMemberProfile(long userId) throws Exception {
-		return memberRepository.findById(userId).orElseThrow(() -> new Exception());
+		return memberRepository.findById(userId).orElseThrow(() -> new Exception("member not exist"));
 	}
 
 	@Transactional

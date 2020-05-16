@@ -20,7 +20,6 @@ public class SwaggerConfiguration {
 			.apis(RequestHandlerSelectors.any())
 			.paths(PathSelectors.any())
 			.build();
-			// .useDefaultResponseMessages(false); // 기본으로 세팅되는 200,401,403,404 메시지를 표시 하지 않음
 	}
 
 	private ApiInfo swaggerInfo() {

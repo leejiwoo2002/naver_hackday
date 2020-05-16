@@ -43,7 +43,7 @@ public class SignService implements UserDetailsService {
 			authorities.add(new SimpleGrantedAuthority(role));
 		}
 
-		return new CustomUser(member.getEmail(), member.getPassword(), authorities, member.getId());
+		return new CustomUser(member.getEmail(), member.getPassword(), authorities, member.getId(), member.getName());
 	}
 
 	@Transactional

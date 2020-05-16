@@ -42,7 +42,8 @@ public class SubscribeService {
 		Member member = memberRepository.findById(userId).orElseThrow(() -> new Exception("member not exist"));
 		Member subscribeMember = memberRepository.findById(subscribeTargetId).orElseThrow(()
 			-> new Exception("member not exist"));
-		Subscribe subscribe = subscribeRepository.findByMemberAndSubscribeMember(member, subscribeMember).orElseThrow(() -> new Exception("subscribe not exist"));
+		Subscribe subscribe = subscribeRepository.findByMemberAndSubscribeMember(member, subscribeMember)
+			.orElseThrow(() -> new Exception("subscribe not exist"));
 
 		subscribeRepository.delete(subscribe);
 	}
