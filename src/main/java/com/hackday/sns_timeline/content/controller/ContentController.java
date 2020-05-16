@@ -130,9 +130,6 @@ public class ContentController {
 		Date today = new Date();
 		contentDto.setPostingTime(today); // date가 string 으로 넘어와서 자동매핑 실패
 
-		log.info("here1");
-		log.info("user-name : "+user.getUsername());
-		log.info("content id : "+contentDto.getContentId());
 		contentService.contentRemove(contentDto.getContentId(),user);
 
 		return "redirect:/timeLine";
