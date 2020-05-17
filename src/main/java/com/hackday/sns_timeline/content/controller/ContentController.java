@@ -66,39 +66,13 @@ public class ContentController {
 	public String contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
 		@RequestParam("file") MultipartFile file) throws Exception {
-		//클래스 빼기 or 메소드
 
 		String saveName="";
-		if(!file.isEmpty()) {
-			UUID uuid = UUID.randomUUID();
-			saveName = uuid.toString();
 
-			SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
-			Date today = new Date();
-			String folderName = dateFormat.format(today);
+		FileController controller = new FileController();
 
-			String extension = "."+FilenameUtils.getExtension(file.getOriginalFilename());
+		saveName = controller.mkDir(filePath, file);
 
-			saveName+=extension; // 확장자 추가
-
-			File directory = new File(filePath+"/"+folderName);
-
-			if (!directory.exists()) {
-				try{
-					directory.mkdir(); //폴더 생성합니다.
-				}
-				catch(Exception e){
-					e.getStackTrace();
-				}
-			}
-
-			File saveFile = new File(filePath+"/"+folderName, saveName); // 저장할 폴더 이름, 저장할 파일 이름
-			try {
-				file.transferTo(saveFile); // 업로드 파일에 saveFile이라는 껍데기 입힘
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
 		contentService.contentCreate(contentDto,user,saveName);
 
 		return "redirect:/timeLine";
@@ -117,7 +91,7 @@ public class ContentController {
 		return new ModelAndView("layout/contentReadMy").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
 	}
 
-	@ApiOperation(httpMethod = "DELETE",
+	@ApiOperation(httpMethod = "POST",
 		value = "자신의 글 삭제 함수",
 		response = String.class,
 		nickname = "deleteContent")
