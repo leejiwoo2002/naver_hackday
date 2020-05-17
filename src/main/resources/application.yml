@@ -1,9 +1,26 @@
 spring:
   profiles:
-    active: jiwoo
-
+    active: yunsang
   mvc:
     static-path-pattern: /resources/**
+
+  thymeleaf:
+    prefix: classpath:templates/
+    check-template-location: true
+    suffix: .html
+    mode: HTML5
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    showSql: true
+    database: mysql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+      use_sql_comments: true
+
 sever:
   error:
     include-exception: true
@@ -11,16 +28,13 @@ sever:
     
 imagePath.name: /Users/jiwoo/OneDrive - kyonggi.ac.kr/IdeaProjects/user-images
 
+logging:
+  level:
+    root: info
+
 ---
 spring:
-  profiles: build
-
-  thymeleaf:
-    prefix: classpath:templates/
-    check-template-location: true
-    suffix: .html
-    mode: HTML5
-    cache: true
+  profiles: server
 
   datasource:
     url: jdbc:mysql://49.50.172.59:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
@@ -28,20 +42,13 @@ spring:
     username: root
     password: hackday
 
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    showSql: true
-    database: mysql
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate.format_sql: true
-      use_sql_comments: true
+  thymeleaf:
+    cache: true
 ---
 
 spring:
   profiles: yunsang
+
   datasource:
     url: jdbc:mysql://localhost:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -49,26 +56,12 @@ spring:
     password: kim111
 
   thymeleaf:
-    prefix: classpath:templates/
-    check-template-location: true
-    suffix: .html
-    mode: HTML5
     cache: false
-
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    showSql: true
-    database: mysql
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate.format_sql: true
-      use_sql_comments: true
 ---
 
 spring:
   profiles: jiwoo
+
   datasource:
     url: jdbc:mysql://localhost:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -76,22 +69,4 @@ spring:
     password: hackday
 
   thymeleaf:
-    prefix: classpath:templates/
-    check-template-location: true
-    suffix: .html
-    mode: HTML5
     cache: false
-
-  jpa:
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    showSql: true
-    database: mysql
-    generate-ddl: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate.format_sql: true
-      use_sql_comments: true
-
-
-

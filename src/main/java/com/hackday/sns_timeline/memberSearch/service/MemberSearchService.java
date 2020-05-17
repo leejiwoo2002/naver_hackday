@@ -54,7 +54,7 @@ public class MemberSearchService {
 
 	public RedirectAttributes setMemberSearchAttributes(RedirectAttributes redirectAttributes, Page<MemberDto> memberDtoList){
 
-		int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
+		int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1; // 상수
 		int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
 		redirectAttributes.addFlashAttribute(CommonConst.START, start);
 		redirectAttributes.addFlashAttribute(CommonConst.LAST, last);

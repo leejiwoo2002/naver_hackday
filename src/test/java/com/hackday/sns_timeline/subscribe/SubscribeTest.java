@@ -3,29 +3,23 @@ package com.hackday.sns_timeline.subscribe;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-import java.util.Random;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
+import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.sign.service.SignService;
 import com.hackday.sns_timeline.subscribe.controller.SubscribeController;
-import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
 import com.hackday.sns_timeline.subscribe.domain.entity.Subscribe;
-import com.hackday.sns_timeline.subscribe.domain.entity.SubscribePK;
-import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.subscribe.repository.SubscribeRepository;
 import com.hackday.sns_timeline.subscribe.service.SubscribeService;
 
