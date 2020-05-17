@@ -19,11 +19,11 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 	@Override
 	Optional<Content> findById(Long aLong);
 
-	@Query(value = "select * from Content content where content.member_id=:id and content.check_delete=false order by posting_time DESC", nativeQuery = true)
+	@Query(value = "select * from content content where content.member_id=:id and content.check_delete=false order by posting_time DESC", nativeQuery = true)
 	Page<Content> searchMyContent(Long id, Pageable pageable);
 
 	@Modifying
 	@Transactional
-	@Query(value = "update Content content set content.check_delete=true where content.content_id=:contentId", nativeQuery = true)
+	@Query(value = "update content content set content.check_delete=true where content.content_id=:contentId", nativeQuery = true)
 	void removeMyContent(Long contentId);
 }
