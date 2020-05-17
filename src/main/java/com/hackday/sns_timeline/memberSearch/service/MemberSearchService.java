@@ -1,6 +1,8 @@
 package com.hackday.sns_timeline.memberSearch.service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,10 +39,14 @@ public class MemberSearchService {
 	@Transactional
 	public void checkSubscribed(Page<MemberDto> searchMembers, long id) throws Exception {
 		Member member = memberRepository.findById(id).orElseThrow(() -> new Exception());
-		List<Long> subscribeList = subscribeRepository.findSubscribeIdByMember(member);
+		List<Member> subscribeList = subscribeRepository.findSubscribeIdByMember(member);
+		Set<Long> subscribeMemberIdSet = new HashSet<>();
+		for (Member currentMember : subscribeList) {
+			subscribeMemberIdSet.add(currentMember.getId());
+		}
 
 		for (MemberDto searchMember : searchMembers) {
-			if(subscribeList.contains(searchMember.getId())){
+			if(subscribeMemberIdSet.contains(searchMember.getId())){
 				searchMember.setSubscribed(true);
 			}
 		}
@@ -48,7 +54,7 @@ public class MemberSearchService {
 
 	public RedirectAttributes setMemberSearchAttributes(RedirectAttributes redirectAttributes, Page<MemberDto> memberDtoList){
 
-		int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1;
+		int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1; // 상수
 		int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
 		redirectAttributes.addFlashAttribute(CommonConst.START, start);
 		redirectAttributes.addFlashAttribute(CommonConst.LAST, last);

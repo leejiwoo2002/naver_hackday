@@ -28,8 +28,11 @@ public class IndexController {
 	)
 	@GetMapping
 	public String getIndexPage(@AuthenticationPrincipal CustomUser user){
-		if(user == null)
+		if(user == null) {
 			return CommonConst.INDEX;
-		else return CommonConst.REDIRECT_TIME_LINE;
+		}
+		else {
+			return CommonConst.REDIRECT_TIME_LINE;
+		}
 	}
 }
