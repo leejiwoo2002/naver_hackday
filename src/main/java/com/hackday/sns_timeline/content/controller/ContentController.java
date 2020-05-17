@@ -53,7 +53,7 @@ public class ContentController {
 		value = "글 작성 페이지",
 		response = ModelAndView.class,
 		nickname = "getCreatePage")
-	@GetMapping("/new")
+	@GetMapping
 	public ModelAndView getCreatePage(@ModelAttribute ContentDto contentDto) {
 		return new ModelAndView("layout/contentCreate").addObject(CommonConst.CONTENT_DTO, contentDto);
 	}
@@ -62,7 +62,7 @@ public class ContentController {
 		value = "글 작성 후 메인화면(Timeline) 반환",
 		response = String.class,
 		nickname = "contentCreate")
-	@PostMapping("/new/do")
+	@PostMapping
 	public String contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
 		@RequestParam("file") MultipartFile file) throws Exception {
@@ -95,7 +95,7 @@ public class ContentController {
 		value = "자신의 글 삭제 함수",
 		response = String.class,
 		nickname = "deleteContent")
-	@PostMapping("/status")
+	@PostMapping("/my")
 	public String deleteContent(@AuthenticationPrincipal User user, @ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
 		Date today = new Date();
