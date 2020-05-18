@@ -55,10 +55,10 @@ spring:
   profiles: yunsang
 
   datasource:
-    url: jdbc:mysql://localhost:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://49.50.167.208:3306/sns_timeline?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: kim111
+    password: hackday
 
   thymeleaf:
     cache: false

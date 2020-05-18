@@ -14,8 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.common.CommonFunction;
 import com.hackday.sns_timeline.searchMember.domain.dto.SearchMemberDto;
-import com.hackday.sns_timeline.searchMember.domain.entity.SearchMember;
-import com.hackday.sns_timeline.searchMember.repository.SearchMemberRepository;
+import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
+import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
@@ -30,7 +30,7 @@ public class SearchMemberService {
 
 	final private MemberRepository memberRepository;
 	final private SubscribeRepository subscribeRepository;
-	final private SearchMemberRepository searchMemberRepository;
+	final private SearchMemberEsRepository searchMemberEsRepository;
 
 	@Transactional
 	public Page<MemberDto> findMembers(String search, int page) {
@@ -46,9 +46,8 @@ public class SearchMemberService {
 		Member member = memberRepository.findById(id).orElseThrow(() -> new Exception());
 		List<Member> subscribeList = subscribeRepository.findSubscribeIdByMember(member);
 		Set<Long> subscribeMemberIdSet = new HashSet<>();
-		for (Member currentMember : subscribeList) {
-			subscribeMemberIdSet.add(currentMember.getId());
-		}
+
+		subscribeList.forEach(currentMember -> subscribeMemberIdSet.add(currentMember.getId()));
 
 		for (MemberDto searchMember : searchMembers) {
 			if(subscribeMemberIdSet.contains(searchMember.getId())){
@@ -78,16 +77,16 @@ public class SearchMemberService {
 		return redirectAttributes;
 	}
 
-	public List<SearchMember> findSearchMemberList(String name){
-		return searchMemberRepository.findByName(name);
+	public List<SearchMemberEs> findSearchMemberList(String name){
+		return searchMemberEsRepository.findByName(name);
 	}
 
-	public List<SearchMember> fineSearchMemberByEmailLike(String email){
-		return searchMemberRepository.findByEmailContains(email);
+	public List<SearchMemberEs> fineSearchMemberByEmailLikeOrNameLike(String email){
+		return searchMemberEsRepository.findByEmailContainsOrNameContains(email, email, PageRequest.of(0, 10));
 	}
 
-	public SearchMember saveSearchMember(SearchMember memberSearch){
-		return searchMemberRepository.save(memberSearch);
+	public SearchMemberEs saveSearchMember(SearchMemberEs memberSearch){
+		return searchMemberEsRepository.save(memberSearch);
 	}
 
 

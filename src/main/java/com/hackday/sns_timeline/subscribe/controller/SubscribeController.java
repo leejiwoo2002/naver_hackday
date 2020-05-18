@@ -54,8 +54,11 @@ public class SubscribeController {
 		}
 
 		searchMemberService.setMemberSearchAttributes(redirectAttributes,
-			SearchMemberDto.builder().search(subscribeDto.getSearch()).page(subscribeDto.getPage())
-				.userId(subscribeDto.getId()).build());
+			SearchMemberDto.builder()
+				.search(subscribeDto.getSearch())
+				.page(subscribeDto.getPage())
+				.userId(subscribeDto.getId())
+				.build());
 
 		return CommonConst.REDIRECT_MEMBER_SEARCH;
 	}
