@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.CommonFunction;
+import com.hackday.sns_timeline.searchMember.domain.dto.SearchMemberDto;
 import com.hackday.sns_timeline.searchMember.domain.entity.SearchMember;
 import com.hackday.sns_timeline.searchMember.repository.SearchMemberRepository;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
@@ -31,9 +33,9 @@ public class SearchMemberService {
 	final private SearchMemberRepository searchMemberRepository;
 
 	@Transactional
-	public Page<MemberDto> findMembers(String search, Pageable pageable) {
-		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-		pageable = PageRequest.of(page, 10);
+	public Page<MemberDto> findMembers(String search, int page) {
+		page = (page == 0) ? 0 : (page - 1);
+		Pageable pageable = PageRequest.of(page, 10);
 		Page<MemberDto> searchMembers = memberRepository.searchMember(search, pageable).map(MemberDto::customConverter);
 
 		return searchMembers;
@@ -55,13 +57,23 @@ public class SearchMemberService {
 		}
 	}
 
-	public RedirectAttributes setMemberSearchAttributes(RedirectAttributes redirectAttributes, Page<MemberDto> memberDtoList){
+	public RedirectAttributes setMemberSearchAttributes(RedirectAttributes redirectAttributes,
+		SearchMemberDto searchMemberDto) throws Exception {
 
-		int start = (int) Math.floor(memberDtoList.getNumber()/10)*10 + 1; // 상수
-		int last = start + 9 < memberDtoList.getTotalPages() ? start + 9 : memberDtoList.getTotalPages();
-		redirectAttributes.addFlashAttribute(CommonConst.START, start);
-		redirectAttributes.addFlashAttribute(CommonConst.LAST, last);
-		redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+		Page<MemberDto> memberDtoList = findMembers(searchMemberDto.getSearch(), searchMemberDto.getPage());
+
+		redirectAttributes.addFlashAttribute(CommonConst.SEARCH, searchMemberDto.getSearch());
+
+		if(memberDtoList.getContent().size() > 0) {
+			checkSubscribed(memberDtoList, searchMemberDto.getUserId());
+			int start = CommonFunction.getStartPageNumber(memberDtoList.getNumber());
+			int last = CommonFunction.getLastPageNumber(start, memberDtoList.getTotalPages());
+			redirectAttributes.addFlashAttribute(CommonConst.START, start);
+			redirectAttributes.addFlashAttribute(CommonConst.LAST, last);
+			redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+		}else {
+			redirectAttributes.addFlashAttribute(CommonConst.IS_NULL, true);
+		}
 
 		return redirectAttributes;
 	}

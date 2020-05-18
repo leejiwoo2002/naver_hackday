@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.service.ContentService;
-import com.hackday.sns_timeline.searchMember.service.SearchMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +36,6 @@ import lombok.extern.log4j.Log4j2;
 public class ContentController {
 
 	final private ContentService contentService;
-	final private SearchMemberService searchMemberService;
 
 	@Value("${imagePath.name}")
 	private	String filePath;
