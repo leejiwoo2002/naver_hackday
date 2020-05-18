@@ -8,6 +8,6 @@ import com.hackday.sns_timeline.subscribe.domain.entity.SubscribeEs;
 
 public interface SubscribeEsRepository extends ElasticsearchCrudRepository<SubscribeEs, String> {
 
-	public Optional<SubscribeEs> findByMemberIdAndSubscribeMemberId(long memberId, long SubscribeMemberId);
+	Optional<SubscribeEs> findByMemberIdAndSubscribeMemberId(long memberId, long SubscribeMemberId);
 
 }

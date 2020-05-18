@@ -10,8 +10,8 @@ import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
 
 public interface SearchMemberEsRepository extends ElasticsearchCrudRepository<SearchMemberEs, String> {
 
-	public Page<SearchMemberEs> findByEmail(String email, Pageable pageable);
-	public List<SearchMemberEs> findByName(String name);
-	public List<SearchMemberEs> findByEmailContainsOrNameContains(String email, String name, Pageable pageable);
+	Page<SearchMemberEs> findByEmail(String email, Pageable pageable);
+	List<SearchMemberEs> findByName(String name);
+	List<SearchMemberEs> findByEmailContainsOrNameContains(String email, String name, Pageable pageable);
 
 }
