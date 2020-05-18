@@ -18,10 +18,10 @@
         <div class="row">
         <div class="col-4">
             <div class="sb-widget">
-                <form class="search-form" th:action="@{/member/search/do}" th:method="GET">
+                <form class="search-form" th:action="@{/search/member/do}" th:method="GET">
                     <input th:id="search" type="text" placeholder="검색어를 입력해 주세요." th:name="search">
                     <button th:type="submit">
-                        <img src="../../static/img/search-icon.png" alt="">
+                        <img src="/resources/static/img/search-icon.png" alt="">
                     </button>
                 </form>
             </div>
@@ -57,13 +57,13 @@
             <nav class="site-pagination" th:if="${memberDtoList.getTotalPages() > 1}">
                 <ul class="pagination" th:with="start=${start}, last=${last}">
                     <li>
-                        <a th:href="@{/member/search/do(search = ${search},page=1)}" aria-label="First">
+                        <a th:href="@{/search/member/do(search = ${search},page=1)}" aria-label="First">
                             <span aria-hidden="true">First</span>
                         </a>
                     </li>
 
                     <li th:class="${memberDtoList.first} ? 'disabled'">
-                        <a th:href="@{/member/search/do(search = ${search}, page=${memberDtoList.getPageable().getPageNumber()})}"
+                        <a th:href="@{/search/member/do(search = ${search}, page=${memberDtoList.getPageable().getPageNumber()})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
@@ -71,18 +71,18 @@
 
                     <li th:each="page: ${#numbers.sequence(start, last)}"
                         th:class="${page == memberDtoList.getPageable().getPageNumber() + 1} ? 'active'">
-                        <a th:text="${page}" th:href="@{/member/search/do(search = ${search}, page=${page})}"></a>
+                        <a th:text="${page}" th:href="@{/search/member/do(search = ${search}, page=${page})}"></a>
                     </li>
 
                     <li th:class="${memberDtoList.last} ? 'disabled'">
-                        <a th:href="@{/member/search/do(search = ${search}, page=${memberDtoList.getPageable().getPageNumber()+2})}"
+                        <a th:href="@{/search/member/do(search = ${search}, page=${memberDtoList.getPageable().getPageNumber()+2})}"
                            aria-label="Next">
                             <span aria-hidden="true">></span>
                         </a>
                     </li>
 
                     <li>
-                        <a th:href="@{/member/search/do(search = ${search},page = ${memberDtoList.getTotalPages()})}" aria-label="Last">
+                        <a th:href="@{/search/member/do(search = ${search},page = ${memberDtoList.getTotalPages()})}" aria-label="Last">
                             <span aria-hidden="true">Last</span>
                         </a>
                     </li>

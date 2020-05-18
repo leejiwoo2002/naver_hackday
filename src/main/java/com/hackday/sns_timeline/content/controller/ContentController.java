@@ -1,14 +1,10 @@
 package com.hackday.sns_timeline.content.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
-import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +12,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.service.ContentService;
-import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +36,6 @@ import lombok.extern.log4j.Log4j2;
 public class ContentController {
 
 	final private ContentService contentService;
-	final private MemberSearchService memberSearchService;
 
 	@Value("${imagePath.name}")
 	private	String filePath;

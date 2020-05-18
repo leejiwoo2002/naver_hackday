@@ -1,4 +1,4 @@
-package com.hackday.sns_timeline.memberSearch;
+package com.hackday.sns_timeline.searchMember;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,7 +17,7 @@ import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.sign.service.SignService;
 
 @SpringBootTest
-public class MemberSearchTest {
+public class SearchMemberEsTest {
 
 	@Autowired
 	MemberRepository memberRepository;
