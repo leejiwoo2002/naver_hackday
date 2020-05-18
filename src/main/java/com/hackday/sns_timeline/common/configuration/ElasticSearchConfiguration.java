@@ -39,6 +39,4 @@ public class ElasticSearchConfiguration {
 	public ElasticsearchTemplate elasticsearchTemplate() throws UnknownHostException {
 		return new ElasticsearchTemplate(elasticsearchClient());
 	}
-
-
 }

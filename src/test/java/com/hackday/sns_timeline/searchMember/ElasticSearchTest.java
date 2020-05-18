@@ -36,13 +36,11 @@ public class ElasticSearchTest {
 	@Test
 	@Transactional
 	public void searchSearchMemberTest(){
-
 		String name = "test";
 		int count = 13;
 		for (int i = 0; i < count; i++) {
 			searchMemberService.saveSearchMember(SearchMember.builder().id(i).email(name+i+"@test").name(name+i).build());
 		}
-
 		List<SearchMember> searchMemberList = searchMemberService.fineSearchMemberByEmailLike(name);
 
 		assertThat(searchMemberList.size()).isEqualTo(count);
