@@ -1,4 +1,4 @@
-package com.hackday.sns_timeline.memberSearch.controller;
+package com.hackday.sns_timeline.searchMember.controller;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
-import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
+import com.hackday.sns_timeline.searchMember.service.SearchMemberService;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.service.SignService;
@@ -26,11 +26,11 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @Log4j2
 @RequiredArgsConstructor
-@RequestMapping("/member/search")
-@Api(value = "/member/search", description = "친구찾기 기능 담당")
-public class MemberSearchController {
+@RequestMapping("/search/member")
+@Api(value = "/search/member", description = "친구찾기 기능 담당")
+public class SearchMemberController {
 
-	final private MemberSearchService memberSearchService;
+	final private SearchMemberService searchMemberService;
 	final private SignService signService;
 
 	@ApiOperation(
@@ -59,13 +59,13 @@ public class MemberSearchController {
 
 		redirectAttributes.addFlashAttribute(CommonConst.SEARCH, search);
 
-		Page<MemberDto> memberDtoList = memberSearchService.findMembers(search, pageable);
+		Page<MemberDto> memberDtoList = searchMemberService.findMembers(search, pageable);
 
 		if(memberDtoList.getContent().size() == 0){
 			redirectAttributes.addFlashAttribute(CommonConst.IS_NULL, true);
 		} else {
-			memberSearchService.checkSubscribed(memberDtoList, user.getId());
-			memberSearchService.setMemberSearchAttributes(redirectAttributes, memberDtoList);
+			searchMemberService.checkSubscribed(memberDtoList, user.getId());
+			searchMemberService.setMemberSearchAttributes(redirectAttributes, memberDtoList);
 		}
 
 		return CommonConst.REDIRECT_MEMBER_SEARCH;
@@ -90,6 +90,6 @@ public class MemberSearchController {
 				.build());
 		}
 
-		return "redirect:/member/search";
+		return "redirect:/search/member";
 	}
 }

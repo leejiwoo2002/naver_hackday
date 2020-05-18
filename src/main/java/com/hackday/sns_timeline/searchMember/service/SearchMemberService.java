@@ -1,4 +1,4 @@
-package com.hackday.sns_timeline.memberSearch.service;
+package com.hackday.sns_timeline.searchMember.service;
 
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.searchMember.domain.entity.SearchMember;
+import com.hackday.sns_timeline.searchMember.repository.SearchMemberRepository;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
@@ -22,10 +24,11 @@ import lombok.extern.log4j.Log4j2;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class MemberSearchService {
+public class SearchMemberService {
 
 	final private MemberRepository memberRepository;
 	final private SubscribeRepository subscribeRepository;
+	final private SearchMemberRepository searchMemberRepository;
 
 	@Transactional
 	public Page<MemberDto> findMembers(String search, Pageable pageable) {
@@ -62,4 +65,18 @@ public class MemberSearchService {
 
 		return redirectAttributes;
 	}
+
+	public List<SearchMember> findSearchMemberList(String name){
+		return searchMemberRepository.findByName(name);
+	}
+
+	public List<SearchMember> fineSearchMemberByEmailLike(String email){
+		return searchMemberRepository.findByEmailContains(email);
+	}
+
+	public SearchMember saveSearchMember(SearchMember memberSearch){
+		return searchMemberRepository.save(memberSearch);
+	}
+
+
 }

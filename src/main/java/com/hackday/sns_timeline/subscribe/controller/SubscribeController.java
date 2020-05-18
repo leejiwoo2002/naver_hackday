@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
-import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
+import com.hackday.sns_timeline.searchMember.service.SearchMemberService;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.subscribe.domain.dto.SubscribeDto;
@@ -30,7 +30,7 @@ import lombok.extern.log4j.Log4j2;
 public class SubscribeController {
 
 	final private SubscribeService subscribeService;
-	final private MemberSearchService memberSearchService;
+	final private SearchMemberService searchMemberService;
 
 	@ApiOperation(
 		httpMethod = "POST",
@@ -52,13 +52,13 @@ public class SubscribeController {
 			subscribeService.addSubscribe(user.getId(), subscribeDto.getId());
 		}
 
-		Page<MemberDto> memberDtoList = memberSearchService.findMembers(subscribeDto.getSearch(),
+		Page<MemberDto> memberDtoList = searchMemberService.findMembers(subscribeDto.getSearch(),
 			PageRequest.of(subscribeDto.getPage(), 10));
 
 		redirectAttributes.addFlashAttribute(CommonConst.SEARCH, subscribeDto.getSearch());
 		if(memberDtoList.getContent().size() > 0) {
-			memberSearchService.checkSubscribed(memberDtoList, user.getId());
-			memberSearchService.setMemberSearchAttributes(redirectAttributes, memberDtoList);
+			searchMemberService.checkSubscribed(memberDtoList, user.getId());
+			searchMemberService.setMemberSearchAttributes(redirectAttributes, memberDtoList);
 		}else {
 			redirectAttributes.addFlashAttribute(CommonConst.IS_NULL, true);
 		}

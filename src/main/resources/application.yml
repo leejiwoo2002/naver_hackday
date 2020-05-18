@@ -32,6 +32,11 @@ logging:
   level:
     root: info
 
+elasticsearch.clusterName: docker-cluster
+elasticsearch.host: 49.50.167.208
+elasticsearch.port: 9300
+spring.main.allow-bean-definition-overriding: true
+
 ---
 spring:
   profiles: server
