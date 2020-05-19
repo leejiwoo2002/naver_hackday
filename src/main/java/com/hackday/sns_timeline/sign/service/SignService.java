@@ -15,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
+import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
 import com.hackday.sns_timeline.sign.domain.Role;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
@@ -31,6 +33,7 @@ public class SignService implements UserDetailsService {
 
 	final private MemberRepository memberRepository;
 	final private SubscribeService subscribeService;
+	final private SearchMemberEsRepository searchMemberEsRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -52,20 +55,15 @@ public class SignService implements UserDetailsService {
 			throw new Exception("email already exist");
 		}
 
-		LocalDateTime currentDateTime = LocalDateTime.now();
-		Date date = java.sql.Timestamp.valueOf(currentDateTime);
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		Member member = memberRepository.save(Member.buildMember(memberDto));
 
-		Member member = memberRepository.save(Member.builder()
-			.email(memberDto.getEmail())
-			.name(memberDto.getName())
-			.password(passwordEncoder.encode(memberDto.getPassword()))
-			.roles(new ArrayList<>(Arrays.asList(Role.MEMBER.getValue())))
-			.regDate(date)
-			.build());
-
+		addSearchMemberEs(member);
 		subscribeService.addSubscribe(member.getId(), member.getId());
 
 		return member;
+	}
+
+	private SearchMemberEs addSearchMemberEs(Member member){
+		return searchMemberEsRepository.save(SearchMemberEs.buildSearchMemberEs(member));
 	}
 }

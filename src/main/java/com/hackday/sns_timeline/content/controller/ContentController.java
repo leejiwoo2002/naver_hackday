@@ -12,7 +12,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +38,6 @@ import lombok.extern.log4j.Log4j2;
 public class ContentController {
 
 	final private ContentService contentService;
-	final private MemberSearchService memberSearchService;
 
 	@Value("${imagePath.name}")
 	private	String filePath;

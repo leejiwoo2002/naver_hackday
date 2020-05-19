@@ -1,5 +1,4 @@
-package com.hackday.sns_timeline.memberSearch;
-
+package com.hackday.sns_timeline.searchMember;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -10,18 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.sign.service.SignService;
-import com.hackday.sns_timeline.subscribe.controller.SubscribeController;
 
 @SpringBootTest
-public class MemberSearchTest {
+public class SearchMemberEsTest {
 
 	@Autowired
 	MemberRepository memberRepository;

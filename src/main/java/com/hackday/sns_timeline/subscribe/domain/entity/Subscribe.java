@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.hackday.sns_timeline.common.CommonFunction;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,4 +34,11 @@ public class Subscribe implements Serializable {
 	private Member subscribeMember;
 
 	private Date regDate;
+
+	static public Subscribe buildSubscribe(Member member, Member subscribeMember){
+		return Subscribe.builder()
+			.member(member)
+			.subscribeMember(subscribeMember)
+			.regDate(CommonFunction.getCurrentDate()).build();
+	}
 }
