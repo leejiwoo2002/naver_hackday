@@ -25,7 +25,7 @@
             <div class="row" th:each="content : ${contentDtoList}">
                 <div class="col-md-4">
                     <div class="icon-box-item ">
-                        <form th:action="@{/content/}" th:object="${contentDto}" th:method="post">
+                        <form th:action="@{/content/editor}" th:object="${contentDto}" th:method="post">
                             <input type="hidden" name="contentId" th:value="${content.getContentId()}"/>
                             <input type="hidden" name="body" th:value="${content.getBody()}"/>
                             <input type="hidden" name="title" th:value="${content.getTitle()}"/>
