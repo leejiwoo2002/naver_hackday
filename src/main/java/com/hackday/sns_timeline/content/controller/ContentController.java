@@ -38,6 +38,7 @@ import lombok.extern.log4j.Log4j2;
 public class ContentController {
 
 	final private ContentService contentService;
+	final private FileService fileService;
 
 	@Value("${imagePath.name}")
 	private	String filePath;
@@ -63,9 +64,7 @@ public class ContentController {
 
 		String saveName="";
 
-		FileService controller = new FileService();
-
-		saveName = controller.mkDir(filePath, file);
+		saveName = fileService.mkDir(filePath, file);
 
 		contentService.contentCreate(contentDto,user,saveName);
 
@@ -110,7 +109,7 @@ public class ContentController {
 	}
 
 	@ApiOperation(httpMethod = "POST",
-		value = "자신의 글 수정 페이지 로드",
+		value = "수정 완료 후 내 글 목록으로 전환",
 		response = ModelAndView.class,
 		nickname = "editContent")
 	@PostMapping("/update")
