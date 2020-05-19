@@ -7,13 +7,14 @@ import java.util.Date;
 import java.util.UUID;
 
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class FileService {
-
-	public FileService(){
-
-	}
 
 	public String mkDir(String filePath, MultipartFile file){
 		String saveName="";
