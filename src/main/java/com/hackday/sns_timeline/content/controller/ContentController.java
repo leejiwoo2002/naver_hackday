@@ -12,6 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -91,23 +92,36 @@ public class ContentController {
 		response = String.class,
 		nickname = "deleteContent")
 	@PostMapping("/my")
-	public String deleteContent(@AuthenticationPrincipal User user, @ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
+	public String deleteContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
 		Date today = new Date();
 		contentDto.setPostingTime(today); // date가 string 으로 넘어와서 자동매핑 실패
 
-		contentService.contentRemove(contentDto.getContentId(),user);
+		contentService.contentRemove(contentDto.getContentId());
 
 		return "redirect:/content/my";
 	}
 
 	@ApiOperation(httpMethod = "POST",
 		value = "자신의 글 수정 페이지 로드",
-		response = String.class,
+		response = ModelAndView.class,
 		nickname = "editContent")
 	@PostMapping("/editor")
-	public ModelAndView editContent(@AuthenticationPrincipal User user, @ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
+	public ModelAndView editContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
 		return new ModelAndView("layout/contentEditor").addObject(CommonConst.CONTENT_DTO, contentDto);
 	}
+
+	@ApiOperation(httpMethod = "POST",
+		value = "자신의 글 수정 페이지 로드",
+		response = ModelAndView.class,
+		nickname = "editContent")
+	@PostMapping("/update")
+	public String updateContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto) throws Exception{
+
+		contentService.contentUpdate(contentDto.getContentId(), contentDto.getTitle(), contentDto.getBody());
+
+		return "redirect:/content/my";
+	}
+
 
 }

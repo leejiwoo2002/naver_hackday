@@ -10,13 +10,12 @@
 
     <section class="hero-section">
         <div class="col-lg-6">
-        <form class="hero-form" th:action="@{/content/editor}" th:object="${contentDto}" action="#" th:method="post" enctype="multipart/form-data" >
+        <form class="hero-form" th:action="@{/content/update}" th:object="${contentDto}" th:method="post" enctype="multipart/form-data" >
             <input type="text" placeholder="Content Title" th:field="*{title}" required="required">
-            <label style="color: white">가존 파일을 변경하려면 다시 첨부해주세요</label>
-            <input type="file" placeholder="file" name="file" >
             <textarea name="body" placeholder="Content Body" th:field="*{body}" required="required" wrap="hard" >
             </textarea>
-            <button class="site-btn" th:type="submit">create content!</button>
+            <input type="hidden" name="contentId" th:value="${contentDto.getContentId()}"/>
+            <button class="site-btn" th:type="submit">update content!</button>
         </form>
     </div>
 </section>
