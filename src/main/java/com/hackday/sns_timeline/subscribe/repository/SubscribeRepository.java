@@ -12,10 +12,10 @@ import com.hackday.sns_timeline.subscribe.domain.entity.Subscribe;
 
 public interface SubscribeRepository extends JpaRepository<Subscribe, Long> {
 
-	@Query(value = "select subscribe.subscribeMember from Subscribe subscribe where subscribe.member = :member")
-	List<Member> findSubscribeIdByMember(@Param("member") Member member);
+	// @Query(value = "select subscribe.subscribeMember from Subscribe subscribe where subscribe.member = :member")
+	// List<Member> findSubscribeIdByMember(@Param("member") Member member);
 
-	List<Subscribe> findByMember(@Param("member") Member member);
+	List<Subscribe> findByMemberId(long memberId);
 
-	Optional<Subscribe> findByMemberAndSubscribeMember(Member member, Member subscribeMember);
+	Optional<Subscribe> findByMemberIdAndSubscribeMemberId(long memberId, long subscribeMemberId);
 }

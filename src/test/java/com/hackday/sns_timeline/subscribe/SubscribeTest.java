@@ -55,7 +55,7 @@ public class SubscribeTest {
 
 		Long maxId = memberRepository.findMaxId();
 
-		Member member = memberRepository.findById(maxId).get();
+		Member member = memberRepository.findById(maxId).orElseThrow(()->new Exception());
 
 		Member newMember = signService.signUp(
 			MemberDto.builder().email("test" + maxId + 1 + "@test").name("test").password("test").build());
@@ -63,7 +63,7 @@ public class SubscribeTest {
 		subscribeService.addSubscribe(member.getId(), newMember.getId());
 
 		assertThat(
-			subscribeRepository.findByMemberAndSubscribeMember(member, newMember)
+			subscribeRepository.findByMemberIdAndSubscribeMemberId(member.getId(), newMember.getId())
 				.isPresent())
 			.isTrue();
 	}
@@ -74,8 +74,8 @@ public class SubscribeTest {
 		List<Subscribe> all = subscribeRepository.findAll();
 		Subscribe subscribe = all.get(0);
 
-		subscribeService.deleteSubscribe(subscribe.getMember().getId()
-			, subscribe.getSubscribeMember().getId());
+		subscribeService.deleteSubscribe(subscribe.getMemberId()
+			, subscribe.getSubscribeMemberId());
 
 		assertThat(
 			subscribeRepository.findById(subscribe.getId())

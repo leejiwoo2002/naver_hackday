@@ -1,6 +1,8 @@
 package com.hackday.sns_timeline.sign.domain.dto;
 
+import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
+import com.hackday.sns_timeline.subscribe.domain.entity.SubscribeEs;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,10 +21,23 @@ public class MemberDto {
 	private String password;
 	private boolean isSubscribed;
 
-	static public MemberDto customConverter(Member member){
+	static public MemberDto memberConverter(Member member){
 		return new MemberDto().builder().id(member.getId())
 			.email(member.getEmail())
 			.name(member.getName())
+			.build();
+	}
+
+	static public MemberDto subscribeEsConverter(SubscribeEs subscribeEs){
+		return new MemberDto().builder().email(subscribeEs.getSubscribeMemberEmail())
+			.name(subscribeEs.getSubscribeMemberName()).id(subscribeEs.getSubscribeMemberId())
+			.build();
+	}
+
+	static public MemberDto searchMemberEsConverter(SearchMemberEs searchMemberEs){
+		return new MemberDto().builder().id(searchMemberEs.getMemberId())
+			.email(searchMemberEs.getEmail())
+			.name(searchMemberEs.getName())
 			.build();
 	}
 }

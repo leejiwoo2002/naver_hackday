@@ -4,6 +4,7 @@ import javax.persistence.Id;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,9 +32,9 @@ public class SubscribeEs {
 
 	private long subscribeMemberId;
 
-	static public SubscribeEs buildSubscribeEs(Member member, Member subscribeMember){
-		return SubscribeEs.builder().memberId(member.getId())
+	static public SubscribeEs buildSubscribeEs(SearchMemberEs member, SearchMemberEs subscribeMember){
+		return SubscribeEs.builder().memberId(member.getMemberId())
 			.subscribeMemberEmail(subscribeMember.getEmail()).subscribeMemberName(subscribeMember.getName())
-			.subscribeMemberId(subscribeMember.getId()).build();
+			.subscribeMemberId(subscribeMember.getMemberId()).build();
 	}
 }
