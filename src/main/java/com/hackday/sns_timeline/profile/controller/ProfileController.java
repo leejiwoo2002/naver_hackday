@@ -38,16 +38,9 @@ public class ProfileController {
 		if(user == null){
 			return new ModelAndView(CommonConst.TIME_LINE);
 		}
-		ModelAndView modelAndView = new ModelAndView(CommonConst.PROFILE);
-
 		Member member = profileService.getMemberProfile(user.getId());
-		MemberDto memberDto = MemberDto.customConverter(member);
 
-		List<MemberDto> subscribeMember = profileService.getSubscribeMember(member);
-
-		modelAndView.addObject(CommonConst.MEMBER_DTO, memberDto);
-		modelAndView.addObject(CommonConst.SUBSCRIBE_LIST, subscribeMember);
-
-		return modelAndView;
+		return new ModelAndView(CommonConst.PROFILE).addObject(CommonConst.MEMBER_DTO, MemberDto.memberConverter(member))
+			.addObject(CommonConst.SUBSCRIBE_LIST, profileService.getSubscribeMember(member));
 	}
 }

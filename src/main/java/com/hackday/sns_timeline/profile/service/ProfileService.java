@@ -10,6 +10,8 @@ import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.subscribe.domain.entity.Subscribe;
+import com.hackday.sns_timeline.subscribe.domain.entity.SubscribeEs;
+import com.hackday.sns_timeline.subscribe.repository.SubscribeEsRepository;
 import com.hackday.sns_timeline.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +25,8 @@ public class ProfileService {
 
 	final private SubscribeRepository subscribeRepository;
 
+	final private SubscribeEsRepository subscribeEsRepository;
+
 	@Transactional
 	public Member getMemberProfile(long userId) throws Exception {
 		return memberRepository.findById(userId).orElseThrow(() -> new Exception("member not exist"));
@@ -30,11 +34,11 @@ public class ProfileService {
 
 	@Transactional
 	public List<MemberDto> getSubscribeMember(Member member){
-		List<Subscribe> subscribeList = subscribeRepository.findByMember(member);
+		List<SubscribeEs> subscribeEsList = subscribeEsRepository.findByMemberId(member.getId());
 
 		List<MemberDto> memberDtoList = new ArrayList<>();
-		for (Subscribe subscribe : subscribeList) {
-			memberDtoList.add(MemberDto.customConverter(subscribe.getSubscribeMember()));
+		for (SubscribeEs subscribeEs : subscribeEsList) {
+			memberDtoList.add(MemberDto.subscribeEsConverter(subscribeEs));
 		}
 
 		return memberDtoList;
