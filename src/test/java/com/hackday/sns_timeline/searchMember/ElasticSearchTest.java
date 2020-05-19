@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,9 +48,9 @@ public class ElasticSearchTest {
 				SearchMemberEs.builder().email(name+i+"@"+email).name(name+i).build()));
 		}
 
-		List<SearchMemberEs> searchMemberEsList = searchMemberService.fineSearchMemberByEmailLikeOrNameLike(name);
+		Page<SearchMemberEs> searchMemberEsList = searchMemberService.fineSearchMemberByEmailLikeOrNameLike(name);
 
-		assertThat(searchMemberEsList.size()).isEqualTo(10);
+		assertThat(searchMemberEsList.getContent().size()).isEqualTo(10);
 
 		searchMemberEsRepository.deleteAll(testData);
 	}

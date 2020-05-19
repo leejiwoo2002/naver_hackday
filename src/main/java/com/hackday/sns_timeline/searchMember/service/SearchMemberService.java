@@ -30,8 +30,6 @@ import lombok.extern.log4j.Log4j2;
 @RequiredArgsConstructor
 public class SearchMemberService {
 
-	final private MemberRepository memberRepository;
-	final private SubscribeRepository subscribeRepository;
 	final private SearchMemberEsRepository searchMemberEsRepository;
 	final private SubscribeEsRepository subscribeEsRepository;
 
@@ -39,15 +37,16 @@ public class SearchMemberService {
 	public Page<MemberDto> findMembers(String search, int page) {
 		page = (page == 0) ? 0 : (page - 1);
 		Pageable pageable = PageRequest.of(page, 10);
-		Page<MemberDto> searchMembers = memberRepository.searchMember(search, pageable).map(MemberDto::customConverter);
+		Page<MemberDto> searchMembers = searchMemberEsRepository.findByEmailContainsOrNameContains(search, search, pageable)
+			.map(MemberDto::searchMemberEsConverter);
 
 		return searchMembers;
 	}
 
 	@Transactional
 	public void checkSubscribed(Page<MemberDto> searchMembers, long id) throws Exception {
-		Member member = memberRepository.findById(id).orElseThrow(() -> new Exception());
-		List<SubscribeEs> subscribeList = subscribeEsRepository.findByMemberId(member.getId());
+		SearchMemberEs searchMemberEs = searchMemberEsRepository.findByMemberId(id).orElseThrow(() -> new Exception());
+		List<SubscribeEs> subscribeList = subscribeEsRepository.findByMemberId(searchMemberEs.getMemberId());
 		Set<Long> subscribeMemberIdSet = new HashSet<>();
 
 		for (SubscribeEs current : subscribeList) {
@@ -86,7 +85,7 @@ public class SearchMemberService {
 		return searchMemberEsRepository.findByName(name);
 	}
 
-	public List<SearchMemberEs> fineSearchMemberByEmailLikeOrNameLike(String email){
+	public Page<SearchMemberEs> fineSearchMemberByEmailLikeOrNameLike(String email){
 		return searchMemberEsRepository.findByEmailContainsOrNameContains(email, email, PageRequest.of(0, 10));
 	}
 

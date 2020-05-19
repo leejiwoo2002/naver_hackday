@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.hackday.sns_timeline.common.CommonFunction;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
@@ -21,24 +23,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(indexes = {@Index(columnList="memberID"), @Index(columnList="subscribeMemberId")})
 public class Subscribe implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@ManyToOne
-	private Member member;
+	private long memberId;
 
-	@ManyToOne
-	private Member subscribeMember;
+	private long subscribeMemberId;
 
 	private Date regDate;
 
-	static public Subscribe buildSubscribe(Member member, Member subscribeMember){
+	static public Subscribe buildSubscribe(long memberId, long subscribeMemberId){
 		return Subscribe.builder()
-			.member(member)
-			.subscribeMember(subscribeMember)
+			.memberId(memberId)
+			.subscribeMemberId(subscribeMemberId)
 			.regDate(CommonFunction.getCurrentDate()).build();
 	}
 }

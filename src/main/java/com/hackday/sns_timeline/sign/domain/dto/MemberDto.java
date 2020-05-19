@@ -33,4 +33,11 @@ public class MemberDto {
 			.name(subscribeEs.getSubscribeMemberName()).id(subscribeEs.getSubscribeMemberId())
 			.build();
 	}
+
+	static public MemberDto searchMemberEsConverter(SearchMemberEs searchMemberEs){
+		return new MemberDto().builder().id(searchMemberEs.getMemberId())
+			.email(searchMemberEs.getEmail())
+			.name(searchMemberEs.getName())
+			.build();
+	}
 }

@@ -13,6 +13,7 @@ public interface SearchMemberEsRepository extends ElasticsearchCrudRepository<Se
 
 	List<SearchMemberEs> findByEmail(String email);
 	List<SearchMemberEs> findByName(String name);
-	List<SearchMemberEs> findByEmailContainsOrNameContains(String email, String name, Pageable pageable);
+	Optional<SearchMemberEs> findByMemberId(long memberId);
+	Page<SearchMemberEs> findByEmailContainsOrNameContains(String email, String name, Pageable pageable);
 
 }
