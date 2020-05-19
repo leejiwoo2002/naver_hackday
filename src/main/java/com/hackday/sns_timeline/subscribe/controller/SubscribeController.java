@@ -57,7 +57,7 @@ public class SubscribeController {
 			SearchMemberDto.builder()
 				.search(subscribeDto.getSearch())
 				.page(subscribeDto.getPage())
-				.userId(subscribeDto.getId())
+				.userId(user.getId())
 				.build());
 
 		return CommonConst.REDIRECT_MEMBER_SEARCH;

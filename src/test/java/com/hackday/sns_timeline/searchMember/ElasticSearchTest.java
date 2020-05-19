@@ -29,7 +29,7 @@ public class ElasticSearchTest {
 	@Test
 	@Transactional
 	public void saveSearchMemberTest() {
-		SearchMemberEs searchMemberEs = SearchMemberEs.builder().id(1).email("test@test").name("test").build();
+		SearchMemberEs searchMemberEs = SearchMemberEs.builder().email("test@test").name("test").build();
 		SearchMemberEs searchMemberEs1 = searchMemberService.saveSearchMember(searchMemberEs);
 
 		assertNotNull(searchMemberEs1.getId());
@@ -44,7 +44,7 @@ public class ElasticSearchTest {
 		List<SearchMemberEs> testData = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			testData.add(searchMemberService.saveSearchMember(
-				SearchMemberEs.builder().id(i).email(name+i+"@"+email).name(name+i).build()));
+				SearchMemberEs.builder().email(name+i+"@"+email).name(name+i).build()));
 		}
 
 		List<SearchMemberEs> searchMemberEsList = searchMemberService.fineSearchMemberByEmailLikeOrNameLike(name);

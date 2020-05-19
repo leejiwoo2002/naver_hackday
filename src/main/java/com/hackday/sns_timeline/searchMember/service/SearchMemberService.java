@@ -19,6 +19,8 @@ import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
+import com.hackday.sns_timeline.subscribe.domain.entity.SubscribeEs;
+import com.hackday.sns_timeline.subscribe.repository.SubscribeEsRepository;
 import com.hackday.sns_timeline.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -31,6 +33,7 @@ public class SearchMemberService {
 	final private MemberRepository memberRepository;
 	final private SubscribeRepository subscribeRepository;
 	final private SearchMemberEsRepository searchMemberEsRepository;
+	final private SubscribeEsRepository subscribeEsRepository;
 
 	@Transactional
 	public Page<MemberDto> findMembers(String search, int page) {
@@ -44,10 +47,12 @@ public class SearchMemberService {
 	@Transactional
 	public void checkSubscribed(Page<MemberDto> searchMembers, long id) throws Exception {
 		Member member = memberRepository.findById(id).orElseThrow(() -> new Exception());
-		List<Member> subscribeList = subscribeRepository.findSubscribeIdByMember(member);
+		List<SubscribeEs> subscribeList = subscribeEsRepository.findByMemberId(member.getId());
 		Set<Long> subscribeMemberIdSet = new HashSet<>();
 
-		subscribeList.forEach(currentMember -> subscribeMemberIdSet.add(currentMember.getId()));
+		for (SubscribeEs current : subscribeList) {
+			subscribeMemberIdSet.add(current.getSubscribeMemberId());
+		}
 
 		for (MemberDto searchMember : searchMembers) {
 			if(subscribeMemberIdSet.contains(searchMember.getId())){
