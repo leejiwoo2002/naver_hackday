@@ -25,12 +25,21 @@
             <div class="row" th:each="content : ${contentDtoList}">
                 <div class="col-md-4">
                     <div class="icon-box-item ">
-                        <form th:action="@{/content/status}" th:object="${contentDto}" th:method="post">
+                        <form th:action="@{/content/editor}" th:object="${contentDto}" th:method="post">
                             <input type="hidden" name="contentId" th:value="${content.getContentId()}"/>
                             <input type="hidden" name="body" th:value="${content.getBody()}"/>
                             <input type="hidden" name="title" th:value="${content.getTitle()}"/>
 
-                            <button class="" th:type="submit" onclick="click_delete();" />
+                            <button class="" th:type="submit" style="float:left"/>
+                            수정하기
+                            </button>
+                        </form>
+                        <form th:action="@{/content/my}" th:object="${contentDto}" th:method="post">
+                            <input type="hidden" name="contentId" th:value="${content.getContentId()}"/>
+                            <input type="hidden" name="body" th:value="${content.getBody()}"/>
+                            <input type="hidden" name="title" th:value="${content.getTitle()}"/>
+
+                            <button class="" th:type="submit" onclick="click_delete();"/>
                             삭제하기
                             </button>
                         </form>

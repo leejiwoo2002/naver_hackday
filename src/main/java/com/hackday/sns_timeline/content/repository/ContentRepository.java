@@ -26,4 +26,9 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 	@Transactional
 	@Query(value = "update content content set content.check_delete=true where content.content_id=:contentId", nativeQuery = true)
 	void removeMyContent(Long contentId);
+
+	@Modifying
+	@Transactional
+	@Query(value = "update Content content set content.title=:title, content.body=:body where content.content_id=:contentId", nativeQuery = true)
+	void updateMyContent(Long contentId, String title, String body);
 }

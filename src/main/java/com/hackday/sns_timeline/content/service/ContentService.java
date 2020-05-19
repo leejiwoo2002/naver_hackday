@@ -56,21 +56,18 @@ public class ContentService {
 		Member member = memberRepository.findByEmail(userName)
 			.orElseThrow(() -> new UsernameNotFoundException(userName));
 
-		log.info("userName : " + userName);
-		log.info("getId : "+ member.getId());
-
 		// 페이지 객체로 찾아옴
 		Page<ContentDto> searchMyContent = contentRepository.searchMyContent(member.getId(), pageable).map(ContentDto::customConverter);
 		return searchMyContent;
 	}
 
-	public void contentRemove(Long id, User user) {
-		String userName = user.getUsername();
-
-		Member member = memberRepository.findByEmail(userName)
-			.orElseThrow(() -> new UsernameNotFoundException(userName));
-
+	public void contentRemove(Long id) {
 		contentRepository.removeMyContent(id);
 
+	}
+
+	public void contentUpdate(Long id, String title, String body) throws Exception {
+
+		contentRepository.updateMyContent(id,title,body);
 	}
 }

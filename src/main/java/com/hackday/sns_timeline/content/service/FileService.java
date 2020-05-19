@@ -1,4 +1,4 @@
-package com.hackday.sns_timeline.content.controller;
+package com.hackday.sns_timeline.content.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,9 +9,9 @@ import java.util.UUID;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-public class FileController {
+public class FileService {
 
-	public FileController(){
+	public FileService(){
 
 	}
 

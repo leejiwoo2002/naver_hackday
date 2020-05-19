@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.service.ContentService;
+import com.hackday.sns_timeline.content.service.FileService;
+import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +47,7 @@ public class ContentController {
 		value = "글 작성 페이지",
 		response = ModelAndView.class,
 		nickname = "getCreatePage")
-	@GetMapping("/new")
+	@GetMapping
 	public ModelAndView getCreatePage(@ModelAttribute ContentDto contentDto) {
 		return new ModelAndView("layout/contentCreate").addObject(CommonConst.CONTENT_DTO, contentDto);
 	}
@@ -54,14 +56,14 @@ public class ContentController {
 		value = "글 작성 후 메인화면(Timeline) 반환",
 		response = String.class,
 		nickname = "contentCreate")
-	@PostMapping("/new/do")
+	@PostMapping
 	public String contentCreate(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
 		@RequestParam("file") MultipartFile file) throws Exception {
 
 		String saveName="";
 
-		FileController controller = new FileController();
+		FileService controller = new FileService();
 
 		saveName = controller.mkDir(filePath, file);
 
@@ -87,15 +89,37 @@ public class ContentController {
 		value = "자신의 글 삭제 함수",
 		response = String.class,
 		nickname = "deleteContent")
-	@PostMapping("/status")
-	public String deleteContent(@AuthenticationPrincipal User user, @ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
+	@PostMapping("/my")
+	public String deleteContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
 		Date today = new Date();
 		contentDto.setPostingTime(today); // date가 string 으로 넘어와서 자동매핑 실패
 
-		contentService.contentRemove(contentDto.getContentId(),user);
+		contentService.contentRemove(contentDto.getContentId());
 
 		return "redirect:/content/my";
 	}
+
+	@ApiOperation(httpMethod = "POST",
+		value = "자신의 글 수정 페이지 로드",
+		response = ModelAndView.class,
+		nickname = "editContent")
+	@PostMapping("/editor")
+	public ModelAndView editContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
+		return new ModelAndView("layout/contentEditor").addObject(CommonConst.CONTENT_DTO, contentDto);
+	}
+
+	@ApiOperation(httpMethod = "POST",
+		value = "자신의 글 수정 페이지 로드",
+		response = ModelAndView.class,
+		nickname = "editContent")
+	@PostMapping("/update")
+	public String updateContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto) throws Exception{
+
+		contentService.contentUpdate(contentDto.getContentId(), contentDto.getTitle(), contentDto.getBody());
+
+		return "redirect:/content/my";
+	}
+
 
 }
