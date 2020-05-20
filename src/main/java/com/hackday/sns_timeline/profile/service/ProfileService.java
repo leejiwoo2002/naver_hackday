@@ -32,8 +32,6 @@ public class ProfileService {
 	public List<MemberDto> getSubscribeMember(Member member){
 		List<SubscribeDoc> subscribeDocList = subscribeDocRepository.findByMemberId(member.getId());
 
-		return subscribeDocList.stream()
-			.map(MemberDto::subscribeEsConverter)
-			.collect(Collectors.toList());
+		return subscribeDocList.stream().map(MemberDto::subscribeEsConverter).collect(Collectors.toList());
 	}
 }

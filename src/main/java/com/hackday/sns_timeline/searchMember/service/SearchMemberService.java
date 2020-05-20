@@ -3,6 +3,7 @@ package com.hackday.sns_timeline.searchMember.service;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,15 +45,10 @@ public class SearchMemberService {
 	public void checkSubscribed(Page<MemberDto> searchMembers, long id) throws Exception {
 		SearchMemberDoc searchMemberDoc = searchMemberEsRepository.findByMemberId(id).orElseThrow(() -> new Exception());
 		List<SubscribeDoc> subscribeList = subscribeDocRepository.findByMemberId(searchMemberDoc.getMemberId());
-		Set<Long> subscribeMemberIdSet = new HashSet<>();
+		Set<Long> subscribeMemberIdSet = subscribeList.stream().map(SubscribeDoc::getMemberId)
+			.collect(Collectors.toSet());
 
-		subscribeList.forEach(subscribeDoc -> subscribeMemberIdSet.add(subscribeDoc.getSubscribeMemberId()));
-
-		for (MemberDto searchMember : searchMembers) {
-			if(subscribeMemberIdSet.contains(searchMember.getId())){
-				searchMember.setSubscribed(true);
-			}
-		}
+		searchMembers.stream().filter(subscribeMemberIdSet::contains).forEach(item -> item.setSubscribed(true));
 	}
 
 	public RedirectAttributes setRedirectAttributes(RedirectAttributes redirectAttributes,

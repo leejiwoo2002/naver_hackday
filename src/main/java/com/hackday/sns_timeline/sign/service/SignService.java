@@ -2,7 +2,9 @@ package com.hackday.sns_timeline.sign.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.context.annotation.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,11 +37,8 @@ public class SignService implements UserDetailsService {
 		Member member = memberRepository.findByEmail(username)
 			.orElseThrow(() -> new UsernameNotFoundException(username));
 
-		List<GrantedAuthority> authorities = new ArrayList<>();
-
-		for (String role : member.getRoles()) {
-			authorities.add(new SimpleGrantedAuthority(role));
-		}
+		List<GrantedAuthority> authorities =
+			member.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
 		return new CustomUser(member.getEmail(), member.getPassword(), authorities, member.getId(), member.getName());
 	}
