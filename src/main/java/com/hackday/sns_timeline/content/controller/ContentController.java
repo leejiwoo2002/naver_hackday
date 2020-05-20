@@ -24,7 +24,6 @@ import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.service.ContentService;
 import com.hackday.sns_timeline.content.service.FileService;
-import com.hackday.sns_timeline.memberSearch.service.MemberSearchService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -119,6 +118,4 @@ public class ContentController {
 
 		return "redirect:/content/my";
 	}
-
-
 }

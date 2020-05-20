@@ -57,13 +57,13 @@ public class SignService implements UserDetailsService {
 
 		Member member = memberRepository.save(Member.buildMember(memberDto));
 
-		addSearchMemberEs(member);
+		if(searchMemberEsRepository.findByMemberId(member.getId()).isPresent()){
+			throw new Exception("member id already exist");
+		}
+
+		searchMemberEsRepository.save(SearchMemberEs.buildSearchMemberEs(member));
 		subscribeService.addSubscribe(member.getId(), member.getId());
 
 		return member;
-	}
-
-	private SearchMemberEs addSearchMemberEs(Member member){
-		return searchMemberEsRepository.save(SearchMemberEs.buildSearchMemberEs(member));
 	}
 }
