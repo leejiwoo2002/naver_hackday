@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: yunsang
+    active: server
   mvc:
     static-path-pattern: /resources/**
 
