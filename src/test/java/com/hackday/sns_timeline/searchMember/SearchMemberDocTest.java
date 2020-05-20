@@ -17,7 +17,7 @@ import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.sign.service.SignService;
 
 @SpringBootTest
-public class SearchMemberEsTest {
+public class SearchMemberDocTest {
 
 	@Autowired
 	MemberRepository memberRepository;

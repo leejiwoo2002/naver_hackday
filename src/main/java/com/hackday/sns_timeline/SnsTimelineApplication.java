@@ -9,5 +9,6 @@ public class SnsTimelineApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SnsTimelineApplication.class, args);
+		System.setProperty("es.set.netty.runtime.available.processors", "false");
 	}
 }

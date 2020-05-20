@@ -19,7 +19,9 @@ public enum ATTRIBUTE {
 	IS_NULL("isNull"),
 	SEARCH("search"),
 	START("start"),
-	LAST("last");
+	LAST("last"),
+	CODE("code"),
+	MSG("msg");
 
 	private final String name;
 }

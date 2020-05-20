@@ -1,9 +1,6 @@
 package com.hackday.sns_timeline.sign.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -11,13 +8,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
+import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
 import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
-import com.hackday.sns_timeline.sign.domain.Role;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
@@ -61,7 +56,12 @@ public class SignService implements UserDetailsService {
 			throw new Exception("member id already exist");
 		}
 
-		searchMemberEsRepository.save(SearchMemberEs.buildSearchMemberEs(member));
+		searchMemberEsRepository.save(
+			SearchMemberDoc.builder()
+			.email(member.getEmail())
+			.name(member.getName())
+			.memberId(member.getId()).build());
+
 		subscribeService.addSubscribe(member.getId(), member.getId());
 
 		return member;

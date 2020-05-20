@@ -1,11 +1,10 @@
-package com.hackday.sns_timeline.subscribe.domain.entity;
+package com.hackday.sns_timeline.subscribe.domain.document;
 
 import javax.persistence.Id;
 
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
-import com.hackday.sns_timeline.sign.domain.entity.Member;
+import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +19,7 @@ import lombok.ToString;
 @ToString
 @Builder
 @Document(indexName = "subscribe", type = "subscribe")
-public class SubscribeEs {
+public class SubscribeDoc {
 	@Id
 	private String id;
 
@@ -32,8 +31,8 @@ public class SubscribeEs {
 
 	private long subscribeMemberId;
 
-	static public SubscribeEs buildSubscribeEs(SearchMemberEs member, SearchMemberEs subscribeMember){
-		return SubscribeEs.builder().memberId(member.getMemberId())
+	static public SubscribeDoc buildSubscribeEs(SearchMemberDoc member, SearchMemberDoc subscribeMember){
+		return SubscribeDoc.builder().memberId(member.getMemberId())
 			.subscribeMemberEmail(subscribeMember.getEmail()).subscribeMemberName(subscribeMember.getName())
 			.subscribeMemberId(subscribeMember.getMemberId()).build();
 	}

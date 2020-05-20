@@ -1,5 +1,7 @@
 package com.hackday.sns_timeline.sign.controller;
 
+import java.util.Objects;
+
 import javax.validation.Valid;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -62,7 +64,7 @@ public class SignController {
 	)
 	@GetMapping("/in")
 	public String signInSuccess(@AuthenticationPrincipal CustomUser user) {
-		if(user==null) {
+		if(Objects.isNull(user)) {
 			return REDIRECT.INDEX.getRedirectUrl();
 		}
 		return REDIRECT.TIME_LINE.getRedirectUrl();

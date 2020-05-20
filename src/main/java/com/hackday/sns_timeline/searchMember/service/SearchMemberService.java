@@ -11,18 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.common.CommonFunction;
 import com.hackday.sns_timeline.common.commonEnum.ATTRIBUTE;
 import com.hackday.sns_timeline.searchMember.domain.dto.SearchMemberDto;
-import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
+import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
 import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
-import com.hackday.sns_timeline.sign.domain.entity.Member;
-import com.hackday.sns_timeline.sign.repository.MemberRepository;
-import com.hackday.sns_timeline.subscribe.domain.entity.SubscribeEs;
-import com.hackday.sns_timeline.subscribe.repository.SubscribeEsRepository;
-import com.hackday.sns_timeline.subscribe.repository.SubscribeRepository;
+import com.hackday.sns_timeline.subscribe.domain.document.SubscribeDoc;
+import com.hackday.sns_timeline.subscribe.repository.SubscribeDocRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -32,7 +28,7 @@ import lombok.extern.log4j.Log4j2;
 public class SearchMemberService {
 
 	final private SearchMemberEsRepository searchMemberEsRepository;
-	final private SubscribeEsRepository subscribeEsRepository;
+	final private SubscribeDocRepository subscribeDocRepository;
 
 	@Transactional
 	public Page<MemberDto> findMembers(String search, int page) {
@@ -46,13 +42,11 @@ public class SearchMemberService {
 
 	@Transactional
 	public void checkSubscribed(Page<MemberDto> searchMembers, long id) throws Exception {
-		SearchMemberEs searchMemberEs = searchMemberEsRepository.findByMemberId(id).orElseThrow(() -> new Exception());
-		List<SubscribeEs> subscribeList = subscribeEsRepository.findByMemberId(searchMemberEs.getMemberId());
+		SearchMemberDoc searchMemberDoc = searchMemberEsRepository.findByMemberId(id).orElseThrow(() -> new Exception());
+		List<SubscribeDoc> subscribeList = subscribeDocRepository.findByMemberId(searchMemberDoc.getMemberId());
 		Set<Long> subscribeMemberIdSet = new HashSet<>();
 
-		for (SubscribeEs current : subscribeList) {
-			subscribeMemberIdSet.add(current.getSubscribeMemberId());
-		}
+		subscribeList.forEach(subscribeDoc -> subscribeMemberIdSet.add(subscribeDoc.getSubscribeMemberId()));
 
 		for (MemberDto searchMember : searchMembers) {
 			if(subscribeMemberIdSet.contains(searchMember.getId())){
@@ -82,15 +76,11 @@ public class SearchMemberService {
 		return redirectAttributes;
 	}
 
-	public List<SearchMemberEs> findSearchMemberList(String name){
-		return searchMemberEsRepository.findByName(name);
-	}
-
-	public Page<SearchMemberEs> fineSearchMemberByEmailLikeOrNameLike(String email){
+	public Page<SearchMemberDoc> fineSearchMemberByEmailLikeOrNameLike(String email){
 		return searchMemberEsRepository.findByEmailContainsOrNameContains(email, email, PageRequest.of(0, 10));
 	}
 
-	public SearchMemberEs saveSearchMember(SearchMemberEs memberSearch){
+	public SearchMemberDoc saveSearchMember(SearchMemberDoc memberSearch){
 		return searchMemberEsRepository.save(memberSearch);
 	}
 }

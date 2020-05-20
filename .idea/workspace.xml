@@ -4,13 +4,72 @@
     <list default="true" id="e999ea68-a2ce-4a50-8016-5847615d1caf" name="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정" comment="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- mod dockerfile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/common/CommonConst.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/common/CommonConst.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/common/CommonFunction.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/common/CommonFunction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/common/configuration/SwaggerConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/common/configuration/SwaggerConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/error/controller/CustomErrorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/error/controller/CustomErrorController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/profile/controller/ProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/profile/controller/ProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/profile/service/ProfileService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/profile/service/ProfileService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/searchMember/controller/SearchMemberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/searchMember/controller/SearchMemberController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/searchMember/domain/entity/SearchMemberEs$SearchMemberEsBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/searchMember/domain/entity/SearchMemberEs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/searchMember/repository/SearchMemberEsRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/searchMember/repository/SearchMemberEsRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/searchMember/service/SearchMemberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/searchMember/service/SearchMemberService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/controller/IndexController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/controller/IndexController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/controller/SignController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/controller/SignController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/domain/dto/MemberDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/domain/dto/MemberDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/subscribe/controller/SubscribeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/subscribe/controller/SubscribeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/subscribe/domain/entity/SubscribeEs$SubscribeEsBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/subscribe/domain/entity/SubscribeEs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/subscribe/repository/SubscribeEsRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/subscribe/service/SubscribeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/subscribe/service/SubscribeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/SnsTimelineApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/SnsTimelineApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/common/CommonConst.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/common/CommonConst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/common/CommonFunction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/common/CommonFunction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/common/commonEnum/ATTRIBUTE.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/common/commonEnum/ATTRIBUTE.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/common/configuration/SwaggerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/common/configuration/SwaggerConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/error/controller/CustomErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/error/controller/CustomErrorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/profile/controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/profile/controller/ProfileController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/profile/service/ProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/profile/service/ProfileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/searchMember/controller/SearchMemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/searchMember/controller/SearchMemberController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/searchMember/domain/entity/SearchMemberEs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/searchMember/domain/document/SearchMemberDoc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/searchMember/repository/SearchMemberEsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/searchMember/repository/SearchMemberEsRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/searchMember/service/SearchMemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/searchMember/service/SearchMemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/controller/IndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/controller/SignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/controller/SignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/domain/dto/MemberDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/domain/dto/MemberDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/service/SignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/service/SignService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/subscribe/domain/entity/SubscribeEs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/subscribe/domain/document/SubscribeDoc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/subscribe/repository/SubscribeEsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/subscribe/repository/SubscribeDocRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/subscribe/service/SubscribeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/subscribe/service/SubscribeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/timeLine/controller/TimeLineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/timeLine/controller/TimeLineController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/searchMember/ElasticSearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/searchMember/ElasticSearchTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/searchMember/SearchMemberEsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/searchMember/SearchMemberDocTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/subscribe/SubscribeElasticSearchTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/subscribe/SubscribeElasticSearchTest.java" afterDir="false" />
     </list>
-    <list id="70a0e690-248f-4c54-b28d-b17cb195bcc6" name="Default Changelist" comment="" />
-    <list id="59151ece-9c73-4bde-8024-be39c4f9efc3" name="sns_timeline_2-53 [윤상&amp;지우] 프로필 추가" comment="sns_timeline_2-53 [윤상&amp;지우] 프로필 추가&#10;&#10;- 코드 정리" />
-    <list id="4ef796b0-a32f-416c-b035-73f8c8b6243e" name="sns_timeline_2-72 [윤상&amp;지우] Elasticsearch 적용 &amp; 테스트" comment="sns_timeline_2-72 [윤상&amp;지우] Elasticsearch 적용 &amp; 테스트&#10;&#10;- ES 데이터 삽입 기능" />
-    <list id="08ee3497-9215-4c2a-96d1-14768460fde7" name="sns_timeline_2-76 [윤상&amp;지우] 친구 찾기 &amp; 구독 Elasticsearch 적용" comment="sns_timeline_2-76 [윤상&amp;지우] 친구 찾기 &amp; 구독 Elasticsearch 적용&#10;&#10;- 친구찾기 es select 로 변경&#10;&#10;- MySQL 접근 최소화">
+    <list id="28d9b496-534a-4a95-92e3-966a82bea66d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/SnsTimelineApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/SnsTimelineApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/repository/ContentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/repository/ContentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/service/ContentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/service/ContentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/service/SignService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/service/SignService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/timeLine/controller/TimeLineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/timeLine/controller/TimeLineController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/layout/contentReadMy.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/layout/contentReadMy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/layout/searchMember.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/layout/searchMember.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/layout/timeLine.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/layout/timeLine.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/subscribe/SubscribeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/subscribe/SubscribeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -599,6 +658,7 @@
         <option value="HTML File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -614,6 +674,37 @@
     <option name="CREATE_PULL_REQUEST_DEFAULT_BRANCH" value="yunsang_jiwoo" />
     <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_USER" value="2020-NAVER-CAMPUS-HACKDAY" />
     <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_NAME" value="sns_timeline_2" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/.idea/workspace.xml">
+      <ranges>
+        <range start1="3" end1="4" start2="3" end2="4" changelist="28d9b496-534a-4a95-92e3-966a82bea66d" />
+        <range start1="6" end1="6" start2="6" end2="36" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="7" end1="7" start2="37" end2="40" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="8" end1="8" start2="41" end2="48" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="9" end1="13" start2="49" end2="72" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="601" end1="601" start2="660" end2="661" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="616" end1="616" start2="676" end2="707" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1019" end1="1019" start2="1110" end2="1124" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1075" end1="1076" start2="1180" end2="1180" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1100" end1="1101" start2="1204" end2="1206" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1139" end1="1140" start2="1244" end2="1245" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1142" end1="1144" start2="1247" end2="1249" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1146" end1="1148" start2="1251" end2="1253" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1150" end1="1151" start2="1255" end2="1256" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1167" end1="1168" start2="1272" end2="1273" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1170" end1="1172" start2="1275" end2="1277" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1174" end1="1176" start2="1279" end2="1281" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1178" end1="1180" start2="1283" end2="1285" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1182" end1="1184" start2="1287" end2="1289" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1186" end1="1188" start2="1291" end2="1293" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1190" end1="1192" start2="1295" end2="1297" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1194" end1="1196" start2="1299" end2="1301" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1198" end1="1199" start2="1303" end2="1304" changelist="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" />
+        <range start1="1235" end1="1236" start2="1340" end2="1341" changelist="28d9b496-534a-4a95-92e3-966a82bea66d" />
+        <range start1="1238" end1="1239" start2="1343" end2="1344" changelist="28d9b496-534a-4a95-92e3-966a82bea66d" />
+      </ranges>
+    </file>
   </component>
   <component name="ProjectId" id="1bi4bm6DDJ9FVaZxGzZgY8iylMn" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -1018,6 +1109,20 @@
       <workItem from="1589898982882" duration="3307000" />
       <workItem from="1589954260383" duration="7888000" />
     </task>
+    <task active="true" id="sns_timeline_2-96" summary="[윤상&amp;지우] 코드 최적화 &amp; 디테일한 기능 추가">
+      <branch name="yunsang_jiwoo" repository="C:\Users\qwdbs\Desktop\spring\sns_timeline" original="true" />
+      <branch name="sns_timeline_2-96" repository="C:\Users\qwdbs\Desktop\spring\sns_timeline" />
+      <changelist id="aa7fbbbd-97ba-4060-99c9-cd0713339aa8" name="sns_timeline_2-96 [윤상&amp;지우] 코드 최적화 &amp; 디테일한 기능 추가" comment="" />
+      <created>1589946676000</created>
+      <option name="issue" value="true" />
+      <url>https://github.com/2020-NAVER-CAMPUS-HACKDAY/sns_timeline_2/issues/96</url>
+      <option name="number" value="96" />
+      <option name="presentableId" value="sns_timeline_2-96" />
+      <option name="project" value="sns_timeline_2" />
+      <option name="type" value="BUG" />
+      <updated>1589980948286</updated>
+      <workItem from="1589979302388" duration="6680000" />
+    </task>
     <option name="localTasksCounter" value="8" />
     <servers>
       <GitHub url="https://github.com">
@@ -1073,7 +1178,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sns_timeline_2-22 [윤상&amp;지우] Subscribe 테이블 수정 &amp; 구독 기능&#10;&#10;- 친구 찾기 시 return 값 Page&lt;Memeber&gt; -&gt; Page&lt;MemeberDto&gt; 변경" />
     <MESSAGE value="sns_timeline_2-28 [윤상&amp;지우] 로그인 &amp; 구독 Exception handling" />
     <MESSAGE value="sns_timeline_2-33 로그인 &amp; 구독 Exception handling&#10;&#10;- 에러 발생시 커스텀 에러 페이지로 리다이렉트&#10;&#10;- 로그인 실패 시 alert 띄우기" />
     <MESSAGE value="sns_timeline_2-33 로그인 &amp; 구독 Exception handling&#10;&#10;- add Member Role" />
@@ -1098,7 +1202,8 @@
     <MESSAGE value="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- jenkins test" />
     <MESSAGE value="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- add Dockerfile" />
     <MESSAGE value="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- mod dockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- mod dockerfile" />
+    <MESSAGE value="sns_timeline_2-96 [윤상&amp;지우] 코드 최적화 &amp; 디테일한 기능 추가&#10;&#10;- CommonConst -&gt; enum 클래스로 그룹핑해서 사용" />
+    <option name="LAST_COMMIT_MESSAGE" value="sns_timeline_2-96 [윤상&amp;지우] 코드 최적화 &amp; 디테일한 기능 추가&#10;&#10;- CommonConst -&gt; enum 클래스로 그룹핑해서 사용" />
   </component>
   <component name="WindowStateProjectService">
     <state x="359" y="39" key="#&lt;template&gt;_of_JUnit" timestamp="1589876518931">
@@ -1137,18 +1242,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="304" y="338" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1589602199183" />
-    <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589802859506">
+    <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589984937955">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1589802859506" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589444179197">
+    <state x="277" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1589984937955" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589981815601">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1589444179197" />
-    <state x="364" y="78" width="953" height="584" key="CommitChangelistDialog2" timestamp="1589961012371">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1589981815601" />
+    <state x="364" y="78" width="953" height="584" key="CommitChangelistDialog2" timestamp="1589980945400">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="364" y="78" width="953" height="584" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589961012371" />
+    <state x="364" y="78" width="953" height="584" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589980945400" />
     <state x="205" y="71" width="1228" height="685" key="DiffContextDialog" timestamp="1589898412155">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -1165,38 +1270,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="639" y="303" width="520" height="273" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1589103222537" />
-    <state width="1493" height="250" key="GridCell.Tab.0.bottom" timestamp="1589954100042">
+    <state width="1493" height="305" key="GridCell.Tab.0.bottom" timestamp="1589985260957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="250" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
-    <state width="1493" height="250" key="GridCell.Tab.0.center" timestamp="1589954100042">
+    <state width="1493" height="305" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589985260957" />
+    <state width="1493" height="305" key="GridCell.Tab.0.center" timestamp="1589985260957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="250" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
-    <state width="1493" height="250" key="GridCell.Tab.0.left" timestamp="1589954100042">
+    <state width="1493" height="305" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589985260957" />
+    <state width="1493" height="305" key="GridCell.Tab.0.left" timestamp="1589985260957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="250" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
-    <state width="1493" height="250" key="GridCell.Tab.0.right" timestamp="1589954100042">
+    <state width="1493" height="305" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589985260957" />
+    <state width="1493" height="305" key="GridCell.Tab.0.right" timestamp="1589985260957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="250" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
-    <state width="1493" height="250" key="GridCell.Tab.1.bottom" timestamp="1589954100043">
+    <state width="1493" height="305" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589985260957" />
+    <state width="1493" height="305" key="GridCell.Tab.1.bottom" timestamp="1589985260958">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="250" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589954100043" />
-    <state width="1493" height="250" key="GridCell.Tab.1.center" timestamp="1589954100043">
+    <state width="1493" height="305" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589985260958" />
+    <state width="1493" height="305" key="GridCell.Tab.1.center" timestamp="1589985260957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="250" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1589954100043" />
-    <state width="1493" height="250" key="GridCell.Tab.1.left" timestamp="1589954100042">
+    <state width="1493" height="305" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1589985260957" />
+    <state width="1493" height="305" key="GridCell.Tab.1.left" timestamp="1589985260957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="250" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
-    <state width="1493" height="250" key="GridCell.Tab.1.right" timestamp="1589954100043">
+    <state width="1493" height="305" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1589985260957" />
+    <state width="1493" height="305" key="GridCell.Tab.1.right" timestamp="1589985260957">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="250" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1589954100043" />
+    <state width="1493" height="305" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1589985260957" />
     <state width="1493" height="343" key="GridCell.Tab.2.bottom" timestamp="1589454180917">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -1,6 +1,6 @@
 package com.hackday.sns_timeline.profile.controller;
 
-import java.util.List;
+import java.util.Objects;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.common.commonEnum.ATTRIBUTE;
 import com.hackday.sns_timeline.common.commonEnum.PAGE;
 import com.hackday.sns_timeline.profile.service.ProfileService;
@@ -27,7 +26,7 @@ import lombok.extern.log4j.Log4j2;
 @Api(value = "/profile", description = "프로필 관리")
 public class ProfileController {
 
-	final private ProfileService profileService;
+	private final ProfileService profileService;
 
 	@ApiOperation(
 		httpMethod = "GET",
@@ -37,12 +36,13 @@ public class ProfileController {
 	)
 	@GetMapping
 	public ModelAndView getProfilePage(@AuthenticationPrincipal CustomUser user) throws Exception {
-		if(user == null){
+		if(Objects.isNull(user)){
 			return new ModelAndView(PAGE.INDEX.getPage());
 		}
 		Member member = profileService.getMemberProfile(user.getId());
 
-		return new ModelAndView(PAGE.PROFILE.getPage()).addObject(ATTRIBUTE.MEMBER_DTO.getName(), MemberDto.memberConverter(member))
+		return new ModelAndView(PAGE.PROFILE.getPage())
+			.addObject(ATTRIBUTE.MEMBER_DTO.getName(), MemberDto.memberConverter(member))
 			.addObject(ATTRIBUTE.SUBSCRIBE_LIST.getName(), profileService.getSubscribeMember(member));
 	}
 }

@@ -34,7 +34,6 @@ import lombok.extern.log4j.Log4j2;
 public class SearchMemberController {
 
 	final private SearchMemberService searchMemberService;
-	final private SignService signService;
 
 	@ApiOperation(
 		httpMethod = "GET",
@@ -61,7 +60,11 @@ public class SearchMemberController {
 		}
 
 		searchMemberService.setRedirectAttributes(redirectAttributes,
-			SearchMemberDto.builder().search(search).page(pageable.getPageNumber()).userId(user.getId()).build());
+			SearchMemberDto.builder()
+				.search(search)
+				.page(pageable.getPageNumber())
+				.userId(user.getId())
+				.build());
 
 		return REDIRECT.SEARCH_MEMBER.getRedirectUrl();
 	}

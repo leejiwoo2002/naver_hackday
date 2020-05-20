@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hackday.sns_timeline.common.commonEnum.ATTRIBUTE;
+import com.hackday.sns_timeline.common.commonEnum.PAGE;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
@@ -31,10 +33,10 @@ public class CustomErrorController implements ErrorController {
 		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 		HttpStatus httpStatus = HttpStatus.valueOf(Integer.valueOf(status.toString()));
 
-		model.addAttribute("code", status.toString());
-		model.addAttribute("msg", httpStatus.getReasonPhrase());
+		model.addAttribute(ATTRIBUTE.CODE.getName(), status.toString());
+		model.addAttribute(ATTRIBUTE.MSG.getName(), httpStatus.getReasonPhrase());
 
-		return "errors/error";
+		return PAGE.ERROR.getPage();
 	}
 
 	@Override

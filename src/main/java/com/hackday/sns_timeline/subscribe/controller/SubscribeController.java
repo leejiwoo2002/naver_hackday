@@ -1,5 +1,7 @@
 package com.hackday.sns_timeline.subscribe.controller;
 
+import java.util.Objects;
+
 import javax.validation.Valid;
 
 import org.springframework.data.domain.Page;
@@ -44,7 +46,7 @@ public class SubscribeController {
 	public String manageSubscribe(@ModelAttribute(CommonConst.SUBSCRIBE_DTO) @Valid SubscribeDto subscribeDto,
 		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) throws Exception {
 
-		if(user == null){
+		if(Objects.isNull(user)){
 			return REDIRECT.INDEX.getRedirectUrl();
 		}
 

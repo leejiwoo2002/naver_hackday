@@ -1,19 +1,13 @@
 package com.hackday.sns_timeline.subscribe.service;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
+import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
 import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
-import com.hackday.sns_timeline.sign.domain.entity.Member;
-import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.subscribe.domain.entity.Subscribe;
-import com.hackday.sns_timeline.subscribe.domain.entity.SubscribeEs;
-import com.hackday.sns_timeline.subscribe.repository.SubscribeEsRepository;
+import com.hackday.sns_timeline.subscribe.domain.document.SubscribeDoc;
+import com.hackday.sns_timeline.subscribe.repository.SubscribeDocRepository;
 import com.hackday.sns_timeline.subscribe.repository.SubscribeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -25,17 +19,17 @@ public class SubscribeService {
 
 	final private SearchMemberEsRepository searchMemberEsRepository;
 	final private SubscribeRepository subscribeRepository;
-	final private SubscribeEsRepository subscribeEsRepository;
+	final private SubscribeDocRepository subscribeDocRepository;
 
 	@Transactional
 	public Subscribe addSubscribe(long userId, long subscribeTargetId) throws Exception{
-		SearchMemberEs member = searchMemberEsRepository.findByMemberId(userId)
+		SearchMemberDoc member = searchMemberEsRepository.findByMemberId(userId)
 			.orElseThrow(() -> new Exception("member not exist"));
 
-		SearchMemberEs subscribeMember = searchMemberEsRepository.findByMemberId(subscribeTargetId)
+		SearchMemberDoc subscribeMember = searchMemberEsRepository.findByMemberId(subscribeTargetId)
 			.orElseThrow(() -> new Exception("member not exist"));
 
-		addSubscribeEs(member, subscribeMember);
+		subscribeDocRepository.save(SubscribeDoc.buildSubscribeEs(member, subscribeMember));
 		return subscribeRepository.save(Subscribe.buildSubscribe(member.getMemberId(), subscribeMember.getMemberId()));
 	}
 
@@ -45,19 +39,9 @@ public class SubscribeService {
 			.orElseThrow(() -> new Exception("subscribe not exist"));
 
 		subscribeRepository.delete(subscribe);
-		deleteSubscribeEs(userId, subscribeTargetId);
-	}
+		SubscribeDoc subscribeDoc = subscribeDocRepository.findByMemberIdAndSubscribeMemberId
+			(userId, subscribeTargetId).orElseThrow(() -> new Exception("subscribe is not exist"));
 
-	@Transactional
-	public SubscribeEs addSubscribeEs(SearchMemberEs member, SearchMemberEs subscribeMember){
-		return subscribeEsRepository.save(SubscribeEs.buildSubscribeEs(member, subscribeMember));
-	}
-
-	@Transactional
-	public void deleteSubscribeEs(long memberId, long subscribeMemberId) throws Exception {
-		SubscribeEs subscribeEs = subscribeEsRepository.findByMemberIdAndSubscribeMemberId
-			(memberId, subscribeMemberId).orElseThrow(() -> new Exception("subscribe is not exist"));
-
-		subscribeEsRepository.delete(subscribeEs);
+		subscribeDocRepository.delete(subscribeDoc);
 	}
 }

@@ -1,5 +1,7 @@
 package com.hackday.sns_timeline.sign.controller;
 
+import java.util.Objects;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +32,7 @@ public class IndexController {
 	)
 	@GetMapping
 	public String getIndexPage(@AuthenticationPrincipal CustomUser user){
-		if(user == null) {
+		if(Objects.isNull(user)) {
 			return PAGE.INDEX.getPage();
 		}
 		else {

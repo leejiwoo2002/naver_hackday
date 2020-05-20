@@ -1,8 +1,8 @@
 package com.hackday.sns_timeline.sign.domain.dto;
 
-import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
+import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
-import com.hackday.sns_timeline.subscribe.domain.entity.SubscribeEs;
+import com.hackday.sns_timeline.subscribe.domain.document.SubscribeDoc;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,16 +28,16 @@ public class MemberDto {
 			.build();
 	}
 
-	static public MemberDto subscribeEsConverter(SubscribeEs subscribeEs){
-		return new MemberDto().builder().email(subscribeEs.getSubscribeMemberEmail())
-			.name(subscribeEs.getSubscribeMemberName()).id(subscribeEs.getSubscribeMemberId())
+	static public MemberDto subscribeEsConverter(SubscribeDoc subscribeDoc){
+		return new MemberDto().builder().email(subscribeDoc.getSubscribeMemberEmail())
+			.name(subscribeDoc.getSubscribeMemberName()).id(subscribeDoc.getSubscribeMemberId())
 			.build();
 	}
 
-	static public MemberDto searchMemberEsConverter(SearchMemberEs searchMemberEs){
-		return new MemberDto().builder().id(searchMemberEs.getMemberId())
-			.email(searchMemberEs.getEmail())
-			.name(searchMemberEs.getName())
+	static public MemberDto searchMemberEsConverter(SearchMemberDoc searchMemberDoc){
+		return new MemberDto().builder().id(searchMemberDoc.getMemberId())
+			.email(searchMemberDoc.getEmail())
+			.name(searchMemberDoc.getName())
 			.build();
 	}
 }

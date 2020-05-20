@@ -1,13 +1,11 @@
 package com.hackday.sns_timeline.timeLine.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +18,6 @@ import com.hackday.sns_timeline.profile.service.ProfileService;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
-import com.hackday.sns_timeline.subscribe.domain.entity.SubscribeEs;
-import com.hackday.sns_timeline.subscribe.repository.SubscribeEsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -43,6 +39,5 @@ public class TimeLineController {
 		Page<ContentDto> contentDtoList = contentService.getMyTimelineContent(memberDtoList, pageable);
 
 		return new ModelAndView("layout/timeLine").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
-
 	}
 }

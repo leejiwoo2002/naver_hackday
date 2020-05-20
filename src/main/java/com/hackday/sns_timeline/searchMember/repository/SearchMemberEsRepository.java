@@ -7,13 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchCrudRepository;
 
-import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
+import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
 
-public interface SearchMemberEsRepository extends ElasticsearchCrudRepository<SearchMemberEs, String> {
+public interface SearchMemberEsRepository extends ElasticsearchCrudRepository<SearchMemberDoc, String> {
 
-	List<SearchMemberEs> findByEmail(String email);
-	List<SearchMemberEs> findByName(String name);
-	Optional<SearchMemberEs> findByMemberId(long memberId);
-	Page<SearchMemberEs> findByEmailContainsOrNameContains(String email, String name, Pageable pageable);
+	List<SearchMemberDoc> findByEmail(String email);
+	List<SearchMemberDoc> findByName(String name);
+	Optional<SearchMemberDoc> findByMemberId(long memberId);
+	Page<SearchMemberDoc> findByEmailContainsOrNameContains(String email, String name, Pageable pageable);
 
 }
