@@ -92,6 +92,4 @@ public class SearchMemberService {
 	public SearchMemberEs saveSearchMember(SearchMemberEs memberSearch){
 		return searchMemberEsRepository.save(memberSearch);
 	}
-
-
 }
