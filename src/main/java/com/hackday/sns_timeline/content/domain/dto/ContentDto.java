@@ -1,5 +1,6 @@
 package com.hackday.sns_timeline.content.domain.dto;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContentDto {
+public class ContentDto implements Serializable {
 
 	private Long contentId;
 	private String body;

@@ -3,6 +3,7 @@ package com.hackday.sns_timeline.timeLine.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -40,7 +41,7 @@ public class TimeLineController {
 		Member member = profileService.getMemberProfile(user.getId());
 		List<MemberDto> memberDtoList = profileService.getSubscribeMember(member);
 
-		Page<ContentDto> contentDtoList = contentService.getMyTimelineContent(memberDtoList, pageable);
+		Page<ContentDto> contentDtoList = contentService.getMyTimelineContent(memberDtoList, pageable, user.getUsername());
 
 		return new ModelAndView("layout/timeLine").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
 

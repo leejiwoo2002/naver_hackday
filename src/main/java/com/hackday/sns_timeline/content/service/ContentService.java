@@ -30,8 +30,8 @@ public class ContentService {
 	final private ContentRepository contentRepository;
 	final private MemberRepository memberRepository;
 
-	//@Cacheable
-	public Content contentCreate(ContentDto contentDto, User user,String saveName) throws Exception {
+	@CacheEvict(value={"myContent","timeline"}, key="#user.getUsername()")
+	public Content contentCreate(ContentDto contentDto, User user, String saveName) throws Exception {
 
 		LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -51,7 +51,8 @@ public class ContentService {
 
 		return contentRepository.save(content);
 	}
-	//@Cacheable
+
+	@Cacheable(value="myContent", key="#userName")
 	public Page<ContentDto> findMyContent(String userName, Pageable pageable) {
 		// pageable 에서는 시작페이지가 0 이라서 0번째 페이지를 찾는게 아니면 1을 빼주고 검색
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
@@ -65,8 +66,9 @@ public class ContentService {
 		Page<ContentDto> searchMyContent = contentRepository.searchMyContent(member.getId(), pageable).map(ContentDto::customConverter);
 		return searchMyContent;
 	}
-	//@Cacheable
-	public Page<ContentDto> getMyTimelineContent(List<MemberDto> memberDtoList, Pageable pageable) {
+
+	@Cacheable(value="timeline", key="#userName")
+	public Page<ContentDto> getMyTimelineContent(List<MemberDto> memberDtoList, Pageable pageable, String userName) {
 		// pageable 에서는 시작페이지가 0 이라서 0번째 페이지를 찾는게 아니면 1을 빼주고 검색
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
 		// pageable 객체 커스텀
@@ -74,22 +76,24 @@ public class ContentService {
 
 		List<Long> idList = new ArrayList<Long>();
 
-		for(int i=0; i<memberDtoList.size(); i++){
+		for (int i = 0; i < memberDtoList.size(); i++) {
 			idList.add(memberDtoList.get(i).getId());
 		}
 
 		// 페이지 객체로 찾아옴
-		Page<ContentDto> searchMyContent = contentRepository.searchMyTimelineContent(idList, pageable).map(ContentDto::customConverter);
+		Page<ContentDto> searchMyContent = contentRepository.searchMyTimelineContent(idList, pageable)
+			.map(ContentDto::customConverter);
 		return searchMyContent;
 	}
-	//@CacheEvict
-	public void contentRemove(Long id) {
+
+	@CacheEvict(value={"myContent","timeline"}, key="#userName")
+	public void contentRemove(Long id, String userName) {
 		contentRepository.removeMyContent(id);
 
 	}
 
-	//@CacheEvict
-	public void contentUpdate(Long id, String title, String body) throws Exception {
+	@CacheEvict(value={"myContent","timeline"}, key="#userName")
+	public void contentUpdate(Long id, String title, String body, String userName) throws Exception {
 
 		contentRepository.updateMyContent(id,title,body);
 	}

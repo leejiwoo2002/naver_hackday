@@ -6,6 +6,8 @@ import java.util.Date;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -41,7 +43,6 @@ public class ContentController {
 
 	@Value("${imagePath.name}")
 	private	String filePath;
-
 
 	@ApiOperation(httpMethod = "GET",
 		value = "글 작성 페이지",
@@ -88,12 +89,12 @@ public class ContentController {
 		response = String.class,
 		nickname = "deleteContent")
 	@PostMapping("/my")
-	public String deleteContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto ) {
+	public String deleteContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto, @AuthenticationPrincipal User user ) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
 		Date today = new Date();
 		contentDto.setPostingTime(today); // date가 string 으로 넘어와서 자동매핑 실패
 
-		contentService.contentRemove(contentDto.getContentId());
+		contentService.contentRemove(contentDto.getContentId(), user.getUsername());
 
 		return "redirect:/content/my";
 	}
@@ -112,9 +113,9 @@ public class ContentController {
 		response = ModelAndView.class,
 		nickname = "editContent")
 	@PostMapping("/update")
-	public String updateContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto) throws Exception{
+	public String updateContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto, @AuthenticationPrincipal User user) throws Exception{
 
-		contentService.contentUpdate(contentDto.getContentId(), contentDto.getTitle(), contentDto.getBody());
+		contentService.contentUpdate(contentDto.getContentId(), contentDto.getTitle(), contentDto.getBody(), user.getUsername());
 
 		return "redirect:/content/my";
 	}
