@@ -1,6 +1,8 @@
 package com.hackday.sns_timeline.content.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.domain.entity.Content;
+import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.content.repository.ContentRepository;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
@@ -58,6 +61,23 @@ public class ContentService {
 
 		// 페이지 객체로 찾아옴
 		Page<ContentDto> searchMyContent = contentRepository.searchMyContent(member.getId(), pageable).map(ContentDto::customConverter);
+		return searchMyContent;
+	}
+
+	public Page<ContentDto> getMyTimelineContent(List<MemberDto> memberDtoList, Pageable pageable) {
+		// pageable 에서는 시작페이지가 0 이라서 0번째 페이지를 찾는게 아니면 1을 빼주고 검색
+		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+		// pageable 객체 커스텀
+		pageable = PageRequest.of(page, 10);
+
+		List<Long> idList = new ArrayList<Long>();
+
+		for(int i=0; i<memberDtoList.size(); i++){
+			idList.add(memberDtoList.get(i).getId());
+		}
+
+		// 페이지 객체로 찾아옴
+		Page<ContentDto> searchMyContent = contentRepository.searchMyTimelineContent(idList, pageable).map(ContentDto::customConverter);
 		return searchMyContent;
 	}
 

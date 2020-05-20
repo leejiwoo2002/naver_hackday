@@ -1,5 +1,6 @@
 package com.hackday.sns_timeline.content.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -21,6 +22,9 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 
 	@Query(value = "select * from content content where content.member_id=:id and content.check_delete=false order by posting_time DESC", nativeQuery = true)
 	Page<Content> searchMyContent(Long id, Pageable pageable);
+
+	@Query(value = "select * from content content where content.member_id in :id and content.check_delete=false order by posting_time DESC", nativeQuery = true)
+	Page<Content> searchMyTimelineContent(List<Long> id, Pageable pageable);
 
 	@Modifying
 	@Transactional
