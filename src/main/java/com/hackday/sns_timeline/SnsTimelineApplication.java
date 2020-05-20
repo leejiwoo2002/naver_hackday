@@ -10,5 +10,4 @@ public class SnsTimelineApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SnsTimelineApplication.class, args);
 	}
-
 }

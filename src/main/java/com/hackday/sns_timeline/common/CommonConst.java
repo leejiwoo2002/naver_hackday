@@ -18,6 +18,8 @@ public final class CommonConst{
 	public final static String SEARCH_MEMBER = "layout/searchMember";
 	public final static String ERROR = "error";
 	public final static String SEARCH = "search";
+
+
 	public final static String IS_NULL = "isNull";
 	public final static String START = "start";
 	public final static String LAST = "last";

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.commonEnum.PAGE;
+import com.hackday.sns_timeline.common.commonEnum.REDIRECT;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,10 +31,10 @@ public class IndexController {
 	@GetMapping
 	public String getIndexPage(@AuthenticationPrincipal CustomUser user){
 		if(user == null) {
-			return CommonConst.INDEX;
+			return PAGE.INDEX.getPage();
 		}
 		else {
-			return CommonConst.REDIRECT_TIME_LINE;
+			return REDIRECT.TIME_LINE.getRedirectUrl();
 		}
 	}
 }

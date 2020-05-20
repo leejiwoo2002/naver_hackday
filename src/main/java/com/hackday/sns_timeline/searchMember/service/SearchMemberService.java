@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.common.CommonFunction;
+import com.hackday.sns_timeline.common.commonEnum.ATTRIBUTE;
 import com.hackday.sns_timeline.searchMember.domain.dto.SearchMemberDto;
 import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
 import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
@@ -60,22 +61,22 @@ public class SearchMemberService {
 		}
 	}
 
-	public RedirectAttributes setMemberSearchAttributes(RedirectAttributes redirectAttributes,
+	public RedirectAttributes setRedirectAttributes(RedirectAttributes redirectAttributes,
 		SearchMemberDto searchMemberDto) throws Exception {
 
 		Page<MemberDto> memberDtoList = findMembers(searchMemberDto.getSearch(), searchMemberDto.getPage());
 
-		redirectAttributes.addFlashAttribute(CommonConst.SEARCH, searchMemberDto.getSearch());
+		redirectAttributes.addFlashAttribute(ATTRIBUTE.SEARCH.getName(), searchMemberDto.getSearch());
 
 		if(memberDtoList.getContent().size() > 0) {
 			checkSubscribed(memberDtoList, searchMemberDto.getUserId());
 			int start = CommonFunction.getStartPageNumber(memberDtoList.getNumber());
 			int last = CommonFunction.getLastPageNumber(start, memberDtoList.getTotalPages());
-			redirectAttributes.addFlashAttribute(CommonConst.START, start);
-			redirectAttributes.addFlashAttribute(CommonConst.LAST, last);
-			redirectAttributes.addFlashAttribute(CommonConst.MEMBER_DTO_LIST, memberDtoList);
+			redirectAttributes.addFlashAttribute(ATTRIBUTE.START.getName(), start);
+			redirectAttributes.addFlashAttribute(ATTRIBUTE.LAST.getName(), last);
+			redirectAttributes.addFlashAttribute(ATTRIBUTE.MEMBER_DTO_LIST.getName(), memberDtoList);
 		}else {
-			redirectAttributes.addFlashAttribute(CommonConst.IS_NULL, true);
+			redirectAttributes.addFlashAttribute(ATTRIBUTE.IS_NULL.getName(), true);
 		}
 
 		return redirectAttributes;

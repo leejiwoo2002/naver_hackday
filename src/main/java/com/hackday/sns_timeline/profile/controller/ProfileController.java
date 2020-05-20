@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.commonEnum.ATTRIBUTE;
+import com.hackday.sns_timeline.common.commonEnum.PAGE;
 import com.hackday.sns_timeline.profile.service.ProfileService;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
@@ -36,11 +38,11 @@ public class ProfileController {
 	@GetMapping
 	public ModelAndView getProfilePage(@AuthenticationPrincipal CustomUser user) throws Exception {
 		if(user == null){
-			return new ModelAndView(CommonConst.TIME_LINE);
+			return new ModelAndView(PAGE.INDEX.getPage());
 		}
 		Member member = profileService.getMemberProfile(user.getId());
 
-		return new ModelAndView(CommonConst.PROFILE).addObject(CommonConst.MEMBER_DTO, MemberDto.memberConverter(member))
-			.addObject(CommonConst.SUBSCRIBE_LIST, profileService.getSubscribeMember(member));
+		return new ModelAndView(PAGE.PROFILE.getPage()).addObject(ATTRIBUTE.MEMBER_DTO.getName(), MemberDto.memberConverter(member))
+			.addObject(ATTRIBUTE.SUBSCRIBE_LIST.getName(), profileService.getSubscribeMember(member));
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.commonEnum.REDIRECT;
 import com.hackday.sns_timeline.searchMember.domain.dto.SearchMemberDto;
 import com.hackday.sns_timeline.searchMember.service.SearchMemberService;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
@@ -44,7 +45,7 @@ public class SubscribeController {
 		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) throws Exception {
 
 		if(user == null){
-			return CommonConst.REDIRECT_INDEX;
+			return REDIRECT.INDEX.getRedirectUrl();
 		}
 
 		if(subscribeDto.getSubscribed()){
@@ -53,13 +54,13 @@ public class SubscribeController {
 			subscribeService.addSubscribe(user.getId(), subscribeDto.getId());
 		}
 
-		searchMemberService.setMemberSearchAttributes(redirectAttributes,
+		searchMemberService.setRedirectAttributes(redirectAttributes,
 			SearchMemberDto.builder()
 				.search(subscribeDto.getSearch())
 				.page(subscribeDto.getPage())
 				.userId(user.getId())
 				.build());
 
-		return CommonConst.REDIRECT_MEMBER_SEARCH;
+		return REDIRECT.SEARCH_MEMBER.getRedirectUrl();
 	}
 }
