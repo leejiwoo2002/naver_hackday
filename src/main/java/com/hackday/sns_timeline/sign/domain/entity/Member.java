@@ -1,5 +1,6 @@
 package com.hackday.sns_timeline.sign.domain.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +37,7 @@ import lombok.NonNull;
 @AllArgsConstructor
 @Builder
 @Table(indexes = {@Index(columnList="email")})
-public class Member {
+public class Member implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

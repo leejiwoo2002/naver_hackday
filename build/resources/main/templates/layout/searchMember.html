@@ -31,15 +31,15 @@
             <div class="row" th:each="memberDto, i : ${memberDtoList}">
                 <div class="icon-box-item">
                     <form th:action="@{/subscribe}" th:object=${subscribeDto} method="post">
-                        <input type="hidden" name="id" th:value="${memberDto.getId()}"/>
-                        <input type="hidden" name="search" th:value="${search}"/>
-                        <input type="hidden" name="page" th:value="${memberDtoList.getPageable().getPageNumber()}"/>
-                        <input type="hidden" name="subscribed" th:value="${memberDto.isSubscribed()}"/>
-                        <button class="ib-icon btn" type="submit">
-                            <i th:if="${!memberDto.isSubscribed()}" class="flaticon-004-assistance"></i>
-                            <i th:if="${memberDto.isSubscribed()}" class="flaticon-003-like"></i>
-                        </button>
-                    </form>
+                    <input type="hidden" name="id" th:value="${memberDto.getId()}"/>
+                    <input type="hidden" name="search" th:value="${search}"/>
+                    <input type="hidden" name="page" th:value="${memberDtoList.getPageable().getPageNumber()}"/>
+                    <input type="hidden" name="subscribed" th:value="${memberDto.isSubscribed()}"/>
+                    <button class="ib-icon btn" type="submit">
+                        <i th:if="${!memberDto.isSubscribed()}" class="flaticon-004-assistance"></i>
+                        <i th:if="${memberDto.isSubscribed()}" class="flaticon-003-like"></i>
+                    </button>
+                </form>
 
                     <div class="col">
                         <div class="row ib-text" th:text="${memberDto.getEmail()}"></div>
