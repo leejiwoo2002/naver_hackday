@@ -13,19 +13,27 @@
 <!-- Header Section -->
 <header th:replace="fragments/commonHeader :: header"></header>
 
-<section class="contact-section spad">
-    <div class="container">
-        <div class="row">
-        <div class="col-4">
-            <div class="sb-widget">
-                <form class="search-form" th:action="@{/search/member/do}" th:method="GET">
-                    <input th:id="search" type="text" placeholder="검색어를 입력해 주세요." th:name="search">
-                    <button th:type="submit">
-                        <img src="/resources/static/img/search-icon.png" alt="">
-                    </button>
-                </form>
-            </div>
+    <!-- Page top Section end -->
+    <section class="page-top-section set-bg" data-setbg="/resources/img/page-top-bg/4.jpg">
+        <div class="container">
+            <h2>친구 찾기</h2>
         </div>
+    </section>
+    <!-- Page top Section end -->
+
+    <section class="contact-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <div class="sb-widget">
+                        <form class="search-form" th:action="@{/search/member/do}" th:method="GET">
+                            <input th:id="search" type="text" placeholder="친구를 검색해 주세요." th:name="search">
+                            <button th:type="submit">
+                                <img src="/resources/img/search-icon.png" alt="">
+                            </button>
+                        </form>
+                    </div>
+                </div>
 
         <div id="result" class="col-4" th:if="${memberDtoList} != null">
             <div class="row" th:each="memberDto, i : ${memberDtoList}">

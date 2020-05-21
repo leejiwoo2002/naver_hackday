@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hackday.sns_timeline.common.CommonConst;
 import com.hackday.sns_timeline.common.CommonFunction;
+import com.hackday.sns_timeline.common.commonEnum.REDIRECT;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.service.ContentService;
 import com.hackday.sns_timeline.content.service.FileService;
@@ -64,7 +65,7 @@ public class ContentController {
 		@RequestParam("file") MultipartFile file) throws Exception {
 
 		if(user == null){
-			return CommonConst.REDIRECT_INDEX;
+			return REDIRECT.INDEX.getRedirectUrl();
 		}
 		String saveName="";
 

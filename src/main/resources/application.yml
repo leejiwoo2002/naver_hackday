@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: jiwoo
+    active: server
   mvc:
     static-path-pattern: /resources/**
 
@@ -20,10 +20,6 @@ spring:
     properties:
       hibernate.format_sql: true
       use_sql_comments: true
-
-  redis:
-    host: 127.0.0.1
-    port: 6379
 
   cache:
     type: redis
@@ -58,6 +54,10 @@ spring:
 
   thymeleaf:
     cache: true
+
+  redis:
+    host: 49.50.172.59
+    port: 6379
 ---
 
 spring:
@@ -71,6 +71,10 @@ spring:
 
   thymeleaf:
     cache: false
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
 ---
 
 spring:
@@ -88,5 +92,8 @@ spring:
 
   thymeleaf:
     cache: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 
