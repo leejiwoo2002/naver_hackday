@@ -32,5 +32,4 @@ public class GlobalExceptionHandler {
 		return new ModelAndView(PAGE.ERROR.getPage()).addObject(ATTRIBUTE.CODE.getName(), HttpStatus.BAD_REQUEST)
 			.addObject(ATTRIBUTE.MSG.getName(), ex.getMessage());
 	}
-
 }

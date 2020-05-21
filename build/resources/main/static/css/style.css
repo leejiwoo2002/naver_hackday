@@ -141,7 +141,7 @@ Commom elements
 	border: none;
 	font-size: 14px;
 	font-weight: 600;
-	min-width: 188px;
+	min-width: 50px;
 	padding: 22px 35px;
 	border-radius: 50px;
 	text-transform: uppercase;
@@ -153,7 +153,11 @@ Commom elements
 }
 
 .site-btn:hover {
-	color: #fff;
+	 color: #fff;
+ }
+
+.subs-btn.sb-dark {
+	background: #22242b;
 }
 
 .site-btn.sb-dark {
@@ -324,7 +328,7 @@ Commom elements
 
 .icon-box-item {
 	/*margin-bottom: 30px;*/
-	width: 500px;
+	width: 900px;
 }
 
 .icon-box-item .ib-icon {
@@ -358,10 +362,10 @@ Commom elements
 	margin-bottom: 15px;
 }
 
-.icon-box-item:hover .ib-icon {
-	background: #f43f00;
-	color: #fff;
-}
+/*.icon-box-item:hover .ib-icon {*/
+/*	background: #f43f00;*/
+/*	color: #fff;*/
+/*}*/
 
 /* Preloder */
 
