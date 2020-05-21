@@ -51,7 +51,7 @@ public class SignController {
 		response = String.class,
 		nickname="signUp")
 	@PostMapping("/up")
-	public String signUp(@Valid MemberDto memberDto) throws Exception {
+	public String signUp(@Valid MemberDto memberDto) {
 		signService.signUp(memberDto);
 		return REDIRECT.INDEX.getRedirectUrl();
 	}

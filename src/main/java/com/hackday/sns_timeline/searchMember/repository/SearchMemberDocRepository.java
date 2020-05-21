@@ -9,7 +9,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchCrudReposi
 
 import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
 
-public interface SearchMemberEsRepository extends ElasticsearchCrudRepository<SearchMemberDoc, String> {
+public interface SearchMemberDocRepository extends ElasticsearchCrudRepository<SearchMemberDoc, String> {
 
 	List<SearchMemberDoc> findByEmail(String email);
 	List<SearchMemberDoc> findByName(String name);

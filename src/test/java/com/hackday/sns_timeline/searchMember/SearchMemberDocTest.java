@@ -34,7 +34,7 @@ public class SearchMemberDocTest {
 
 	@Test
 	@Transactional
-	public void getMemberListSuccessTest() throws Exception {
+	public void getMemberListSuccessTest() {
 		String name = "newTest";
 		int count = 13;
 		for (int i = 0; i < count; i++) {

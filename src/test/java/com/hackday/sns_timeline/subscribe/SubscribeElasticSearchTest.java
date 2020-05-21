@@ -12,13 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
-import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
+import com.hackday.sns_timeline.searchMember.repository.SearchMemberDocRepository;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.sign.service.SignService;
 import com.hackday.sns_timeline.subscribe.domain.document.SubscribeDoc;
-import com.hackday.sns_timeline.subscribe.repository.SubscribeEsRepository;
+import com.hackday.sns_timeline.subscribe.repository.SubscribeDocRepository;
 import com.hackday.sns_timeline.subscribe.service.SubscribeService;
 
 @SpringBootTest
@@ -28,7 +28,7 @@ public class SubscribeElasticSearchTest {
 	SubscribeService subscribeService;
 
 	@Autowired
-	SubscribeEsRepository subscribeEsRepository;
+	SubscribeDocRepository subscribeDocRepository;
 
 	@Autowired
 	SignService signService;
@@ -37,8 +37,7 @@ public class SubscribeElasticSearchTest {
 	MemberRepository memberRepository;
 
 	@Autowired
-	SearchMemberEsRepository searchMemberEsRepository;
-
+	SearchMemberDocRepository searchMemberDocRepository;
 
 	@BeforeEach
 	public void before() throws Exception {
@@ -54,25 +53,31 @@ public class SubscribeElasticSearchTest {
 
 		subscribeService.addSubscribe(test1.getId(), test2.getId());
 
-		SubscribeDoc subscribeDoc = subscribeEsRepository.findByMemberIdAndSubscribeMemberId(
+		SubscribeDoc subscribeDoc = subscribeDocRepository.findByMemberIdAndSubscribeMemberId(
 			test1.getId(), test2.getId()).get();
 
-		List<SubscribeDoc> byMemberId = subscribeEsRepository.findByMemberId(test1.getId());
+		List<SubscribeDoc> byMemberId = subscribeDocRepository.findByMemberId(test1.getId());
 
 		assertThat(subscribeDoc.getMemberId()).isEqualTo(test1.getId());
 		assertThat(subscribeDoc.getSubscribeMemberId()).isEqualTo(test2.getId());
 		assertThat(byMemberId.size()).isEqualTo(2);
 	}
 
+	@Test
+	@Transactional
+	public void searchMemberNullTest(){
+
+	}
+
 	@AfterEach
 	public void after(){
-		List<SearchMemberDoc> byEmail = searchMemberEsRepository.findByEmail("new@new");
-		searchMemberEsRepository.deleteAll(byEmail);
+		List<SearchMemberDoc> byEmail = searchMemberDocRepository.findByEmail("new@new");
+		searchMemberDocRepository.deleteAll(byEmail);
 
-		List<SubscribeDoc> bySubscribeMemberEmail = subscribeEsRepository.findBySubscribeMemberEmail("new@new");
-		List<SubscribeDoc> bySubscribeMemberEmail2 = subscribeEsRepository.findBySubscribeMemberEmail("new2@new");
+		List<SubscribeDoc> bySubscribeMemberEmail = subscribeDocRepository.findBySubscribeMemberEmail("new@new");
+		List<SubscribeDoc> bySubscribeMemberEmail2 = subscribeDocRepository.findBySubscribeMemberEmail("new2@new");
 
-		subscribeEsRepository.deleteAll(bySubscribeMemberEmail);
-		subscribeEsRepository.deleteAll(bySubscribeMemberEmail2);
+		subscribeDocRepository.deleteAll(bySubscribeMemberEmail);
+		subscribeDocRepository.deleteAll(bySubscribeMemberEmail2);
 	}
 }

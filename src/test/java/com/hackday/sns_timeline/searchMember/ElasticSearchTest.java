@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
-import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
+import com.hackday.sns_timeline.searchMember.repository.SearchMemberDocRepository;
 import com.hackday.sns_timeline.searchMember.service.SearchMemberService;
 
 @SpringBootTest
@@ -23,7 +23,7 @@ public class ElasticSearchTest {
 	SearchMemberService searchMemberService;
 
 	@Autowired
-	SearchMemberEsRepository searchMemberEsRepository;
+	SearchMemberDocRepository searchMemberDocRepository;
 
 	@Test
 	@Transactional
@@ -33,6 +33,9 @@ public class ElasticSearchTest {
 
 		assertNotNull(searchMemberDoc1.getId());
 		assertThat(searchMemberDoc1.getEmail()).isEqualTo(searchMemberDoc.getEmail());
+
+		searchMemberDocRepository.delete(searchMemberDoc);
+		searchMemberDocRepository.delete(searchMemberDoc1);
 	}
 
 	@Test
@@ -50,6 +53,6 @@ public class ElasticSearchTest {
 
 		assertThat(searchMemberEsList.getContent().size()).isEqualTo(10);
 
-		searchMemberEsRepository.deleteAll(testData);
+		searchMemberDocRepository.deleteAll(testData);
 	}
 }

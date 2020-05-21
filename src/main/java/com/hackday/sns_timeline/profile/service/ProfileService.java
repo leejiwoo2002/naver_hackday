@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.hackday.sns_timeline.error.customException.RepositoryNullException;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.domain.entity.Member;
 import com.hackday.sns_timeline.sign.repository.MemberRepository;
@@ -24,8 +25,9 @@ public class ProfileService {
 	private final SubscribeDocRepository subscribeDocRepository;
 
 	@Transactional
-	public Member getMemberProfile(long userId) throws Exception {
-		return memberRepository.findById(userId).orElseThrow(() -> new Exception("member not exist"));
+	public Member getMemberProfile(long userId) throws RepositoryNullException {
+		return memberRepository.findById(userId)
+			.orElseThrow(() -> new RepositoryNullException("memberRepository error"));
 	}
 
 	@Transactional

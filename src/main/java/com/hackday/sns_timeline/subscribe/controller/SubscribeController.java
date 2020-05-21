@@ -44,7 +44,7 @@ public class SubscribeController {
 	)
 	@PostMapping()
 	public String manageSubscribe(@ModelAttribute(CommonConst.SUBSCRIBE_DTO) @Valid SubscribeDto subscribeDto,
-		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) throws Exception {
+		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) {
 
 		if(Objects.isNull(user)){
 			return REDIRECT.INDEX.getRedirectUrl();

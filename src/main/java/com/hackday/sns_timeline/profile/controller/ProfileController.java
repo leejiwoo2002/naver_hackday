@@ -35,7 +35,7 @@ public class ProfileController {
 		nickname="getProfilePage"
 	)
 	@GetMapping
-	public ModelAndView getProfilePage(@AuthenticationPrincipal CustomUser user) throws Exception {
+	public ModelAndView getProfilePage(@AuthenticationPrincipal CustomUser user) {
 		if(Objects.isNull(user)){
 			return new ModelAndView(PAGE.INDEX.getPage());
 		}
