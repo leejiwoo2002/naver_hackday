@@ -30,7 +30,7 @@ public class ContentService {
 	final private ContentRepository contentRepository;
 	final private MemberRepository memberRepository;
 
-	@CacheEvict(value={"myContent","timeline"}, key="#user.getUsername()")
+	@CacheEvict(value="myContent", key="#user.getUsername()")
 	public Content contentCreate(ContentDto contentDto, User user, String saveName) throws Exception {
 
 		LocalDateTime currentDateTime = LocalDateTime.now();
@@ -67,7 +67,6 @@ public class ContentService {
 		return searchMyContent;
 	}
 
-	@Cacheable(value="timeline", key="#userName")
 	public Page<ContentDto> getMyTimelineContent(List<MemberDto> memberDtoList, Pageable pageable, String userName) {
 		// pageable 에서는 시작페이지가 0 이라서 0번째 페이지를 찾는게 아니면 1을 빼주고 검색
 		int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
@@ -86,13 +85,13 @@ public class ContentService {
 		return searchMyContent;
 	}
 
-	@CacheEvict(value={"myContent","timeline"}, key="#userName")
+	@CacheEvict(value="myContent", key="#userName")
 	public void contentRemove(Long id, String userName) {
 		contentRepository.removeMyContent(id);
 
 	}
 
-	@CacheEvict(value={"myContent","timeline"}, key="#userName")
+	@CacheEvict(value="myContent", key="#userName")
 	public void contentUpdate(Long id, String title, String body, String userName) throws Exception {
 
 		contentRepository.updateMyContent(id,title,body);

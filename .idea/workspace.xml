@@ -1,47 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e999ea68-a2ce-4a50-8016-5847615d1caf" name="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.3/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/gc.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
+    <list default="true" id="5d99dc16-2cef-457f-a0db-41f8a28b7fbe" name="sns_timeline_2-100 [윤상&amp;지우] Redis 적용" comment="getCurrentDate 사용">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/SnsTimelineApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/SnsTimelineApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/controller/ContentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/controller/ContentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/domain/dto/ContentDto$ContentDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/domain/dto/ContentDto$ContentDtoBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/domain/dto/ContentDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/domain/dto/ContentDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/repository/ContentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/repository/ContentRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/service/ContentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/content/service/ContentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/domain/entity/Member$MemberBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/domain/entity/Member$MemberBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/domain/entity/Member.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/domain/entity/Member.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/service/SignService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/sign/service/SignService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/timeLine/controller/TimeLineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/hackday/sns_timeline/timeLine/controller/TimeLineController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/layout/contentReadMy.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/layout/contentReadMy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/layout/searchMember.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/layout/searchMember.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/layout/timeLine.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/layout/timeLine.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/SnsTimelineApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/SnsTimelineApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/content/controller/ContentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/content/controller/ContentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/content/domain/dto/ContentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/content/domain/dto/ContentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/content/service/ContentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/content/service/ContentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/domain/entity/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/sign/domain/entity/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/timeLine/controller/TimeLineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hackday/sns_timeline/timeLine/controller/TimeLineController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/SnsTimelineApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/hackday/sns_timeline/SnsTimelineApplicationTests.java" afterDir="false" />
     </list>
     <list id="70a0e690-248f-4c54-b28d-b17cb195bcc6" name="Default Changelist" comment="" />
     <list id="59151ece-9c73-4bde-8024-be39c4f9efc3" name="sns_timeline_2-53 [윤상&amp;지우] 프로필 추가" comment="sns_timeline_2-53 [윤상&amp;지우] 프로필 추가&#10;&#10;- 코드 정리" />
     <list id="4ef796b0-a32f-416c-b035-73f8c8b6243e" name="sns_timeline_2-72 [윤상&amp;지우] Elasticsearch 적용 &amp; 테스트" comment="sns_timeline_2-72 [윤상&amp;지우] Elasticsearch 적용 &amp; 테스트&#10;&#10;- ES 데이터 삽입 기능" />
     <list id="08ee3497-9215-4c2a-96d1-14768460fde7" name="sns_timeline_2-76 [윤상&amp;지우] 친구 찾기 &amp; 구독 Elasticsearch 적용" comment="sns_timeline_2-76 [윤상&amp;지우] 친구 찾기 &amp; 구독 Elasticsearch 적용&#10;&#10;- 친구찾기 es select 로 변경&#10;&#10;- MySQL 접근 최소화" />
+    <list id="e999ea68-a2ce-4a50-8016-5847615d1caf" name="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정" comment="redis 적용 및 entity serialization" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -668,6 +636,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GithubProjectSettings">
     <option name="CREATE_PULL_REQUEST_DEFAULT_BRANCH" value="yunsang_jiwoo" />
@@ -1062,7 +1031,7 @@
       <workItem from="1589879598837" duration="112000" />
       <workItem from="1589879831857" duration="8047000" />
     </task>
-    <task active="true" id="sns_timeline_2-90" summary="[윤상&amp;지우] 배포 환경 설정">
+    <task id="sns_timeline_2-90" summary="[윤상&amp;지우] 배포 환경 설정">
       <branch name="yunsang_jiwoo" repository="C:\Users\qwdbs\Desktop\spring\sns_timeline" original="true" />
       <branch name="sns_timeline_2-90" repository="C:\Users\qwdbs\Desktop\spring\sns_timeline" />
       <changelist id="e999ea68-a2ce-4a50-8016-5847615d1caf" name="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정" comment="" />
@@ -1074,12 +1043,40 @@
       <option name="presentableId" value="sns_timeline_2-90" />
       <option name="project" value="sns_timeline_2" />
       <option name="type" value="BUG" />
-      <updated>1589961014384</updated>
+      <updated>1589994736998</updated>
       <workItem from="1589898982882" duration="3307000" />
       <workItem from="1589954260383" duration="7888000" />
-      <workItem from="1589975563566" duration="9902000" />
+      <workItem from="1589975563566" duration="10055000" />
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="redis 적용 및 entity serialization">
+      <created>1589994635097</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1589994635097</updated>
+    </task>
+    <task active="true" id="sns_timeline_2-100" summary="[윤상&amp;지우] Redis 적용">
+      <branch name="yunsang_jiwoo" repository="$PROJECT_DIR$" original="true" />
+      <branch name="sns_timeline_2-100" repository="$PROJECT_DIR$" />
+      <changelist id="5d99dc16-2cef-457f-a0db-41f8a28b7fbe" name="sns_timeline_2-100 [윤상&amp;지우] Redis 적용" comment="" />
+      <created>1589962317000</created>
+      <option name="issue" value="true" />
+      <url>https://github.com/2020-NAVER-CAMPUS-HACKDAY/sns_timeline_2/issues/100</url>
+      <option name="number" value="100" />
+      <option name="presentableId" value="sns_timeline_2-100" />
+      <option name="project" value="sns_timeline_2" />
+      <option name="type" value="BUG" />
+      <updated>1589994736998</updated>
+      <workItem from="1589994738165" duration="2272000" />
+    </task>
+    <task id="LOCAL-00009" summary="getCurrentDate 사용">
+      <created>1590044210516</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1590044210516</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers>
       <GitHub url="https://github.com">
         <option name="repoAuthor" value="2020-NAVER-CAMPUS-HACKDAY" />
@@ -1134,8 +1131,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="sns_timeline_2-22 [윤상&amp;지우] Subscribe 테이블 수정 &amp; 구독 기능&#10;&#10;- 친구 찾기 시 return 값 Page&lt;Memeber&gt; -&gt; Page&lt;MemeberDto&gt; 변경" />
-    <MESSAGE value="sns_timeline_2-28 [윤상&amp;지우] 로그인 &amp; 구독 Exception handling" />
     <MESSAGE value="sns_timeline_2-33 로그인 &amp; 구독 Exception handling&#10;&#10;- 에러 발생시 커스텀 에러 페이지로 리다이렉트&#10;&#10;- 로그인 실패 시 alert 띄우기" />
     <MESSAGE value="sns_timeline_2-33 로그인 &amp; 구독 Exception handling&#10;&#10;- add Member Role" />
     <MESSAGE value="sns_timeline_2-33 로그인 &amp; 구독 Exception handling&#10;&#10;- search 결과 없을 경우 처리" />
@@ -1159,7 +1154,9 @@
     <MESSAGE value="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- jenkins test" />
     <MESSAGE value="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- add Dockerfile" />
     <MESSAGE value="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- mod dockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="sns_timeline_2-90 [윤상&amp;지우] 배포 환경 설정&#10;&#10;- mod dockerfile" />
+    <MESSAGE value="redis 적용 및 entity serialization" />
+    <MESSAGE value="getCurrentDate 사용" />
+    <option name="LAST_COMMIT_MESSAGE" value="getCurrentDate 사용" />
   </component>
   <component name="WindowStateProjectService">
     <state x="359" y="39" key="#&lt;template&gt;_of_JUnit" timestamp="1589876518931">
@@ -1208,15 +1205,17 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1589444179197" />
-    <state x="607" y="102" width="953" height="584" key="CommitChangelistDialog2" timestamp="1589986125337">
+    <state x="1096" y="110" width="1134" height="756" key="CommitChangelistDialog2" timestamp="1590044209849">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state x="1096" y="110" width="1134" height="756" key="CommitChangelistDialog2/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590044209849" />
     <state x="364" y="78" width="953" height="584" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1589961012371" />
-    <state x="607" y="102" key="CommitChangelistDialog2/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589986125337" />
-    <state x="205" y="71" width="1228" height="685" key="DiffContextDialog" timestamp="1589898412155">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="607" y="102" key="CommitChangelistDialog2/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994634364" />
+    <state x="342" y="93" width="1228" height="685" key="DiffContextDialog" timestamp="1589994763272">
+      <screen x="0" y="0" width="2560" height="1080" />
     </state>
     <state x="205" y="71" width="1228" height="685" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1589898412155" />
+    <state x="342" y="93" key="DiffContextDialog/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994763272" />
     <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1589815015235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -1229,62 +1228,70 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="639" y="303" width="520" height="273" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1589103222537" />
-    <state width="2518" height="296" key="GridCell.Tab.0.bottom" timestamp="1589994564431">
+    <state width="2518" height="296" key="GridCell.Tab.0.bottom" timestamp="1590043462718">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state width="2518" height="296" key="GridCell.Tab.0.bottom/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590043462718" />
     <state width="1493" height="250" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
     <state width="2518" height="296" key="GridCell.Tab.0.bottom/0.0.2560.1014/-1080.-165.1080.1897@0.0.2560.1014" timestamp="1589985377569" />
     <state width="2518" height="297" key="GridCell.Tab.0.bottom/0.0.2560.1080/-1080.-165.1080.1897@0.0.2560.1080" timestamp="1589975614661" />
-    <state width="2518" height="296" key="GridCell.Tab.0.bottom/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994564431" />
-    <state width="2518" height="296" key="GridCell.Tab.0.center" timestamp="1589994564430">
+    <state width="2518" height="296" key="GridCell.Tab.0.bottom/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589995514822" />
+    <state width="2518" height="296" key="GridCell.Tab.0.center" timestamp="1590043462717">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state width="2518" height="296" key="GridCell.Tab.0.center/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590043462717" />
     <state width="1493" height="250" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
     <state width="2518" height="296" key="GridCell.Tab.0.center/0.0.2560.1014/-1080.-165.1080.1897@0.0.2560.1014" timestamp="1589985377567" />
     <state width="2518" height="297" key="GridCell.Tab.0.center/0.0.2560.1080/-1080.-165.1080.1897@0.0.2560.1080" timestamp="1589975614659" />
-    <state width="2518" height="296" key="GridCell.Tab.0.center/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994564430" />
-    <state width="2518" height="296" key="GridCell.Tab.0.left" timestamp="1589994564429">
+    <state width="2518" height="296" key="GridCell.Tab.0.center/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589995514820" />
+    <state width="2518" height="296" key="GridCell.Tab.0.left" timestamp="1590043462716">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state width="2518" height="296" key="GridCell.Tab.0.left/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590043462716" />
     <state width="1493" height="250" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
     <state width="2518" height="296" key="GridCell.Tab.0.left/0.0.2560.1014/-1080.-165.1080.1897@0.0.2560.1014" timestamp="1589985377565" />
     <state width="2518" height="297" key="GridCell.Tab.0.left/0.0.2560.1080/-1080.-165.1080.1897@0.0.2560.1080" timestamp="1589975614658" />
-    <state width="2518" height="296" key="GridCell.Tab.0.left/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994564429" />
-    <state width="2518" height="296" key="GridCell.Tab.0.right" timestamp="1589994564430">
+    <state width="2518" height="296" key="GridCell.Tab.0.left/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589995514820" />
+    <state width="2518" height="296" key="GridCell.Tab.0.right" timestamp="1590043462718">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state width="2518" height="296" key="GridCell.Tab.0.right/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590043462718" />
     <state width="1493" height="250" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
     <state width="2518" height="296" key="GridCell.Tab.0.right/0.0.2560.1014/-1080.-165.1080.1897@0.0.2560.1014" timestamp="1589985377568" />
     <state width="2518" height="297" key="GridCell.Tab.0.right/0.0.2560.1080/-1080.-165.1080.1897@0.0.2560.1080" timestamp="1589975614660" />
-    <state width="2518" height="296" key="GridCell.Tab.0.right/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994564430" />
-    <state width="2518" height="296" key="GridCell.Tab.1.bottom" timestamp="1589994564433">
+    <state width="2518" height="296" key="GridCell.Tab.0.right/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589995514821" />
+    <state width="2518" height="296" key="GridCell.Tab.1.bottom" timestamp="1590043462721">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state width="2518" height="296" key="GridCell.Tab.1.bottom/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590043462721" />
     <state width="1493" height="250" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589954100043" />
     <state width="2518" height="296" key="GridCell.Tab.1.bottom/0.0.2560.1014/-1080.-165.1080.1897@0.0.2560.1014" timestamp="1589985377572" />
     <state width="2518" height="297" key="GridCell.Tab.1.bottom/0.0.2560.1080/-1080.-165.1080.1897@0.0.2560.1080" timestamp="1589975614666" />
-    <state width="2518" height="296" key="GridCell.Tab.1.bottom/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994564433" />
-    <state width="2518" height="296" key="GridCell.Tab.1.center" timestamp="1589994564432">
+    <state width="2518" height="296" key="GridCell.Tab.1.bottom/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589995514825" />
+    <state width="2518" height="296" key="GridCell.Tab.1.center" timestamp="1590043462720">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state width="2518" height="296" key="GridCell.Tab.1.center/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590043462720" />
     <state width="1493" height="250" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1589954100043" />
     <state width="2518" height="296" key="GridCell.Tab.1.center/0.0.2560.1014/-1080.-165.1080.1897@0.0.2560.1014" timestamp="1589985377571" />
     <state width="2518" height="297" key="GridCell.Tab.1.center/0.0.2560.1080/-1080.-165.1080.1897@0.0.2560.1080" timestamp="1589975614664" />
-    <state width="2518" height="296" key="GridCell.Tab.1.center/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994564432" />
-    <state width="2518" height="296" key="GridCell.Tab.1.left" timestamp="1589994564432">
+    <state width="2518" height="296" key="GridCell.Tab.1.center/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589995514824" />
+    <state width="2518" height="296" key="GridCell.Tab.1.left" timestamp="1590043462719">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state width="2518" height="296" key="GridCell.Tab.1.left/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590043462719" />
     <state width="1493" height="250" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1589954100042" />
     <state width="2518" height="296" key="GridCell.Tab.1.left/0.0.2560.1014/-1080.-165.1080.1897@0.0.2560.1014" timestamp="1589985377570" />
     <state width="2518" height="297" key="GridCell.Tab.1.left/0.0.2560.1080/-1080.-165.1080.1897@0.0.2560.1080" timestamp="1589975614663" />
-    <state width="2518" height="296" key="GridCell.Tab.1.left/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994564432" />
-    <state width="2518" height="296" key="GridCell.Tab.1.right" timestamp="1589994564433">
+    <state width="2518" height="296" key="GridCell.Tab.1.left/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589995514823" />
+    <state width="2518" height="296" key="GridCell.Tab.1.right" timestamp="1590043462720">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state width="2518" height="296" key="GridCell.Tab.1.right/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590043462720" />
     <state width="1493" height="250" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1589954100043" />
     <state width="2518" height="296" key="GridCell.Tab.1.right/0.0.2560.1014/-1080.-165.1080.1897@0.0.2560.1014" timestamp="1589985377572" />
     <state width="2518" height="297" key="GridCell.Tab.1.right/0.0.2560.1080/-1080.-165.1080.1897@0.0.2560.1080" timestamp="1589975614665" />
-    <state width="2518" height="296" key="GridCell.Tab.1.right/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994564433" />
+    <state width="2518" height="296" key="GridCell.Tab.1.right/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589995514825" />
     <state width="1493" height="343" key="GridCell.Tab.2.bottom" timestamp="1589454180917">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -1321,21 +1328,24 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="194" y="67" width="981" height="707" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1589876528701" />
-    <state x="505" y="228" key="SimpleOpenTaskDialog" timestamp="1589898982661">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="842" y="299" key="SimpleOpenTaskDialog" timestamp="1589994737059">
+      <screen x="0" y="0" width="2560" height="1080" />
     </state>
     <state x="505" y="228" key="SimpleOpenTaskDialog/0.0.1536.824@0.0.1536.824" timestamp="1589898982661" />
-    <state x="361" y="146" key="Vcs.Push.Dialog.v2" timestamp="1589961016329">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="842" y="299" key="SimpleOpenTaskDialog/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994737059" />
+    <state x="602" y="191" key="Vcs.Push.Dialog.v2" timestamp="1589994766093">
+      <screen x="0" y="0" width="2560" height="1080" />
     </state>
     <state x="361" y="146" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1589961016329" />
+    <state x="602" y="191" key="Vcs.Push.Dialog.v2/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589994766093" />
     <state x="345" y="59" key="com.intellij.dvcs.ui.CompareBranchesDialog" timestamp="1589287984229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="345" y="59" key="com.intellij.dvcs.ui.CompareBranchesDialog/0.0.1536.824@0.0.1536.824" timestamp="1589287984229" />
-    <state x="1085" y="464" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589986148868">
+    <state x="1085" y="464" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1590041877420">
       <screen x="0" y="0" width="2560" height="1080" />
     </state>
+    <state x="1085" y="464" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1080.-188.1080.1920/0.0.2560.1080@0.0.2560.1080" timestamp="1590041877420" />
     <state x="1085" y="464" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1080/-1080.-188.1080.1920@0.0.2560.1080" timestamp="1589986148868" />
     <state x="471" y="131" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1589778789174">
       <screen x="0" y="0" width="1536" height="824" />

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.CommonFunction;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.service.ContentService;
 import com.hackday.sns_timeline.content.service.FileService;
@@ -62,6 +63,9 @@ public class ContentController {
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
 		@RequestParam("file") MultipartFile file) throws Exception {
 
+		if(user == null){
+			return CommonConst.REDIRECT_INDEX;
+		}
 		String saveName="";
 
 		saveName = fileService.mkDir(filePath, file);
@@ -78,6 +82,8 @@ public class ContentController {
 	@GetMapping("/my")
 	public ModelAndView readContent(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user, @PageableDefault Pageable pageable) {
+		if(user==null)
+			return new ModelAndView("layout/index");
 
 		Page<ContentDto> contentDtoList = contentService.findMyContent(user.getUsername(), pageable);
 
@@ -90,11 +96,11 @@ public class ContentController {
 		nickname = "deleteContent")
 	@PostMapping("/my")
 	public String deleteContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto, @AuthenticationPrincipal User user ) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
-		Date today = new Date();
-		contentDto.setPostingTime(today); // date가 string 으로 넘어와서 자동매핑 실패
 
-		contentService.contentRemove(contentDto.getContentId(), user.getUsername());
+		contentDto.setPostingTime(CommonFunction.getCurrentDate()); // date가 string 으로 넘어와서 자동매핑 실패
+
+		if(user!=null)
+			contentService.contentRemove(contentDto.getContentId(), user.getUsername());
 
 		return "redirect:/content/my";
 	}
@@ -115,7 +121,8 @@ public class ContentController {
 	@PostMapping("/update")
 	public String updateContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto, @AuthenticationPrincipal User user) throws Exception{
 
-		contentService.contentUpdate(contentDto.getContentId(), contentDto.getTitle(), contentDto.getBody(), user.getUsername());
+		if(user!=null)
+			contentService.contentUpdate(contentDto.getContentId(), contentDto.getTitle(), contentDto.getBody(), user.getUsername());
 
 		return "redirect:/content/my";
 	}
