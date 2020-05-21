@@ -56,7 +56,7 @@ spring:
     cache: true
 
   redis:
-    host: 49.50.172.59
+    host: localhost
     port: 6379
 ---
 
