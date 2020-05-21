@@ -63,12 +63,14 @@ public class ContentController {
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user,
 		@RequestParam("file") MultipartFile file) throws Exception {
 
+		if(user == null){
+			return CommonConst.REDIRECT_INDEX;
+		}
 		String saveName="";
 
 		saveName = fileService.mkDir(filePath, file);
 
-		if(user!=null)
-			contentService.contentCreate(contentDto,user,saveName);
+		contentService.contentCreate(contentDto,user,saveName);
 
 		return "redirect:/timeLine";
 	}
@@ -80,10 +82,10 @@ public class ContentController {
 	@GetMapping("/my")
 	public ModelAndView readContent(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user, @PageableDefault Pageable pageable) {
-		Page<ContentDto> contentDtoList;
+		if(user==null)
+			return new ModelAndView("layout/index");
 
-		if(user!=null)
-			contentDtoList = contentService.findMyContent(user.getUsername(), pageable);
+		Page<ContentDto> contentDtoList = contentService.findMyContent(user.getUsername(), pageable);
 
 		return new ModelAndView("layout/contentReadMy").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
 	}
