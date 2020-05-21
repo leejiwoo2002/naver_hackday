@@ -67,7 +67,8 @@ public class ContentController {
 
 		saveName = fileService.mkDir(filePath, file);
 
-		contentService.contentCreate(contentDto,user,saveName);
+		if(user!=null)
+			contentService.contentCreate(contentDto,user,saveName);
 
 		return "redirect:/timeLine";
 	}
@@ -79,8 +80,10 @@ public class ContentController {
 	@GetMapping("/my")
 	public ModelAndView readContent(@ModelAttribute(CommonConst.CONTENT_DTO)
 	@Valid ContentDto contentDto, @AuthenticationPrincipal User user, @PageableDefault Pageable pageable) {
+		Page<ContentDto> contentDtoList;
 
-		Page<ContentDto> contentDtoList = contentService.findMyContent(user.getUsername(), pageable);
+		if(user!=null)
+			contentDtoList = contentService.findMyContent(user.getUsername(), pageable);
 
 		return new ModelAndView("layout/contentReadMy").addObject(CommonConst.CONTENT_DTO_LIST, contentDtoList);
 	}
@@ -94,7 +97,8 @@ public class ContentController {
 
 		contentDto.setPostingTime(CommonFunction.getCurrentDate()); // date가 string 으로 넘어와서 자동매핑 실패
 
-		contentService.contentRemove(contentDto.getContentId(), user.getUsername());
+		if(user!=null)
+			contentService.contentRemove(contentDto.getContentId(), user.getUsername());
 
 		return "redirect:/content/my";
 	}
@@ -115,7 +119,8 @@ public class ContentController {
 	@PostMapping("/update")
 	public String updateContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto, @AuthenticationPrincipal User user) throws Exception{
 
-		contentService.contentUpdate(contentDto.getContentId(), contentDto.getTitle(), contentDto.getBody(), user.getUsername());
+		if(user!=null)
+			contentService.contentUpdate(contentDto.getContentId(), contentDto.getTitle(), contentDto.getBody(), user.getUsername());
 
 		return "redirect:/content/my";
 	}
