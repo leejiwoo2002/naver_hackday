@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.CommonFunction;
 import com.hackday.sns_timeline.content.domain.dto.ContentDto;
 import com.hackday.sns_timeline.content.service.ContentService;
 import com.hackday.sns_timeline.content.service.FileService;
@@ -90,9 +91,8 @@ public class ContentController {
 		nickname = "deleteContent")
 	@PostMapping("/my")
 	public String deleteContent(@ModelAttribute(CommonConst.CONTENT_DTO) @Valid ContentDto contentDto, @AuthenticationPrincipal User user ) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd");
-		Date today = new Date();
-		contentDto.setPostingTime(today); // date가 string 으로 넘어와서 자동매핑 실패
+
+		contentDto.setPostingTime(CommonFunction.getCurrentDate()); // date가 string 으로 넘어와서 자동매핑 실패
 
 		contentService.contentRemove(contentDto.getContentId(), user.getUsername());
 

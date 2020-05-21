@@ -33,6 +33,6 @@ public interface ContentRepository extends JpaRepository<Content, Long> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "update Content content set content.title=:title, content.body=:body where content.content_id=:contentId", nativeQuery = true)
+	@Query(value = "update content content set content.title=:title, content.body=:body where content.content_id=:contentId", nativeQuery = true)
 	void updateMyContent(Long contentId, String title, String body);
 }
