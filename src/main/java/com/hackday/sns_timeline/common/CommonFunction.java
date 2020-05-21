@@ -5,22 +5,26 @@ import java.util.Date;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CommonFunction {
 
-	static public int getStartPageNumber(int page){
+	public static int getStartPageNumber(int page){
 		return (int) Math.floor(page/10)*10 + 1;
 	}
 
-	static public int getLastPageNumber(int start, int totalPage){
+	public static int getLastPageNumber(int start, int totalPage){
 		return start + 9 < totalPage ? start + 9 : totalPage;
 	}
 
-	static public Date getCurrentDate(){
+	public static Date getCurrentDate(){
 		LocalDateTime currentDateTime = LocalDateTime.now();
 		return java.sql.Timestamp.valueOf(currentDateTime);
 	}
 
-	static public String encodingPassword(String password){
+	public static String encodingPassword(String password){
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		return passwordEncoder.encode(password);
 	}

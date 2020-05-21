@@ -10,12 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.hackday.sns_timeline.searchMember.domain.entity.SearchMemberEs;
-import com.hackday.sns_timeline.searchMember.repository.SearchMemberEsRepository;
+import com.hackday.sns_timeline.searchMember.domain.document.SearchMemberDoc;
+import com.hackday.sns_timeline.searchMember.repository.SearchMemberDocRepository;
 import com.hackday.sns_timeline.searchMember.service.SearchMemberService;
 
 @SpringBootTest
@@ -25,16 +23,19 @@ public class ElasticSearchTest {
 	SearchMemberService searchMemberService;
 
 	@Autowired
-	SearchMemberEsRepository searchMemberEsRepository;
+	SearchMemberDocRepository searchMemberDocRepository;
 
 	@Test
 	@Transactional
 	public void saveSearchMemberTest() {
-		SearchMemberEs searchMemberEs = SearchMemberEs.builder().email("test@test").name("test").build();
-		SearchMemberEs searchMemberEs1 = searchMemberService.saveSearchMember(searchMemberEs);
+		SearchMemberDoc searchMemberDoc = SearchMemberDoc.builder().email("test@test").name("test").build();
+		SearchMemberDoc searchMemberDoc1 = searchMemberService.saveSearchMember(searchMemberDoc);
 
-		assertNotNull(searchMemberEs1.getId());
-		assertThat(searchMemberEs1.getEmail()).isEqualTo(searchMemberEs.getEmail());
+		assertNotNull(searchMemberDoc1.getId());
+		assertThat(searchMemberDoc1.getEmail()).isEqualTo(searchMemberDoc.getEmail());
+
+		searchMemberDocRepository.delete(searchMemberDoc);
+		searchMemberDocRepository.delete(searchMemberDoc1);
 	}
 
 	@Test
@@ -42,16 +43,16 @@ public class ElasticSearchTest {
 		String name = "pure";
 		String email = "kys";
 		int count = 13;
-		List<SearchMemberEs> testData = new ArrayList<>();
+		List<SearchMemberDoc> testData = new ArrayList<>();
 		for (int i = 0; i < count; i++) {
 			testData.add(searchMemberService.saveSearchMember(
-				SearchMemberEs.builder().email(name+i+"@"+email).name(name+i).build()));
+				SearchMemberDoc.builder().email(name+i+"@"+email).name(name+i).build()));
 		}
 
-		Page<SearchMemberEs> searchMemberEsList = searchMemberService.fineSearchMemberByEmailLikeOrNameLike(name);
+		Page<SearchMemberDoc> searchMemberEsList = searchMemberService.fineSearchMemberByEmailLikeOrNameLike(name);
 
 		assertThat(searchMemberEsList.getContent().size()).isEqualTo(10);
 
-		searchMemberEsRepository.deleteAll(testData);
+		searchMemberDocRepository.deleteAll(testData);
 	}
 }

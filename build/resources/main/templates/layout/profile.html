@@ -6,12 +6,20 @@
 <body>
     <header th:replace="fragments/commonHeader :: header"></header>
 
+    <!-- Page top Section end -->
+    <section class="page-top-section set-bg" data-setbg="/resources/img/page-top-bg/4.jpg">
+        <div class="container">
+            <h2>프로필</h2>
+        </div>
+    </section>
+    <!-- Page top Section end -->
+
     <section class="contact-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="contact-text">
-                        <h2 th:text="${memberDto.getName()}"/>
+                        <input class="h2" th:text="${memberDto.getName()}"/>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tem por incididunt ut labore et dolore mag na aliqua.  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hime-naeos. Suspendisse potenti. </p>
                         <ul>
                             <li ><i class="flaticon-025-arroba"></i><span th:text="${memberDto.getEmail()}"/></li>
@@ -31,14 +39,14 @@
                 </div>
 
                 <div class="col-lg-4">
-                    <h3>구독 리스트</h3>
+                    <div class="row" style="margin-bottom: 20px; margin-top: 10px">
+                        <h3>구독 리스트</h3>
+                    </div>
                     <div class="row" th:each="subscribe : ${subscribeList}">
                         <div class="icon-box-item">
-                            <form method="post">
-                                <button class="ib-icon btn" type="submit">
-                                    <i class="flaticon-004-assistance"></i>
-                                </button>
-                            </form>
+                            <button class="ib-icon btn">
+                                <i class="flaticon-004-assistance"></i>
+                            </button>
 
                             <div class="col">
                                 <div class="row ib-text" th:text="${subscribe.getEmail()}"></div>
@@ -50,6 +58,14 @@
             </div>
         </div>
     </section>
+
+    <!--====== Javascripts & Jquery ======-->
+    <script src="/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/jquery.slicknav.min.js"></script>
+    <script src="/resources/js/owl.carousel.min.js"></script>
+    <script src="/resources/js/jquery-ui.min.js"></script>
+    <script src="/resources/js/main.js"></script>
 
 </body>
 </html>

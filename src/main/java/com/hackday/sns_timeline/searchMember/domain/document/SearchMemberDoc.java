@@ -1,4 +1,4 @@
-package com.hackday.sns_timeline.searchMember.domain.entity;
+package com.hackday.sns_timeline.searchMember.domain.document;
 
 import javax.persistence.Id;
 
@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 @Getter
@@ -18,15 +17,15 @@ import lombok.ToString;
 @ToString
 @Builder
 @Document(indexName = "member", type = "member")
-public class SearchMemberEs {
+public class SearchMemberDoc {
 	@Id
 	private String id;
 	private long memberId;
 	private String email;
 	private String name;
 
-	static public SearchMemberEs buildSearchMemberEs(Member member){
-		return SearchMemberEs.builder().memberId(member.getId())
-			.email(member.getEmail()).name(member.getName()).build();
-	}
+	// static public SearchMemberDoc buildSearchMemberDoc(Member member){
+	// 	return SearchMemberDoc.builder().memberId(member.getId())
+	// 		.email(member.getEmail()).name(member.getName()).build();
+	// }
 }

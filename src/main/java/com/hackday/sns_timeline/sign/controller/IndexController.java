@@ -1,5 +1,7 @@
 package com.hackday.sns_timeline.sign.controller;
 
+import java.util.Objects;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.commonEnum.PAGE;
+import com.hackday.sns_timeline.common.commonEnum.REDIRECT;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,11 +32,11 @@ public class IndexController {
 	)
 	@GetMapping
 	public String getIndexPage(@AuthenticationPrincipal CustomUser user){
-		if(user == null) {
-			return CommonConst.INDEX;
+		if(Objects.isNull(user)) {
+			return PAGE.INDEX.getPage();
 		}
 		else {
-			return CommonConst.REDIRECT_TIME_LINE;
+			return REDIRECT.TIME_LINE.getRedirectUrl();
 		}
 	}
 }

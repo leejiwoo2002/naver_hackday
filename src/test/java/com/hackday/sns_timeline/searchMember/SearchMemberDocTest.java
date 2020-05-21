@@ -17,7 +17,7 @@ import com.hackday.sns_timeline.sign.repository.MemberRepository;
 import com.hackday.sns_timeline.sign.service.SignService;
 
 @SpringBootTest
-public class SearchMemberEsTest {
+public class SearchMemberDocTest {
 
 	@Autowired
 	MemberRepository memberRepository;
@@ -34,7 +34,7 @@ public class SearchMemberEsTest {
 
 	@Test
 	@Transactional
-	public void getMemberListSuccessTest() throws Exception {
+	public void getMemberListSuccessTest() {
 		String name = "newTest";
 		int count = 13;
 		for (int i = 0; i < count; i++) {

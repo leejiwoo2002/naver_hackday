@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.commonEnum.PAGE;
+import com.hackday.sns_timeline.common.commonEnum.REDIRECT;
 import com.hackday.sns_timeline.searchMember.domain.dto.SearchMemberDto;
 import com.hackday.sns_timeline.searchMember.service.SearchMemberService;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
@@ -32,7 +34,6 @@ import lombok.extern.log4j.Log4j2;
 public class SearchMemberController {
 
 	final private SearchMemberService searchMemberService;
-	final private SignService signService;
 
 	@ApiOperation(
 		httpMethod = "GET",
@@ -42,7 +43,7 @@ public class SearchMemberController {
 	)
 	@GetMapping
 	public ModelAndView searchMemberPage(@ModelAttribute SubscribeDto subscribeDto) {
-		return new ModelAndView(CommonConst.SEARCH_MEMBER);
+		return new ModelAndView(PAGE.SEARCH_MEMBER.getPage());
 	}
 
 	@ApiOperation(
@@ -52,37 +53,41 @@ public class SearchMemberController {
 		nickname="searchMember"
 	)
 	@GetMapping("/do")
-	public String searchMember(@RequestParam(name = CommonConst.SEARCH) String search, @PageableDefault Pageable pageable,
+	public String searchMember(@RequestParam(name = "search") String search, @PageableDefault Pageable pageable,
 		RedirectAttributes redirectAttributes, @AuthenticationPrincipal CustomUser user) throws Exception {
 		if(user == null) {
-			return CommonConst.REDIRECT_INDEX;
+			return REDIRECT.INDEX.getRedirectUrl();
 		}
 
-		searchMemberService.setMemberSearchAttributes(redirectAttributes,
-			SearchMemberDto.builder().search(search).page(pageable.getPageNumber()).userId(user.getId()).build());
-
-		return CommonConst.REDIRECT_MEMBER_SEARCH;
-	}
-
-
-	@ApiOperation(
-		httpMethod = "GET",
-		value = "Mock 데이터를 넣기 위한 end point",
-		response = String.class,
-		nickname="createTestData"
-	)
-	@GetMapping("/test")
-	public String createTestData(@RequestParam(name = "name") String name,
-		@RequestParam(name = "count") int count) throws Exception {
-
-		for (int i = 1; i <= count; i++) {
-			signService.signUp(MemberDto.builder()
-				.email(name+i + "@"+name)
-				.name(name+i)
-				.password("test")
+		searchMemberService.setRedirectAttributes(redirectAttributes,
+			SearchMemberDto.builder()
+				.search(search)
+				.page(pageable.getPageNumber())
+				.userId(user.getId())
 				.build());
-		}
 
-		return "redirect:/search/member";
+		return REDIRECT.SEARCH_MEMBER.getRedirectUrl();
 	}
+
+
+	// @ApiOperation(
+	// 	httpMethod = "GET",
+	// 	value = "Mock 데이터를 넣기 위한 end point",
+	// 	response = String.class,
+	// 	nickname="createTestData"
+	// )
+	// @GetMapping("/test")
+	// public String createTestData(@RequestParam(name = "name") String name,
+	// 	@RequestParam(name = "count") int count) throws Exception {
+	//
+	// 	for (int i = 1; i <= count; i++) {
+	// 		signService.signUp(MemberDto.builder()
+	// 			.email(name+i + "@"+name)
+	// 			.name(name+i)
+	// 			.password("test")
+	// 			.build());
+	// 	}
+	//
+	// 	return "redirect:/search/member";
+	// }
 }

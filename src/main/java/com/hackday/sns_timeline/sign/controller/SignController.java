@@ -1,5 +1,7 @@
 package com.hackday.sns_timeline.sign.controller;
 
+import java.util.Objects;
+
 import javax.validation.Valid;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -12,6 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hackday.sns_timeline.common.CommonConst;
+import com.hackday.sns_timeline.common.commonEnum.ATTRIBUTE;
+import com.hackday.sns_timeline.common.commonEnum.PAGE;
+import com.hackday.sns_timeline.common.commonEnum.REDIRECT;
 import com.hackday.sns_timeline.sign.domain.dto.CustomUser;
 import com.hackday.sns_timeline.sign.domain.dto.MemberDto;
 import com.hackday.sns_timeline.sign.service.SignService;
@@ -37,7 +42,7 @@ public class SignController {
 	)
 	@GetMapping("/up")
 	public ModelAndView getSignUpPage(@ModelAttribute MemberDto memberDto) {
-		return new ModelAndView(CommonConst.SIGN_UP);
+		return new ModelAndView(PAGE.SIGN_UP.getPage());
 	}
 
 	@ApiOperation(
@@ -46,9 +51,9 @@ public class SignController {
 		response = String.class,
 		nickname="signUp")
 	@PostMapping("/up")
-	public String signUp(@Valid MemberDto memberDto) throws Exception {
+	public String signUp(@Valid MemberDto memberDto) {
 		signService.signUp(memberDto);
-		return CommonConst.REDIRECT_INDEX;
+		return REDIRECT.INDEX.getRedirectUrl();
 	}
 
 	@ApiOperation(
@@ -59,10 +64,10 @@ public class SignController {
 	)
 	@GetMapping("/in")
 	public String signInSuccess(@AuthenticationPrincipal CustomUser user) {
-		if(user==null) {
-			return CommonConst.REDIRECT_INDEX;
+		if(Objects.isNull(user)) {
+			return REDIRECT.INDEX.getRedirectUrl();
 		}
-		return CommonConst.REDIRECT_TIME_LINE;
+		return REDIRECT.TIME_LINE.getRedirectUrl();
 	}
 
 	@ApiOperation(
@@ -73,7 +78,7 @@ public class SignController {
 	)
 	@GetMapping("/fail")
 	public String signInFail(RedirectAttributes redirectAttributes){
-		redirectAttributes.addFlashAttribute(CommonConst.ERROR, true);
-		return CommonConst.REDIRECT_INDEX;
+		redirectAttributes.addFlashAttribute(ATTRIBUTE.ERROR.getName(), true);
+		return REDIRECT.INDEX.getRedirectUrl();
 	}
 }
