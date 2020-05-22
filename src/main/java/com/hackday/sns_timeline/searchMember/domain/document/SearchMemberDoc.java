@@ -23,9 +23,4 @@ public class SearchMemberDoc {
 	private long memberId;
 	private String email;
 	private String name;
-
-	// static public SearchMemberDoc buildSearchMemberDoc(Member member){
-	// 	return SearchMemberDoc.builder().memberId(member.getId())
-	// 		.email(member.getEmail()).name(member.getName()).build();
-	// }
 }

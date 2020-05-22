@@ -29,7 +29,7 @@ sever:
     include-exception: true
     include-stacktrace: always
     
-imagePath.name: /Users/jiwoo/OneDrive - kyonggi.ac.kr/IdeaProjects/user-images
+
 
 logging:
   level:
@@ -58,6 +58,8 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+
+imagePath.name: /root/images
 ---
 
 spring:
@@ -95,5 +97,7 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+
+imagePath.name: /Users/jiwoo/OneDrive - kyonggi.ac.kr/IdeaProjects/user-images
 
 

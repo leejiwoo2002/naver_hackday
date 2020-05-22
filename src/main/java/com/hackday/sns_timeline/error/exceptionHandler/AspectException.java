@@ -10,11 +10,4 @@ public class AspectException {
 
 	@Pointcut("execution(* com.hackday.sns_timeline.*.service.*serivce.*(..))")
 	public void getNullFromRepository() { }
-
-	// @Around("getNullFromRepository()")
-	// public Object test(ProceedingJoinPoint proceedingJoinPoint){
-	// 	try{
-	//
-	// 	}catch ()
-	// }
 }
