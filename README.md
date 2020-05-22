@@ -63,4 +63,44 @@ docker image pull : $ docker pull yunsang/hackday
 
 
 
+## 구현 사항
+
+### Jiwoo
+
+#### 게시글 Create
+
+- form 태그로 입력받아 DB Insert
+
+#### 게시글 Read
+
+- 내가 쓴 게시글의 경우 Redis Cache 사용하여 DB 접근 없이 정보 확인
+- Create, Update, Delete시 Cache 제거
+- 추후에 Read 사용시 DB 접근 후 Cache 생성
+
+#### 게시글 Update
+
+- form 태그로 입력받아 DB Update
+
+#### 게시글 Delete
+
+- 삭제 버튼 클릭시 해당 게시글의 isDelete 컬럼 = true로 변경
+- 실제 게시글 데이터는 DB에 남아있고, Read시 isDelete = false 인 경우만 Read
+
+#### 타임라인
+
+- 구독자 리스트를 받아 게시글중 작성자 id가 리스트에 존재할경우 Select
+- 날짜별로 내림차순
+
+#### 사진 저장
+
+- 폴더를 지정하여 사진 파일을 저장
+- 폴더 한곳에 사진을 모두 저장하지 않고 날짜별로 생성하여 이미지를 저장
+- 게시글 Read시 작성일에 해당하는 폴더 접근하여 파일 이름이 saveName 컬럼에 해당하는 값을 가져옴
+
+### Redis
+
+- 내 게시글 확인시 Cache가 존재하면 DB에 접근하지 않고 Redis Cache에 접근하여 데이터 수신
+- key : User name
+- 게시글 생성, 수정, 삭제시 캐시 삭제 -> Read시 캐시가 없으면 캐시 생성, 캐시가 존재하면 해당 캐시 수신
+
 
